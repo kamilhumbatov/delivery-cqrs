@@ -6,7 +6,7 @@ services:
     image: mariadb
     container_name: mysql
     ports:
-      - 3307:3307
+      - 3306:3306
     restart: always
     environment:
       MYSQL_DATABASE: ${DELIVERY_DATABASE_NAME}

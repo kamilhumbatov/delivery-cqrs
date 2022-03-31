@@ -1,4 +1,4 @@
 FROM openjdk:8u111-jdk-alpine
 VOLUME /tmp
 ADD /target/gateway-service.jar gateway.jar
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /gateway.jar" ]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/gateway.jar"]
