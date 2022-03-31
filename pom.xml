@@ -10,7 +10,8 @@
         <module>deliver</module>
         <module>gateway</module>
         <module>courier</module>
-    </modules>
+		<module>common</module>
+	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>

@@ -40,6 +40,16 @@ services:
       SPRING_DATASOURCE_PASSWORD: ${DATABASE_PASSWORD}
       KAFKA_HOST_NAME: ${KAFKA_HOST_NAME}
 
+  courier:
+    build: ./courier
+    depends_on:
+      - gateway
+      - deliver
+    networks:
+      - backend
+    ports:
+      - 8283:8283
+
 volumes:
   db-data:
 

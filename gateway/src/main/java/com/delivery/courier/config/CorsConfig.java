@@ -1,4 +1,4 @@
-package com.delivery.config;
+package com.delivery.courier.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
