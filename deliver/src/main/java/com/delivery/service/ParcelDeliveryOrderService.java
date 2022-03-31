@@ -12,6 +12,12 @@ public interface ParcelDeliveryOrderService {
 
     ParcelDeliveryOrderDto cancelOrder(Long id);
 
+    ParcelDeliveryOrderDto changeOrderStatusToPickUp(Long id);
+
+    ParcelDeliveryOrderDto changeOrderStatusToDelivery(Long id);
+
+    ParcelDeliveryOrderDto changeOrderStatusToDelivered(Long id);
+
     ParcelDeliveryOrderDto assigneeOrderToCourier(ParcelDeliveryOrderAssigneeDto assigneeDto);
 
     List<ParcelDeliveryOrderDto> findAllOrdersByOwner(String owner);

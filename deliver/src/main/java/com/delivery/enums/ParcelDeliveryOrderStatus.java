@@ -2,5 +2,5 @@ package com.delivery.enums;
 
 public enum ParcelDeliveryOrderStatus {
 
-   CREATED,CANCEL;
+    CREATED, PICKUP, DELIVERY, DELIVERED, CANCELED;
 }

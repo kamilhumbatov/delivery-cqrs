@@ -36,8 +36,26 @@ public class ParcelDeliveryOrderServiceImpl implements ParcelDeliveryOrderServic
     @Override
     public ParcelDeliveryOrderDto cancelOrder(Long id) {
         ParcelDeliveryOrder parcelDeliveryOrder = findById(id);
-        parcelDeliveryOrder.setStatus(ParcelDeliveryOrderStatus.CANCEL);
+        if (parcelDeliveryOrder.getStatus().compareTo(ParcelDeliveryOrderStatus.DELIVERED) == 0) {
+            throw new IllegalArgumentException("Can not cancelled");
+        }
+        parcelDeliveryOrder.setStatus(ParcelDeliveryOrderStatus.CANCELED);
         return mapper.toDto(repository.save(parcelDeliveryOrder));
+    }
+
+    @Override
+    public ParcelDeliveryOrderDto changeOrderStatusToPickUp(Long id) {
+        return changeOrderStatus(id, ParcelDeliveryOrderStatus.PICKUP);
+    }
+
+    @Override
+    public ParcelDeliveryOrderDto changeOrderStatusToDelivery(Long id) {
+        return changeOrderStatus(id, ParcelDeliveryOrderStatus.DELIVERY);
+    }
+
+    @Override
+    public ParcelDeliveryOrderDto changeOrderStatusToDelivered(Long id) {
+        return changeOrderStatus(id, ParcelDeliveryOrderStatus.DELIVERED);
     }
 
     @Override
@@ -61,6 +79,12 @@ public class ParcelDeliveryOrderServiceImpl implements ParcelDeliveryOrderServic
                 .stream()
                 .map(ParcelDeliveryOrderMapper.INSTANCE::toDto)
                 .collect(Collectors.toList());
+    }
+
+    private ParcelDeliveryOrderDto changeOrderStatus(Long id, ParcelDeliveryOrderStatus status) {
+        ParcelDeliveryOrder parcelDeliveryOrder = findById(id);
+        parcelDeliveryOrder.setStatus(status);
+        return mapper.toDto(repository.save(parcelDeliveryOrder));
     }
 
     private ParcelDeliveryOrder findById(Long id) {
