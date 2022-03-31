@@ -2,32 +2,6 @@ version: '3.7'
 
 services:
 
-  zookeeper:
-    image: wurstmeister/zookeeper
-    container_name: zookeeper
-    ports:
-      - 2181:2181
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    networks:
-      - backend
-  kafka:
-    image: wurstmeister/kafka
-    ports:
-      - 9092:9092
-    networks:
-      - backend
-    environment:
-      KAFKA_ADVERTISED_HOST_NAME: kafka
-      KAFKA_CREATE_TOPICS: commerceTopic
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:${KAFKA_PORT}
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    depends_on:
-      - zookeeper
-
   db:
     image: mysql:5.7
     container_name: mysql
@@ -44,66 +18,26 @@ services:
     networks:
       - backend
 
-  redis:
-    image: redis:latest
-    container_name: redis
-    ports:
-      - 6379:6379
+  gateway:
+    build: ./gateway-service
     networks:
       - backend
-
-  redis-gui:
-    image: erikdubbelboer/phpredisadmin
-    container_name: redis-gui
     ports:
-      - 6380:80
-    depends_on:
-      - redis
-    networks:
-      - backend
-    environment:
-      - REDIS_1_HOST=redis
-      - REDIS_1_NAME=MyRedis
+      - 8080:8080
 
-  sign:
-    build: ./sign
+  deliver:
+    build: ./deliver-service
     depends_on:
+      - gateway
       - db
-      - kafka
     networks:
       - backend
     ports:
-      - 8093:8093
+      - 8181:8181
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:${DATABASE_PORT}/${DATABASE_NAME}?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:${DATABASE_PORT}/${DELIVERY_DATABASE_NAME}?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: ${DATABASE_USER}
       SPRING_DATASOURCE_PASSWORD: ${DATABASE_PASSWORD}
-      KAFKA_HOST_NAME: ${KAFKA_HOST_NAME}
-
-  products:
-    build: ./products
-    depends_on:
-      - db
-      - kafka
-    networks:
-      - backend
-    ports:
-      - 8092:8092
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:${DATABASE_PORT}/${DATABASE_NAME}?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
-      SPRING_DATASOURCE_USERNAME: ${DATABASE_USER}
-      SPRING_DATASOURCE_PASSWORD: ${DATABASE_PASSWORD}
-      REDIS_HOST: redis
-
-  notification:
-    build: ./notification
-    depends_on:
-      - kafka
-    networks:
-      - backend
-    ports:
-      - 8095:8095
-    environment:
       KAFKA_HOST_NAME: ${KAFKA_HOST_NAME}
 
 volumes:
