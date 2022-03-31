@@ -5,7 +5,10 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>security</module>
-	</modules>
+        <module>user</module>
+		<module>admin</module>
+        <module>deliver</module>
+    </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>

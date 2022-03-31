@@ -1,0 +1,7 @@
+server:
+  port: 8181
+  servlet:
+    contextPath: /user
+
+application:
+  name: delivery_user
