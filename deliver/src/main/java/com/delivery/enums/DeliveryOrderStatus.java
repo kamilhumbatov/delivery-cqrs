@@ -1,6 +1,6 @@
 package com.delivery.enums;
 
-public enum ParcelDeliveryOrderStatus {
+public enum DeliveryOrderStatus {
 
     CREATED, PICKUP, DELIVERY, DELIVERED, CANCELED;
 }

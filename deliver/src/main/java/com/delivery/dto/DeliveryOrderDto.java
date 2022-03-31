@@ -3,7 +3,7 @@ package com.delivery.dto;
 import lombok.Data;
 
 @Data
-public class ParcelDeliveryOrderDto {
+public class DeliveryOrderDto {
 
     private Long id;
 

@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class ParcelDeliveryOrderAssigneeDto {
+public class DeliveryOrderAssigneeDto {
 
     @NotNull
     private Long id;

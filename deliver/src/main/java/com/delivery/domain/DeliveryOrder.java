@@ -1,6 +1,6 @@
 package com.delivery.domain;
 
-import com.delivery.enums.ParcelDeliveryOrderStatus;
+import com.delivery.enums.DeliveryOrderStatus;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table
-public class ParcelDeliveryOrder {
+public class DeliveryOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,5 +20,9 @@ public class ParcelDeliveryOrder {
     private String assignee;
 
     @Enumerated(EnumType.STRING)
-    private ParcelDeliveryOrderStatus status;
+    private DeliveryOrderStatus status;
+
+    @OneToOne
+    @JoinColumn(name="DESTINATION_ID")
+    private DeliveryOrderDestination destination;
 }
