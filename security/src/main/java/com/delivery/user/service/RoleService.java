@@ -1,6 +1,6 @@
-package com.delivery.service;
+package com.delivery.user.service;
 
-import com.delivery.dto.RoleDto;
+import com.delivery.user.dto.RoleDto;
 
 import java.util.List;
 

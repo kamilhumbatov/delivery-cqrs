@@ -1,8 +1,8 @@
-package com.delivery.service.impl;
+package com.delivery.user.service.impl;
 
-import com.delivery.client.UserClient;
-import com.delivery.dto.UserCreateDto;
-import com.delivery.service.UserService;
+import com.delivery.user.client.UserClient;
+import com.delivery.user.dto.UserCreateDto;
+import com.delivery.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

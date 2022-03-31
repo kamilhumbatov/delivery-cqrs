@@ -1,9 +1,9 @@
-package com.delivery.service.impl;
+package com.delivery.user.service.impl;
 
-import com.delivery.dto.RoleDto;
+import com.delivery.user.dto.RoleDto;
 import com.delivery.repository.RoleRepository;
-import com.delivery.service.RoleService;
-import com.delivery.service.mapper.RoleMapper;
+import com.delivery.user.service.RoleService;
+import com.delivery.user.service.mapper.RoleMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

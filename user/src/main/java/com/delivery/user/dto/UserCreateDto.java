@@ -1,4 +1,4 @@
-package com.delivery.dto;
+package com.delivery.user.dto;
 
 public class UserCreateDto {
 }

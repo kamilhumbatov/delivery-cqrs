@@ -1,7 +1,7 @@
-package com.delivery.controller;
+package com.delivery.user.controller;
 
-import com.delivery.dto.UserCreateDto;
-import com.delivery.service.UserService;
+import com.delivery.user.dto.UserCreateDto;
+import com.delivery.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
