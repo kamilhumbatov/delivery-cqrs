@@ -3,7 +3,7 @@ version: '3.7'
 services:
 
   db:
-    image: mysql:5.7
+    image: mariadb
     container_name: mysql
     ports:
       - 3306:3306
