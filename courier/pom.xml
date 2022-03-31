@@ -18,4 +18,8 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>courier-service</finalName>
+    </build>
 </project>
