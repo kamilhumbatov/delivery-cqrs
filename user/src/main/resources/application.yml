@@ -1,7 +1,10 @@
 server:
-  port: 8181
+  port: 8281
   servlet:
     contextPath: /user
 
 application:
   name: delivery_user
+
+security:
+  url: ${SECURITY_SERVICE_URL:http://localhost:8181}

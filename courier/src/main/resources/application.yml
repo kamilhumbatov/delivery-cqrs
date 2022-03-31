@@ -1,0 +1,7 @@
+server:
+  port: 8283
+  servlet:
+    contextPath: /courier
+
+application:
+  name: delivery_courier
