@@ -1,0 +1,49 @@
+image: gitlab/dind
+services:
+  - docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay
+  SPRING_PROFILES_ACTIVE: gitlab-ci
+
+stages:
+  - build
+  - test
+  - docker
+
+maven-build:
+  image: maven:3-jdk-11
+  stage: build
+  script: "mvn clean package -B"
+  artifacts:
+    paths:
+      - gateway/target/*.jar
+      - security/target/*.jar
+      - deliver/target/*.jar
+      - admin/target/*.jar
+      - user/target/*.jar
+  only:
+    - main
+
+maven-test:
+  image: maven:3-jdk-11
+  stage: test
+  script: "mvn test"
+  artifacts:
+    paths:
+      - gateway/target/*.jar
+      - security/target/*.jar
+      - deliver/target/*.jar
+      - admin/target/*.jar
+      - user/target/*.jar
+  only:
+    - test
+
+docker-build:
+  stage: docker
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+    - docker build -t registry.gitlab.com/kamilhumbatov/delivery .
+    - docker push registry.gitlab.com/kamilhumbatov/delivery
+  only:
+    - main

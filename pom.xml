@@ -8,6 +8,7 @@
         <module>user</module>
 		<module>admin</module>
         <module>deliver</module>
+        <module>gateway</module>
     </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

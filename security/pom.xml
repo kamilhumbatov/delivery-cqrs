@@ -26,4 +26,8 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>security-service</finalName>
+    </build>
 </project>

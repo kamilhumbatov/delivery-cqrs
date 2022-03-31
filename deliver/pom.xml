@@ -22,4 +22,8 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>deliver-service</finalName>
+    </build>
 </project>
