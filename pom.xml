@@ -4,14 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>pom</packaging>
 	<modules>
-		<module>security</module>
-        <module>user</module>
-		<module>admin</module>
-        <module>deliver</module>
-        <module>gateway</module>
-        <module>courier-service</module>
 		<module>common</module>
-        <module>common-security</module>
+		<module>common-security</module>
+		<module>gateway</module>
+		<module>deliver-service</module>
+        <module>user-service</module>
+        <module>courier-service</module>
     </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

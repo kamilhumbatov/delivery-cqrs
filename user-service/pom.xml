@@ -48,6 +48,6 @@
     </dependencies>
 
     <build>
-        <finalName>security-service</finalName>
+        <finalName>user-service</finalName>
     </build>
 </project>
