@@ -1,7 +1,6 @@
-package com.delivery.user.exception;
+package com.delivery.exception;
 
 import com.delivery.dto.ErrorResponse;
-import com.delivery.exception.CommonExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +17,23 @@ import org.springframework.web.context.request.WebRequest;
 @ControllerAdvice
 public class GlobalExceptionHandler extends CommonExceptionHandler {
 
-    @ExceptionHandler(UserNotFoundException.class)
+    @ExceptionHandler(DeliveryOrderNotFoundException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ErrorResponse> handleUserNotFoundException(
-            UserNotFoundException exception,
+    public ResponseEntity<ErrorResponse> handleDeliveryOrderNotFoundException(
+            DeliveryOrderNotFoundException exception,
             WebRequest request
     ) {
         log.error("Failed to find the requested element", exception);
+        return buildErrorResponse(exception, HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(DeliveryOrderStatusException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handleDeliveryOrderStatusException(
+            DeliveryOrderStatusException exception,
+            WebRequest request
+    ) {
+        log.error("Failed to change the order status", exception);
         return buildErrorResponse(exception, HttpStatus.BAD_REQUEST, request);
     }
 

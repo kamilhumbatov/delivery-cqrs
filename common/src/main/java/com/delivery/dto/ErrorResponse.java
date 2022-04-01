@@ -1,4 +1,4 @@
-package com.delivery.user.dto.error;
+package com.delivery.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
