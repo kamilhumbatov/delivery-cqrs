@@ -48,31 +48,6 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     }
 
     @Override
-    public DeliveryOrderDto cancelOrder(Long id) {
-        DeliveryOrder deliveryOrder = findById(id);
-        if (deliveryOrder.getStatus().compareTo(DeliveryOrderStatus.DELIVERED) == 0) {
-            throw new IllegalArgumentException("Can not cancelled");
-        }
-        deliveryOrder.setStatus(DeliveryOrderStatus.CANCELED);
-        return mapper.toDto(repository.save(deliveryOrder));
-    }
-
-    @Override
-    public DeliveryOrderDto changeOrderStatusToPickUp(Long id) {
-        return changeOrderStatus(id, DeliveryOrderStatus.PICKUP);
-    }
-
-    @Override
-    public DeliveryOrderDto changeOrderStatusToDelivery(Long id) {
-        return changeOrderStatus(id, DeliveryOrderStatus.DELIVERY);
-    }
-
-    @Override
-    public DeliveryOrderDto changeOrderStatusToDelivered(Long id) {
-        return changeOrderStatus(id, DeliveryOrderStatus.DELIVERED);
-    }
-
-    @Override
     public DeliveryOrderDto changeDestination(Long id, DeliveryOrderDestinationDto destinationDto) {
         return null;
     }
@@ -98,12 +73,6 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
                 .stream()
                 .map(DeliveryOrderMapper.INSTANCE::toDto)
                 .collect(Collectors.toList());
-    }
-
-    private DeliveryOrderDto changeOrderStatus(Long id, DeliveryOrderStatus status) {
-        DeliveryOrder deliveryOrder = findById(id);
-        deliveryOrder.setStatus(status);
-        return mapper.toDto(repository.save(deliveryOrder));
     }
 
     private DeliveryOrder findById(Long id) {

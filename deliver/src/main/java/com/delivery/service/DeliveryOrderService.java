@@ -14,14 +14,6 @@ public interface DeliveryOrderService {
 
     DeliveryOrderDto changeDestination(Long id,DeliveryOrderDestinationDto destinationDto);
 
-    DeliveryOrderDto cancelOrder(Long id);
-
-    DeliveryOrderDto changeOrderStatusToPickUp(Long id);
-
-    DeliveryOrderDto changeOrderStatusToDelivery(Long id);
-
-    DeliveryOrderDto changeOrderStatusToDelivered(Long id);
-
     DeliveryOrderDto assigneeOrderToCourier(DeliveryOrderAssigneeDto assigneeDto);
 
     List<DeliveryOrderDto> findAllOrdersByOwner();

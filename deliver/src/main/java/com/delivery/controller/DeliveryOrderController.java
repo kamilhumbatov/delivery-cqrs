@@ -7,7 +7,13 @@ import com.delivery.service.DeliveryOrderService;
 import com.delivery.util.Roles;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -51,11 +57,5 @@ public class DeliveryOrderController {
     @PutMapping("destination")
     public DeliveryOrderDto changeDestination(@RequestBody DeliveryOrderAssigneeDto assigneeDto) {
         return service.assigneeOrderToCourier(assigneeDto);
-    }
-
-    @Secured(Roles.ROLE_USER)
-    @PutMapping("/cancel")
-    public DeliveryOrderDto cancelOrder(@PathVariable Long id) {
-        return service.cancelOrder(id);
     }
 }
