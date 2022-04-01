@@ -21,6 +21,9 @@ spring:
       hibernate:
         jdbc:
           time_zone: Asia/Baku
+  liquibase:
+    enabled: false
+    change-log: classpath:db/changelog/db.changelog-master.yaml
 security:
   token:
     expire-length: 3600000

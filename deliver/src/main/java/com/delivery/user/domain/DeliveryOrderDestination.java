@@ -1,4 +1,4 @@
-package com.delivery.domain;
+package com.delivery.user.domain;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
-package com.delivery.repository;
+package com.delivery.user.repository;
 
-import com.delivery.domain.User;
+import com.delivery.user.domain.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

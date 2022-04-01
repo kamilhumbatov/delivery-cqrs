@@ -1,7 +1,7 @@
 package com.delivery.user.service.impl;
 
 import com.delivery.user.dto.RoleDto;
-import com.delivery.repository.RoleRepository;
+import com.delivery.user.repository.RoleRepository;
 import com.delivery.user.service.RoleService;
 import com.delivery.user.service.mapper.RoleMapper;
 import lombok.RequiredArgsConstructor;

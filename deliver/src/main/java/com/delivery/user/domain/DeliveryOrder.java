@@ -1,4 +1,4 @@
-package com.delivery.domain;
+package com.delivery.user.domain;
 
 import com.delivery.enums.DeliveryOrderStatus;
 import lombok.Data;

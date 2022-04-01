@@ -1,12 +1,12 @@
 package com.delivery.service.impl;
 
-import com.delivery.domain.DeliveryOrder;
-import com.delivery.domain.DeliveryOrderDestination;
+import com.delivery.user.domain.DeliveryOrder;
+import com.delivery.user.domain.DeliveryOrderDestination;
 import com.delivery.dto.DeliveryOrderAssigneeDto;
 import com.delivery.dto.DeliveryOrderCreateDto;
 import com.delivery.dto.DeliveryOrderDto;
 import com.delivery.enums.DeliveryOrderStatus;
-import com.delivery.repository.DeliveryOrderRepository;
+import com.delivery.user.repository.DeliveryOrderRepository;
 import com.delivery.service.DeliveryOrderService;
 import com.delivery.service.mapper.DeliveryOrderCreateMapper;
 import com.delivery.service.mapper.DeliveryOrderDestinationCreateMapper;
