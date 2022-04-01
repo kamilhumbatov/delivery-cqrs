@@ -27,7 +27,7 @@ public class SecurityConfig extends MainSecurityConfig {
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
         http.authorizeRequests()
-                .antMatchers("/auth", "/refresh-token").permitAll()
+                .antMatchers("/api/v1/auth", "/api/v1/refresh-token").permitAll()
                 .anyRequest().authenticated();
     }
 }

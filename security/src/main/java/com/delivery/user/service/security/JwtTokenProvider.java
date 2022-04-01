@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Component;
 
-import java.security.interfaces.RSAPrivateKey;
 import java.util.Date;
 
 @Slf4j
@@ -21,8 +20,8 @@ public class JwtTokenProvider {
 
     private static final String ROLE = "role";
     private static final String ROLE_CEO = "ROLE_CEO";
+    private static final String secret = "X1X2X3";
 
-    private final RSAPrivateKey privateKey;
     private final SecurityProperties securityProperties;
 
     public String generateTokenForUser(User user) {
@@ -46,7 +45,7 @@ public class JwtTokenProvider {
                 .setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + multiply * securityProperties.getExpireLength()))
-                .signWith(SignatureAlgorithm.RS256, privateKey)
+                .signWith(SignatureAlgorithm.RS256, secret)
                 .compact();
     }
 
