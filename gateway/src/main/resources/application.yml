@@ -17,20 +17,14 @@ spring:
               - OPTIONS
       routes:
         - id: userModule
-          uri: http://localhost:8281/
+          uri: http://localhost:8181/
           filters:
             - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
           predicates:
             - Path=/user/**
-        - id: adminModule
-          uri: http://localhost:8282/
+        - id: deliverModule
+          uri: http://localhost:8182/
           filters:
             - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
           predicates:
-            - Path=/admin/**
-        - id: courierModule
-          uri: http://localhost:8283/
-          filters:
-            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
-          predicates:
-            - Path=/courier/**
+            - Path=/deliver/**

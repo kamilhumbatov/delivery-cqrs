@@ -1,4 +1,3 @@
-FROM openjdk:8u111-jdk-alpine
-VOLUME /tmp
-ADD /target/security-service.jar security.jar
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /security.jar" ]
+FROM openjdk:14-jdk-alpine
+ADD /target/courier-service.jar courier-service.jar
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/courier-service.jar"]
