@@ -2,6 +2,7 @@ package com.delivery.service.impl;
 
 import com.delivery.CurrentUserService;
 import com.delivery.dto.DeliveryOrderDto;
+import com.delivery.commands.ChangeStatusDeliveryOrderCommand;
 import com.delivery.enums.DeliveryOrderStatus;
 import com.delivery.exception.DeliveryOrderStatusException;
 import com.delivery.service.DeliveryOrderService;
@@ -9,19 +10,22 @@ import com.delivery.service.DeliveryOrderStatusCommandService;
 import com.delivery.service.mapper.DeliveryOrderMapper;
 import com.delivery.user.domain.DeliveryOrder;
 import lombok.RequiredArgsConstructor;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @RequiredArgsConstructor
 public class DeliveryOrderStatusServiceImpl implements DeliveryOrderStatusCommandService {
 
-    private final DeliveryOrderMapper mapper;
     private final DeliveryOrderService orderService;
     private final CurrentUserService currentUserService;
+    private final CommandGateway commandGateway;
 
     @Override
-    public DeliveryOrderDto changeOrderStatusToCancel(long id) {
+    public CompletableFuture<String> changeOrderStatusToCancel(long id) {
         DeliveryOrder deliveryOrder = orderService.findById(id);
         checkUserAccess(deliveryOrder);
         if (deliveryOrder.getStatus().compareTo(DeliveryOrderStatus.DELIVERED) == 0) {
@@ -31,17 +35,17 @@ public class DeliveryOrderStatusServiceImpl implements DeliveryOrderStatusComman
     }
 
     @Override
-    public DeliveryOrderDto changeOrderStatusToPickUp(long id) {
+    public CompletableFuture<String> changeOrderStatusToPickUp(long id) {
         return changeOrderStatus(id, DeliveryOrderStatus.PICKUP);
     }
 
     @Override
-    public DeliveryOrderDto changeOrderStatusToDelivery(long id) {
+    public CompletableFuture<String> changeOrderStatusToDelivery(long id) {
         return changeOrderStatus(id, DeliveryOrderStatus.DELIVERY);
     }
 
     @Override
-    public DeliveryOrderDto changeOrderStatusToDelivered(long id) {
+    public CompletableFuture<String> changeOrderStatusToDelivered(long id) {
         return changeOrderStatus(id, DeliveryOrderStatus.DELIVERED);
     }
 
@@ -51,13 +55,13 @@ public class DeliveryOrderStatusServiceImpl implements DeliveryOrderStatusComman
         }
     }
 
-    private DeliveryOrderDto changeOrderStatus(long id, DeliveryOrderStatus status) {
+    private CompletableFuture<String> changeOrderStatus(long id, DeliveryOrderStatus status) {
         DeliveryOrder deliveryOrder = orderService.findById(id);
         checkUserAccess(deliveryOrder);
         return changeOrderStatus(deliveryOrder, status);
     }
 
-    private DeliveryOrderDto changeOrderStatus(DeliveryOrder deliveryOrder, DeliveryOrderStatus status) {
+    private CompletableFuture<String> changeOrderStatus(DeliveryOrder deliveryOrder, DeliveryOrderStatus status) {
         if (deliveryOrder.getStatus().compareTo(status) == 1) {
             throw new DeliveryOrderStatusException(status,
                     String.format("Because order status is %s", deliveryOrder.getStatus().name()));
@@ -66,7 +70,7 @@ public class DeliveryOrderStatusServiceImpl implements DeliveryOrderStatusComman
             throw new DeliveryOrderStatusException(status);
         }
         deliveryOrder.setStatus(status);
-        return mapper.toDto(orderService.save(deliveryOrder));
+        return commandGateway.send(new ChangeStatusDeliveryOrderCommand(deliveryOrder, status));
     }
 
 }
