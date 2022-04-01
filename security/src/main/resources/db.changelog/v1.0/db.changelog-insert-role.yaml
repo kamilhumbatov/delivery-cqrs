@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: in_27062020
+      author: microfin
+      changes:
+        - insert:
+            tableName: mp_office_users_role
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: description
+                  value: ROLE_ADMIN
+        - insert:
+            tableName: mp_office_users_role
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: description
+                  value: ROLE_OPERATOR
+        - insert:
+            tableName: mp_office_users_role
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: description
+                  value: ROLE_HEAD

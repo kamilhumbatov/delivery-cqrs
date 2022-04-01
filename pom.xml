@@ -11,7 +11,8 @@
         <module>gateway</module>
         <module>courier</module>
 		<module>common</module>
-	</modules>
+        <module>common-security</module>
+    </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>

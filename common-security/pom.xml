@@ -9,18 +9,30 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>admin</artifactId>
+    <artifactId>common-security</artifactId>
+
+    <properties>
+        <jjwt.version>0.9.1</jjwt.version>
+    </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.delivery</groupId>
-            <artifactId>common</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.delivery</groupId>
-            <artifactId>common-security</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-ext-jdk16</artifactId>
+            <version>1.46</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -28,8 +40,4 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
-
-    <build>
-        <finalName>admin-service</finalName>
-    </build>
 </project>

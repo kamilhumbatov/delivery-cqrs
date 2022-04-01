@@ -21,5 +21,6 @@ spring:
       hibernate:
         jdbc:
           time_zone: Asia/Baku
-app:
-  jwtExpirationInMs: 720000
+security:
+  token:
+    expire-length: 3600000
