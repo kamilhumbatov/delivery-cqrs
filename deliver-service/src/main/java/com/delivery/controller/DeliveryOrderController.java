@@ -3,7 +3,7 @@ package com.delivery.controller;
 import com.delivery.dto.DeliveryOrderAssigneeDto;
 import com.delivery.dto.DeliveryOrderCreateDto;
 import com.delivery.dto.DeliveryOrderDto;
-import com.delivery.service.DeliveryOrderService;
+import com.delivery.service.DeliveryOrderCommandService;
 import com.delivery.util.Roles;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
@@ -22,7 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DeliveryOrderController {
 
-    private final DeliveryOrderService service;
+    private final DeliveryOrderCommandService service;
 
     @GetMapping("/{id}")
     public DeliveryOrderDto getOrder(@PathVariable Long id) {

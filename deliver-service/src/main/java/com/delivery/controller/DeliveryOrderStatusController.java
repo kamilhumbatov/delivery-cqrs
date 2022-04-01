@@ -1,7 +1,7 @@
 package com.delivery.controller;
 
 import com.delivery.dto.DeliveryOrderDto;
-import com.delivery.service.DeliveryOrderStatusService;
+import com.delivery.service.DeliveryOrderStatusCommandService;
 import com.delivery.util.Roles;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class DeliveryOrderStatusController {
 
-    private final DeliveryOrderStatusService service;
+    private final DeliveryOrderStatusCommandService service;
 
     @Secured(Roles.ROLE_USER)
     @GetMapping("/pickup/{id}")

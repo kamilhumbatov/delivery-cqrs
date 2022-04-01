@@ -5,7 +5,7 @@ import com.delivery.dto.DeliveryOrderDto;
 import com.delivery.enums.DeliveryOrderStatus;
 import com.delivery.exception.DeliveryOrderNotFoundException;
 import com.delivery.exception.DeliveryOrderStatusException;
-import com.delivery.service.DeliveryOrderStatusService;
+import com.delivery.service.DeliveryOrderStatusCommandService;
 import com.delivery.service.mapper.DeliveryOrderMapper;
 import com.delivery.user.domain.DeliveryOrder;
 import com.delivery.user.repository.DeliveryOrderRepository;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class DeliveryOrderStatusServiceImpl implements DeliveryOrderStatusService {
+public class DeliveryOrderStatusServiceImpl implements DeliveryOrderStatusCommandService {
 
     private final DeliveryOrderMapper mapper;
     private final DeliveryOrderRepository repository;
