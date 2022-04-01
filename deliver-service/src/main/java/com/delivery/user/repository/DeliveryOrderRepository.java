@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface DeliveryOrderRepository extends JpaRepository<DeliveryOrder, Long> {
 
-    List<DeliveryOrder> findAllOrdersByOwner(String owner);
+    List<DeliveryOrder> findAllByOwner(String owner);
 
     List<DeliveryOrder> findAllByAssignee(String assignee);
 }

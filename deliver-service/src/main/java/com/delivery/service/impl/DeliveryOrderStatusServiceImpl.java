@@ -3,12 +3,11 @@ package com.delivery.service.impl;
 import com.delivery.CurrentUserService;
 import com.delivery.dto.DeliveryOrderDto;
 import com.delivery.enums.DeliveryOrderStatus;
-import com.delivery.exception.DeliveryOrderNotFoundException;
 import com.delivery.exception.DeliveryOrderStatusException;
+import com.delivery.service.DeliveryOrderService;
 import com.delivery.service.DeliveryOrderStatusCommandService;
 import com.delivery.service.mapper.DeliveryOrderMapper;
 import com.delivery.user.domain.DeliveryOrder;
-import com.delivery.user.repository.DeliveryOrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
@@ -18,12 +17,12 @@ import org.springframework.stereotype.Service;
 public class DeliveryOrderStatusServiceImpl implements DeliveryOrderStatusCommandService {
 
     private final DeliveryOrderMapper mapper;
-    private final DeliveryOrderRepository repository;
+    private final DeliveryOrderService orderService;
     private final CurrentUserService currentUserService;
 
     @Override
     public DeliveryOrderDto changeOrderStatusToCancel(long id) {
-        DeliveryOrder deliveryOrder = findById(id);
+        DeliveryOrder deliveryOrder = orderService.findById(id);
         checkUserAccess(deliveryOrder);
         if (deliveryOrder.getStatus().compareTo(DeliveryOrderStatus.DELIVERED) == 0) {
             throw new DeliveryOrderStatusException(DeliveryOrderStatus.CANCELED, "Because order was delivered!");
@@ -53,7 +52,7 @@ public class DeliveryOrderStatusServiceImpl implements DeliveryOrderStatusComman
     }
 
     private DeliveryOrderDto changeOrderStatus(long id, DeliveryOrderStatus status) {
-        DeliveryOrder deliveryOrder = findById(id);
+        DeliveryOrder deliveryOrder = orderService.findById(id);
         checkUserAccess(deliveryOrder);
         return changeOrderStatus(deliveryOrder, status);
     }
@@ -67,10 +66,7 @@ public class DeliveryOrderStatusServiceImpl implements DeliveryOrderStatusComman
             throw new DeliveryOrderStatusException(status);
         }
         deliveryOrder.setStatus(status);
-        return mapper.toDto(repository.save(deliveryOrder));
+        return mapper.toDto(orderService.save(deliveryOrder));
     }
 
-    private DeliveryOrder findById(long id) {
-        return repository.findById(id).orElseThrow(() -> new DeliveryOrderNotFoundException(id));
-    }
 }

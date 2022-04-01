@@ -45,7 +45,7 @@ public class DeliveryOrderCommandServiceImpl implements DeliveryOrderCommandServ
         DeliveryOrderDestination deliveryOrderDestination = destinationCreateMapper.toDbo(createDto);
         deliveryOrderDestination.setOrder(deliveryOrder);
 
-        return mapper.toDto(repository.save(deliveryOrder));
+        return mapper.toDto(orderService.save(deliveryOrder));
     }
 
     @Override
@@ -55,14 +55,14 @@ public class DeliveryOrderCommandServiceImpl implements DeliveryOrderCommandServ
 
     @Override
     public DeliveryOrderDto assigneeOrderToCourier(DeliveryOrderAssigneeDto assigneeDto) {
-        DeliveryOrder deliveryOrder = findById(assigneeDto.getId());
+        DeliveryOrder deliveryOrder = orderService.findById(assigneeDto.getId());
         deliveryOrder.setAssignee(assigneeDto.getAssignee());
-        return mapper.toDto(repository.save(deliveryOrder));
+        return mapper.toDto(orderService.save(deliveryOrder));
     }
 
     @Override
     public List<DeliveryOrderDto> findAllOrdersByOwner() {
-        return repository.findAllOrdersByOwner(currentUserService.getCurrentUser())
+        return orderService.findAllOrdersByOwner(currentUserService.getCurrentUser())
                 .stream()
                 .map(DeliveryOrderMapper.INSTANCE::toDto)
                 .collect(Collectors.toList());
@@ -70,7 +70,7 @@ public class DeliveryOrderCommandServiceImpl implements DeliveryOrderCommandServ
 
     @Override
     public List<DeliveryOrderDto> findAllOrdersByAssignee() {
-        return repository.findAllByAssignee(currentUserService.getCurrentUser())
+        return orderService.findAllOrdersByAssignee(currentUserService.getCurrentUser())
                 .stream()
                 .map(DeliveryOrderMapper.INSTANCE::toDto)
                 .collect(Collectors.toList());
