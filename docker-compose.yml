@@ -6,7 +6,7 @@ services:
     image: mariadb
     container_name: mysql
     ports:
-      - 3306:3306
+      - 3307:3306
     restart: always
     environment:
       MYSQL_DATABASE: ${DELIVERY_DATABASE_NAME}
@@ -18,37 +18,13 @@ services:
     networks:
       - backend
 
-  gateway:
-    build: ./gateway
-    networks:
-      - backend
-    ports:
-      - 8280:8280
-
-  deliver:
-    build: ./deliver
-    depends_on:
-      - gateway
-      - db
-    networks:
-      - backend
-    ports:
-      - 8182:8182
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:${DATABASE_PORT}/${DELIVERY_DATABASE_NAME}?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
-      SPRING_DATASOURCE_USERNAME: ${DATABASE_USER}
-      SPRING_DATASOURCE_PASSWORD: ${DATABASE_PASSWORD}
-      KAFKA_HOST_NAME: ${KAFKA_HOST_NAME}
-
-  courier:
-    build: ./courier
-    depends_on:
-      - gateway
-      - deliver
+  courier-service:
+    build: ./courier-service
     networks:
       - backend
     ports:
       - 8283:8283
+
 
 volumes:
   db-data:

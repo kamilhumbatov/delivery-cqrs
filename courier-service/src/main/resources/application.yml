@@ -4,4 +4,4 @@ server:
     contextPath: /courier
 
 application:
-  name: delivery_courier
+  name: courier-service

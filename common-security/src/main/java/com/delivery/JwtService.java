@@ -2,7 +2,6 @@ package com.delivery;
 
 import com.delivery.model.CustomUser;
 import com.delivery.model.CustomUserDetails;
-import com.delivery.util.PublicKeyUtility;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -10,26 +9,21 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Component;
-
-import java.security.interfaces.RSAPublicKey;
 
 @Slf4j
 @Component
-@Import({PublicKeyUtility.class})
 @RequiredArgsConstructor
 public class JwtService {
 
     private static final String ID = "id";
     private static final String ROLE_CEO = "ROLE_CEO";
     private static final String TIN = "TIN";
-
-    private final RSAPublicKey publicKey;
+    private static final String secret = "X1X2X3";
 
     private Claims getAllClaimsFromToken(String token) {
         return Jwts.parser()
-                .setSigningKey(publicKey)
+                .setSigningKey(secret)
                 .parseClaimsJws(token)
                 .getBody();
     }
@@ -52,7 +46,7 @@ public class JwtService {
     public boolean validate(String token) {
         try {
             Jwts.parser()
-                    .setSigningKey(publicKey)
+                    .setSigningKey(secret)
                     .parseClaimsJws(token);
             return true;
         } catch (MalformedJwtException e) {

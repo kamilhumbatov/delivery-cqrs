@@ -9,7 +9,7 @@
 		<module>admin</module>
         <module>deliver</module>
         <module>gateway</module>
-        <module>courier</module>
+        <module>courier-service</module>
 		<module>common</module>
         <module>common-security</module>
     </modules>
