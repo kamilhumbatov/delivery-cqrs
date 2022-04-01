@@ -1,5 +1,7 @@
 package com.delivery.service.impl;
 
+import com.delivery.CurrentUserService;
+import com.delivery.dto.DeliveryOrderDestinationDto;
 import com.delivery.user.domain.DeliveryOrder;
 import com.delivery.user.domain.DeliveryOrderDestination;
 import com.delivery.dto.DeliveryOrderAssigneeDto;
@@ -25,6 +27,7 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     private final DeliveryOrderMapper mapper;
     private final DeliveryOrderCreateMapper createMapper;
     private final DeliveryOrderDestinationCreateMapper destinationCreateMapper;
+    private final CurrentUserService currentUserService;
 
     @Override
     public DeliveryOrderDto getOrder(Long id) {
@@ -36,6 +39,7 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     public DeliveryOrderDto createOrder(DeliveryOrderCreateDto createDto) {
         DeliveryOrder deliveryOrder = createMapper.toDbo(createDto);
         deliveryOrder.setStatus(DeliveryOrderStatus.CREATED);
+        deliveryOrder.setOwner(currentUserService.getCurrentUser());
 
         DeliveryOrderDestination deliveryOrderDestination = destinationCreateMapper.toDbo(createDto);
         deliveryOrderDestination.setOrder(deliveryOrder);
@@ -69,6 +73,11 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     }
 
     @Override
+    public DeliveryOrderDto changeDestination(Long id, DeliveryOrderDestinationDto destinationDto) {
+        return null;
+    }
+
+    @Override
     public DeliveryOrderDto assigneeOrderToCourier(DeliveryOrderAssigneeDto assigneeDto) {
         DeliveryOrder deliveryOrder = findById(assigneeDto.getId());
         deliveryOrder.setAssignee(assigneeDto.getAssignee());
@@ -76,16 +85,16 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     }
 
     @Override
-    public List<DeliveryOrderDto> findAllOrdersByOwner(String assignee) {
-        return repository.findAllOrdersByOwner(assignee)
+    public List<DeliveryOrderDto> findAllOrdersByOwner() {
+        return repository.findAllOrdersByOwner(currentUserService.getCurrentUser())
                 .stream()
                 .map(DeliveryOrderMapper.INSTANCE::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<DeliveryOrderDto> findAllOrdersByAssignee(String assignee) {
-        return repository.findAllByAssignee(assignee)
+    public List<DeliveryOrderDto> findAllOrdersByAssignee() {
+        return repository.findAllByAssignee(currentUserService.getCurrentUser())
                 .stream()
                 .map(DeliveryOrderMapper.INSTANCE::toDto)
                 .collect(Collectors.toList());
