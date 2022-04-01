@@ -23,7 +23,7 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
-public class UserController {
+public class SignController {
 
     private final AuthService authService;
 
