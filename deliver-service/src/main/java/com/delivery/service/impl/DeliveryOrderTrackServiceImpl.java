@@ -2,7 +2,6 @@ package com.delivery.service.impl;
 
 import com.delivery.CurrentUserService;
 import com.delivery.commands.ChangeOrderCoordinateCommand;
-import com.delivery.commands.ChangeStatusDeliveryOrderCommand;
 import com.delivery.dto.DeliveryOrderDestinationDto;
 import com.delivery.enums.DeliveryOrderStatus;
 import com.delivery.exception.DeliveryOrderStatusException;
@@ -28,7 +27,7 @@ public class DeliveryOrderTrackServiceImpl implements DeliveryOrderTrackService 
         DeliveryOrder deliveryOrder = orderService.findById(id);
         //checkUserAccess(deliveryOrder);
         if (deliveryOrder.getStatus().compareTo(DeliveryOrderStatus.DELIVERY) == 0) {
-            return commandGateway.send(new ChangeOrderCoordinateCommand(deliveryOrder, destinationDto));
+            return commandGateway.send(new ChangeOrderCoordinateCommand(deliveryOrder.getId(), deliveryOrder, destinationDto));
         }
         throw new DeliveryOrderStatusException(DeliveryOrderStatus.CANCELED, "Because order was delivered!");
     }

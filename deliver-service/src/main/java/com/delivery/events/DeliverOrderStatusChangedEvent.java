@@ -6,6 +6,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class DeliverOrderStatusChangeEvent {
+public class DeliverOrderStatusChangedEvent {
     private DeliveryOrder order;
 }

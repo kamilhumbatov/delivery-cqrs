@@ -1,13 +1,13 @@
 package com.delivery.commands;
 
-import com.delivery.dto.DeliveryOrderDestinationDto;
-import com.delivery.user.domain.DeliveryOrder;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+public class ChangeOrderCoordinateCommand extends BaseCommand<String> {
 
-@Data
-@AllArgsConstructor
-public class ChangeOrderCoordinateCommand {
-    private DeliveryOrder order;
-    private DeliveryOrderDestinationDto coordinate;
+    public String latitude;
+    public String longitude;
+
+    public ChangeOrderCoordinateCommand(String id, String latitude, String longitude) {
+        super(id);
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }
