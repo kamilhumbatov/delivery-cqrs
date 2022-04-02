@@ -10,8 +10,6 @@ import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
 
-import java.util.UUID;
-
 @Aggregate
 public class DeliveryOrderAggregate {
 
@@ -31,7 +29,7 @@ public class DeliveryOrderAggregate {
     @CommandHandler
     public DeliveryOrderAggregate(CreateOrderCommand command) {
         DeliverOrderCreatedEvent event = new DeliverOrderCreatedEvent(
-                UUID.randomUUID().toString(), command.owner, command.latitude, command.longitude);
+                command.id, command.owner, command.latitude, command.longitude);
         AggregateLifecycle.apply(event);
     }
 

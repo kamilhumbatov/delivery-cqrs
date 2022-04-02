@@ -1,13 +1,19 @@
 package com.delivery.deliver.domain;
 
 import com.delivery.deliver.enums.DeliveryOrderStatus;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class DeliveryOrder {
 
     @Id

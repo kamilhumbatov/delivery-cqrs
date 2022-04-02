@@ -2,7 +2,7 @@ package com.delivery.deliver.commands;
 
 import javax.validation.constraints.NotBlank;
 
-public class CreateOrderCommand extends BaseCommand<Long> {
+public class CreateOrderCommand extends BaseCommand<String> {
 
     @NotBlank
     public String owner;
@@ -13,8 +13,9 @@ public class CreateOrderCommand extends BaseCommand<Long> {
     @NotBlank
     public String longitude;
 
-    public CreateOrderCommand(Long id, String latitude, String longitude) {
+    public CreateOrderCommand(String id, @NotBlank String owner, @NotBlank String latitude, @NotBlank String longitude) {
         super(id);
+        this.owner = owner;
         this.latitude = latitude;
         this.longitude = longitude;
     }

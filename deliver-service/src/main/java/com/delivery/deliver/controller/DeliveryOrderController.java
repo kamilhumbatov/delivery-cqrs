@@ -4,18 +4,14 @@ import com.delivery.deliver.dto.DeliveryOrderAssigneeDto;
 import com.delivery.deliver.dto.DeliveryOrderCreateDto;
 import com.delivery.deliver.dto.DeliveryOrderDto;
 import com.delivery.deliver.service.DeliveryOrderCommandService;
+import com.delivery.deliver.service.DeliveryOrderCreateService;
 import com.delivery.util.RoleName;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("delivery-orders")
@@ -23,6 +19,7 @@ import java.util.List;
 public class DeliveryOrderController {
 
     private final DeliveryOrderCommandService service;
+    private final DeliveryOrderCreateService createService;
 
     @GetMapping("/{id}")
     public DeliveryOrderDto getOrder(@PathVariable String id) {
@@ -43,8 +40,8 @@ public class DeliveryOrderController {
 
     @Secured(RoleName.ROLE_CUSTOMER)
     @PostMapping
-    public DeliveryOrderDto create(@RequestBody DeliveryOrderCreateDto createDto) {
-        return service.createOrder(createDto);
+    public CompletableFuture<String> create(@RequestBody DeliveryOrderCreateDto createDto) {
+        return createService.createOrder(createDto);
     }
 
     @Secured(RoleName.ROLE_ADMIN)
