@@ -1,6 +1,6 @@
 package com.delivery.service.mapper;
 
-import com.delivery.user.domain.DeliveryOrder;
+import com.delivery.domain.DeliveryOrder;
 import com.delivery.dto.DeliveryOrderCreateDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

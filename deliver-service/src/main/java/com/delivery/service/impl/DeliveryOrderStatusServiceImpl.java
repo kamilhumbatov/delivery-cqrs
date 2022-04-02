@@ -7,7 +7,7 @@ import com.delivery.exception.DeliveryOrderStatusException;
 import com.delivery.service.DeliveryOrderService;
 import com.delivery.service.DeliveryOrderStatusService;
 import com.delivery.service.mapper.DeliveryOrderMapper;
-import com.delivery.user.domain.DeliveryOrder;
+import com.delivery.domain.DeliveryOrder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;

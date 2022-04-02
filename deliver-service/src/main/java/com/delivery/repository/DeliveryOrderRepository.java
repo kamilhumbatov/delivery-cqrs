@@ -1,6 +1,6 @@
-package com.delivery.user.repository;
+package com.delivery.repository;
 
-import com.delivery.user.domain.DeliveryOrder;
+import com.delivery.domain.DeliveryOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

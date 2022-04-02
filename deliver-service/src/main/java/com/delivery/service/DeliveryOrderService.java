@@ -1,6 +1,6 @@
 package com.delivery.service;
 
-import com.delivery.user.domain.DeliveryOrder;
+import com.delivery.domain.DeliveryOrder;
 
 import java.util.List;
 

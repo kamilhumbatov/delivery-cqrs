@@ -1,9 +1,9 @@
 package com.delivery.user.service.impl;
 
-import com.delivery.user.domain.User;
+import com.delivery.domain.User;
 import com.delivery.user.dto.signup.SignUpRequest;
 import com.delivery.user.exception.UsernameAlreadyTakenException;
-import com.delivery.user.repository.UserRepository;
+import com.delivery.repository.UserRepository;
 import com.delivery.user.service.RoleService;
 import com.delivery.user.service.UserService;
 import com.delivery.util.RoleName;

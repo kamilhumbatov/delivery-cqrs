@@ -27,6 +27,7 @@ public class DeliveryOrderAggregate {
 
     @EventSourcingHandler
     protected void on(DeliverOrderCoordinateChangedEvent event) {
+        this.id = event.id;
         this.currentLatitude = event.latitude;
         this.currentLongitude = event.longitude;
     }

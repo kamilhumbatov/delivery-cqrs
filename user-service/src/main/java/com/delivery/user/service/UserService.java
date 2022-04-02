@@ -1,6 +1,6 @@
 package com.delivery.user.service;
 
-import com.delivery.user.domain.User;
+import com.delivery.domain.User;
 import com.delivery.user.dto.signup.SignUpRequest;
 
 import java.util.Optional;

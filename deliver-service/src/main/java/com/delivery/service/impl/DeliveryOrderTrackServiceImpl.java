@@ -2,12 +2,12 @@ package com.delivery.service.impl;
 
 import com.delivery.CurrentUserService;
 import com.delivery.commands.ChangeOrderCoordinateCommand;
+import com.delivery.domain.DeliveryOrder;
 import com.delivery.dto.DeliveryOrderDestinationDto;
 import com.delivery.enums.DeliveryOrderStatus;
 import com.delivery.exception.DeliveryOrderStatusException;
 import com.delivery.service.DeliveryOrderService;
 import com.delivery.service.DeliveryOrderTrackService;
-import com.delivery.user.domain.DeliveryOrder;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -34,6 +34,6 @@ public class DeliveryOrderTrackServiceImpl implements DeliveryOrderTrackService 
             );
             return commandGateway.send(command);
         }
-        throw new DeliveryOrderStatusException(DeliveryOrderStatus.CANCELED, "Because order was delivered!");
+        throw new DeliveryOrderStatusException(deliveryOrder.getStatus(), "Because order was not delivery!");
     }
 }

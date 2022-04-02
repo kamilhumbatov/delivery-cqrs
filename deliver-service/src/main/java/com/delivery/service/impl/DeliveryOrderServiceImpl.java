@@ -2,8 +2,8 @@ package com.delivery.service.impl;
 
 import com.delivery.exception.DeliveryOrderNotFoundException;
 import com.delivery.service.DeliveryOrderService;
-import com.delivery.user.domain.DeliveryOrder;
-import com.delivery.user.repository.DeliveryOrderRepository;
+import com.delivery.domain.DeliveryOrder;
+import com.delivery.repository.DeliveryOrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
