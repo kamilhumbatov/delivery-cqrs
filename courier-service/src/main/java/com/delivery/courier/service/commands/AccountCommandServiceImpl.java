@@ -23,16 +23,28 @@ public class AccountCommandServiceImpl implements AccountCommandService {
 
     @Override
     public CompletableFuture<String> createAccount(AccountCreateDTO accountCreateDTO) {
-        return commandGateway.send(new CreateAccountCommand(UUID.randomUUID().toString(), accountCreateDTO.getStartingBalance(), accountCreateDTO.getCurrency()));
+        return commandGateway.send(CreateAccountCommand.builder()
+                .id(UUID.randomUUID().toString())
+                .accountBalance(accountCreateDTO.getStartingBalance())
+                .currency(accountCreateDTO.getCurrency())
+                .build());
     }
 
     @Override
     public CompletableFuture<String> creditMoneyToAccount(String accountNumber, MoneyCreditDTO moneyCreditDTO) {
-        return commandGateway.send(new CreditMoneyCommand(accountNumber, moneyCreditDTO.getCreditAmount(), moneyCreditDTO.getCurrency()));
+        return commandGateway.send(CreditMoneyCommand.builder()
+                .id(accountNumber)
+                .creditAmount(moneyCreditDTO.getCreditAmount())
+                .currency(moneyCreditDTO.getCurrency())
+                .build());
     }
 
     @Override
     public CompletableFuture<String> debitMoneyFromAccount(String accountNumber, MoneyDebitDTO moneyDebitDTO) {
-        return commandGateway.send(new DebitMoneyCommand(accountNumber, moneyDebitDTO.getDebitAmount(), moneyDebitDTO.getCurrency()));
+        return commandGateway.send(DebitMoneyCommand.builder()
+                .id(accountNumber)
+                .currency(moneyDebitDTO.getCurrency())
+                .debitAmount(moneyDebitDTO.getDebitAmount())
+                .build());
     }
 }

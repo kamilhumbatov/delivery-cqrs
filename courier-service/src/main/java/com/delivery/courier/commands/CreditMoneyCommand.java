@@ -1,14 +1,18 @@
 package com.delivery.courier.commands;
 
-public class CreditMoneyCommand extends BaseCommand<String> {
+import lombok.Builder;
+import lombok.Data;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
+
+@Data
+@Builder
+public class CreditMoneyCommand  {
+
+    @TargetAggregateIdentifier
+    private String id;
 
     public final double creditAmount;
 
     public final String currency;
 
-    public CreditMoneyCommand(String id, double creditAmount, String currency) {
-        super(id);
-        this.creditAmount = creditAmount;
-        this.currency = currency;
-    }
 }

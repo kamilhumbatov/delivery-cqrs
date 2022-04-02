@@ -1,14 +1,17 @@
 package com.delivery.courier.commands;
 
-public class CreateAccountCommand extends BaseCommand<String> {
+import lombok.Builder;
+import lombok.Data;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
-    public final double accountBalance;
+@Data
+@Builder
+public class CreateAccountCommand {
 
-    public final String currency;
+    @TargetAggregateIdentifier
+    private String id;
 
-    public CreateAccountCommand(String id, double accountBalance, String currency) {
-        super(id);
-        this.accountBalance = accountBalance;
-        this.currency = currency;
-    }
+    private final double accountBalance;
+
+    private final String currency;
 }

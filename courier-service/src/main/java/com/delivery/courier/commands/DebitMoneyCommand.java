@@ -1,14 +1,18 @@
 package com.delivery.courier.commands;
 
-public class DebitMoneyCommand extends BaseCommand<String> {
+import lombok.Builder;
+import lombok.Data;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
+
+@Data
+@Builder
+public class DebitMoneyCommand {
+
+    @TargetAggregateIdentifier
+    private String id;
 
     public final double debitAmount;
 
     public final String currency;
 
-    public DebitMoneyCommand(String id, double debitAmount, String currency) {
-        super(id);
-        this.debitAmount = debitAmount;
-        this.currency = currency;
-    }
 }

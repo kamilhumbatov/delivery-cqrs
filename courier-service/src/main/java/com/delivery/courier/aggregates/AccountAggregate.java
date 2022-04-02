@@ -28,7 +28,8 @@ public class AccountAggregate {
     @CommandHandler
     public AccountAggregate(CreateAccountCommand createAccountCommand){
         System.out.println("CreateAccountCommand");
-        AggregateLifecycle.apply(new AccountCreatedEvent(createAccountCommand.id, createAccountCommand.accountBalance, createAccountCommand.currency));
+        AggregateLifecycle.apply(new AccountCreatedEvent(createAccountCommand.getId(),
+                createAccountCommand.getAccountBalance(), createAccountCommand.getCurrency()));
     }
 
     @EventSourcingHandler
@@ -51,7 +52,8 @@ public class AccountAggregate {
     @CommandHandler
     protected void on(CreditMoneyCommand creditMoneyCommand){
         System.out.println("CreditMoneyCommand");
-        AggregateLifecycle.apply(new MoneyCreditedEvent(creditMoneyCommand.id, creditMoneyCommand.creditAmount, creditMoneyCommand.currency));
+        AggregateLifecycle.apply(new MoneyCreditedEvent(creditMoneyCommand.getId(), creditMoneyCommand.getCreditAmount(),
+                creditMoneyCommand.getCurrency()));
     }
 
     @EventSourcingHandler
@@ -67,7 +69,7 @@ public class AccountAggregate {
     @CommandHandler
     protected void on(DebitMoneyCommand debitMoneyCommand){
         System.out.println("DebitMoneyCommand");
-        AggregateLifecycle.apply(new MoneyDebitedEvent(debitMoneyCommand.id, debitMoneyCommand.debitAmount, debitMoneyCommand.currency));
+        AggregateLifecycle.apply(new MoneyDebitedEvent(debitMoneyCommand.getId(), debitMoneyCommand.getDebitAmount(), debitMoneyCommand.getCurrency()));
     }
 
     @EventSourcingHandler
