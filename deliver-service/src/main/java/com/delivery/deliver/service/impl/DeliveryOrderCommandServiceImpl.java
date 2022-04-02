@@ -9,6 +9,7 @@ import com.delivery.deliver.service.DeliveryOrderCommandService;
 import com.delivery.deliver.service.DeliveryOrderService;
 import com.delivery.deliver.service.mapper.DeliveryOrderMapper;
 import lombok.RequiredArgsConstructor;
+import org.axonframework.eventsourcing.eventstore.EventStore;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DeliveryOrderCommandServiceImpl implements DeliveryOrderCommandService {
 
+    private final EventStore eventStore;
     private final DeliveryOrderMapper mapper;
     private final DeliveryOrderService orderService;
     private final CurrentUserService currentUserService;
@@ -54,5 +56,10 @@ public class DeliveryOrderCommandServiceImpl implements DeliveryOrderCommandServ
                 .stream()
                 .map(DeliveryOrderMapper.INSTANCE::toDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Object> listEventsForAccount(String orderId) {
+        return eventStore.readEvents(orderId).asStream().map( s -> s.getPayload()).collect(Collectors.toList());
     }
 }

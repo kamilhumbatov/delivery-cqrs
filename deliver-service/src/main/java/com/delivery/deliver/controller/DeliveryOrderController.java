@@ -38,6 +38,11 @@ public class DeliveryOrderController {
         return service.findAllOrdersByAssignee();
     }
 
+    @GetMapping("/{accountNumber}/events")
+    public List<Object> listEventsForAccount(@PathVariable(value = "accountNumber") String accountNumber){
+        return service.listEventsForAccount(accountNumber);
+    }
+
     @Secured(RoleName.ROLE_CUSTOMER)
     @PostMapping
     public String create(@RequestBody DeliveryOrderCreateDto createDto) {

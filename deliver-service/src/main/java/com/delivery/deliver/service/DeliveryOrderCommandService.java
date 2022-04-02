@@ -16,4 +16,6 @@ public interface DeliveryOrderCommandService {
     List<DeliveryOrderDto> findAllOrdersByOwner();
 
     List<DeliveryOrderDto> findAllOrdersByAssignee();
+
+    List<Object> listEventsForAccount(String orderId);
 }
