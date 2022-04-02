@@ -42,14 +42,14 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     @EventHandler
     public void on(DeliverOrderCreatedEvent event) {
         DeliveryOrder deliveryOrder = DeliveryOrder.builder()
-                .id(event.id)
-                .owner(event.owner)
+                .id(event.getOrderId())
+                .owner(event.getOwner())
                 .status(DeliveryOrderStatus.CREATED)
                 .build();
 
         DeliveryOrderDestination deliveryOrderDestination = DeliveryOrderDestination.builder()
-                .latitude(event.latitude)
-                .longitude(event.longitude)
+                .latitude(event.getLatitude())
+                .longitude(event.getLongitude())
                 .order(deliveryOrder)
                 .build();
         deliveryOrderDestination.setOrder(deliveryOrder);

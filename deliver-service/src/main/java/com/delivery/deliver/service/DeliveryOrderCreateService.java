@@ -6,5 +6,5 @@ import java.util.concurrent.CompletableFuture;
 
 public interface DeliveryOrderCreateService {
 
-    CompletableFuture<String> createOrder(DeliveryOrderCreateDto createDto);
+    String createOrder(DeliveryOrderCreateDto createDto);
 }

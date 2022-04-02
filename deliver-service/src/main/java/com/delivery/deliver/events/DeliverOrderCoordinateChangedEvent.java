@@ -1,13 +1,16 @@
 package com.delivery.deliver.events;
 
-public class DeliverOrderCoordinateChangedEvent extends BaseEvent<String> {
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    public String latitude;
-    public String longitude;
-
-    public DeliverOrderCoordinateChangedEvent(String id, String latitude, String longitude) {
-        super(id);
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class DeliverOrderCoordinateChangedEvent {
+    private String orderId;
+    private String latitude;
+    private String longitude;
 }

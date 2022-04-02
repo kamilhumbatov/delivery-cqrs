@@ -21,10 +21,10 @@ public class DeliveryOrderCoordinateServiceImpl implements DeliveryOrderCoordina
 
     @EventHandler
     public void on(DeliverOrderCoordinateChangedEvent event) {
-        DeliveryOrder order = deliveryOrderService.findById(event.id);
+        DeliveryOrder order = deliveryOrderService.findById(event.getOrderId());
         DeliveryOrderCoordinate orderCoordinate = DeliveryOrderCoordinate.builder()
-                .latitude(event.latitude)
-                .longitude(event.longitude)
+                .latitude(event.getLatitude())
+                .longitude(event.getLongitude())
                 .order(order)
                 .build();
         repository.save(orderCoordinate);

@@ -26,31 +26,44 @@ public class DeliveryOrderAggregate {
 
     private String currentLongitude;
 
+    public DeliveryOrderAggregate() {
+
+    }
+
     @CommandHandler
     public DeliveryOrderAggregate(CreateOrderCommand command) {
-        DeliverOrderCreatedEvent event = new DeliverOrderCreatedEvent(
-                command.id, command.owner, command.latitude, command.longitude);
+        DeliverOrderCreatedEvent event =
+                DeliverOrderCreatedEvent.builder()
+                        .orderId(command.getOrderId())
+                        .latitude(command.getLatitude())
+                        .longitude(command.getLongitude())
+                        .owner(command.getOwner())
+                        .build();
         AggregateLifecycle.apply(event);
     }
 
     @EventSourcingHandler
     protected void on(DeliverOrderCreatedEvent event) {
-        this.id = event.id;
-        this.owner = owner;
-        this.latitude = event.latitude;
-        this.longitude = event.longitude;
+        this.id = event.getOrderId();
+        this.owner = event.getOwner();
+        this.latitude = event.getLatitude();
+        this.longitude = event.getLongitude();
     }
 
     @CommandHandler
     public DeliveryOrderAggregate(ChangeOrderCoordinateCommand command) {
-        DeliverOrderCoordinateChangedEvent event = new DeliverOrderCoordinateChangedEvent(
-                command.id, command.latitude, command.longitude);
+        DeliverOrderCoordinateChangedEvent event =
+                DeliverOrderCoordinateChangedEvent.builder()
+                        .orderId(command.getOrderId())
+                        .latitude(command.getLatitude())
+                        .longitude(command.getLongitude())
+                        .build();
         AggregateLifecycle.apply(event);
     }
 
     @EventSourcingHandler
     protected void on(DeliverOrderCoordinateChangedEvent event) {
-        this.currentLatitude = event.latitude;
-        this.currentLongitude = event.longitude;
+        this.currentLatitude = event.getLatitude();
+        this.currentLongitude = event.getLongitude();
     }
 }

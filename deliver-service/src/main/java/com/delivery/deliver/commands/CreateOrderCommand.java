@@ -1,22 +1,24 @@
 package com.delivery.deliver.commands;
 
+import lombok.Builder;
+import lombok.Data;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
+
 import javax.validation.constraints.NotBlank;
 
-public class CreateOrderCommand extends BaseCommand<String> {
+@Data
+@Builder
+public class CreateOrderCommand {
+
+    @TargetAggregateIdentifier
+    private String orderId;
 
     @NotBlank
-    public String owner;
+    private String owner;
 
     @NotBlank
-    public String latitude;
+    private String latitude;
 
     @NotBlank
-    public String longitude;
-
-    public CreateOrderCommand(String id, @NotBlank String owner, @NotBlank String latitude, @NotBlank String longitude) {
-        super(id);
-        this.owner = owner;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
+    private String longitude;
 }

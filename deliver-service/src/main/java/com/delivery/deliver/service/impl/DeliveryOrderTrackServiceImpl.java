@@ -27,11 +27,12 @@ public class DeliveryOrderTrackServiceImpl implements DeliveryOrderTrackService 
         DeliveryOrder deliveryOrder = orderService.findById(id);
         //checkUserAccess(deliveryOrder);
         if (deliveryOrder.getStatus().compareTo(DeliveryOrderStatus.DELIVERY) == 0) {
-            ChangeOrderCoordinateCommand command = new ChangeOrderCoordinateCommand(
-                    deliveryOrder.getId(),
-                    destinationDto.getLatitude(),
-                    destinationDto.getLongitude()
-            );
+            ChangeOrderCoordinateCommand command =
+                    ChangeOrderCoordinateCommand.builder()
+                            .orderId(deliveryOrder.getId())
+                            .longitude(destinationDto.getLongitude())
+                            .latitude(destinationDto.getLatitude())
+                            .build();
             return commandGateway.send(command);
         }
         throw new DeliveryOrderStatusException(deliveryOrder.getStatus(), "Because order was not delivery!");

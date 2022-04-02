@@ -1,15 +1,18 @@
 package com.delivery.deliver.events;
 
-public class DeliverOrderCreatedEvent extends BaseEvent<String> {
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    public String owner;
-    public String latitude;
-    public String longitude;
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class DeliverOrderCreatedEvent {
 
-    public DeliverOrderCreatedEvent(String id, String owner, String latitude, String longitude) {
-        super(id);
-        this.owner = owner;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
+    private String orderId;
+    private String owner;
+    private String latitude;
+    private String longitude;
 }

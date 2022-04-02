@@ -1,18 +1,21 @@
 package com.delivery.deliver.commands;
 
+import lombok.Builder;
+import lombok.Data;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
+
 import javax.validation.constraints.NotBlank;
 
-public class ChangeOrderCoordinateCommand extends BaseCommand<String> {
+@Data
+@Builder
+public class ChangeOrderCoordinateCommand {
+
+    @TargetAggregateIdentifier
+    private String orderId;
 
     @NotBlank
-    public String latitude;
+    private String latitude;
 
     @NotBlank
-    public String longitude;
-
-    public ChangeOrderCoordinateCommand(String id, String latitude, String longitude) {
-        super(id);
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
+    private String longitude;
 }

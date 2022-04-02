@@ -40,7 +40,7 @@ public class DeliveryOrderController {
 
     @Secured(RoleName.ROLE_CUSTOMER)
     @PostMapping
-    public CompletableFuture<String> create(@RequestBody DeliveryOrderCreateDto createDto) {
+    public String create(@RequestBody DeliveryOrderCreateDto createDto) {
         return createService.createOrder(createDto);
     }
 
