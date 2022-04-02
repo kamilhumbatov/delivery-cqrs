@@ -1,7 +1,0 @@
-server:
-  port: 8282
-  servlet:
-    contextPath: /admin
-
-application:
-  name: delivery_admin

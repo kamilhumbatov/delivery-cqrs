@@ -1,7 +1,7 @@
 package com.delivery.controller;
 
 import com.delivery.service.DeliveryOrderStatusCommandService;
-import com.delivery.util.Roles;
+import com.delivery.util.RoleName;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -15,25 +15,25 @@ public class DeliveryOrderStatusController {
 
     private final DeliveryOrderStatusCommandService service;
 
-    @Secured(Roles.ROLE_USER)
+    @Secured(RoleName.ROLE_COURIER)
     @GetMapping("/pickup/{id}")
     public CompletableFuture<String> pickupOrder(@PathVariable Long id) {
         return service.changeOrderStatusToPickUp(id);
     }
 
-    @Secured(Roles.ROLE_USER)
+    @Secured(RoleName.ROLE_COURIER)
     @GetMapping("/deliver/{id}")
     public CompletableFuture<String> deliveryOrder(@PathVariable Long id) {
         return service.changeOrderStatusToDelivery(id);
     }
 
-    @Secured(Roles.ROLE_USER)
+    @Secured(RoleName.ROLE_COURIER)
     @GetMapping("/delivered/{id}")
     public CompletableFuture<String> deliveredOrder(@PathVariable Long id) {
         return service.changeOrderStatusToDelivered(id);
     }
 
-    @Secured({Roles.ROLE_USER, Roles.ROLE_ADMIN})
+    @Secured({RoleName.ROLE_CUSTOMER, RoleName.ROLE_COURIER, RoleName.ROLE_ADMIN})
     @PutMapping("/cancel/{id}")
     public CompletableFuture<String> cancelOrder(@PathVariable Long id) {
         return service.changeOrderStatusToCancel(id);

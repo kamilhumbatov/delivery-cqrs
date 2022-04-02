@@ -28,7 +28,7 @@ public class SecurityConfig extends MainSecurityConfig {
         super.configure(http);
         http.authorizeRequests()
                 .antMatchers("/api/v1/auth",
-                        "/api/v1/signup/user",
+                        "/api/v1/signup/customer",
                         "/api/v1/refresh-token").permitAll()
                 .anyRequest().authenticated();
     }

@@ -3,9 +3,11 @@ package com.delivery.user.service;
 import com.delivery.user.domain.User;
 import com.delivery.user.dto.signup.SignUpRequest;
 
+import java.util.Optional;
+
 public interface UserService {
 
-    User findByUsername(String username);
+    Optional<User> findByUsername(String username);
 
-    void createUser(SignUpRequest request);
+    String createCustomer(SignUpRequest request);
 }

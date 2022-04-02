@@ -1,12 +1,8 @@
 package com.delivery.user.service;
 
-import com.delivery.user.dto.RoleDto;
-
-import java.util.List;
+import com.delivery.user.domain.Role;
 
 public interface RoleService {
 
-    List<RoleDto> findAll();
-
-    RoleDto save(RoleDto role);
+    Role findByDescription(String info);
 }

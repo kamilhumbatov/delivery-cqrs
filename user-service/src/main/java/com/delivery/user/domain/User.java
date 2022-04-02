@@ -1,6 +1,9 @@
 package com.delivery.user.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,6 +18,9 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -27,6 +33,8 @@ public class User {
 
     @Column
     private String password;
+
+    private String fullName;
 
     @ManyToOne
     @JoinColumn(nullable = false)

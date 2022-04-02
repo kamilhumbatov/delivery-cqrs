@@ -1,5 +1,6 @@
 package com.delivery.user.service.impl;
 
+import com.delivery.user.domain.Role;
 import com.delivery.user.dto.RoleDto;
 import com.delivery.user.repository.RoleRepository;
 import com.delivery.user.service.RoleService;
@@ -17,16 +18,7 @@ public class RoleServiceImpl implements RoleService {
     private final RoleRepository repository;
 
     @Override
-    public List<RoleDto> findAll() {
-        return repository
-                .findAll()
-                .stream()
-                .map(RoleMapper.INSTANCE::toDto)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public RoleDto save(RoleDto role) {
-        return null;
+    public Role findByDescription(String info) {
+        return repository.findByDescription(info);
     }
 }

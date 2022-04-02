@@ -4,7 +4,7 @@ import com.delivery.dto.DeliveryOrderAssigneeDto;
 import com.delivery.dto.DeliveryOrderCreateDto;
 import com.delivery.dto.DeliveryOrderDto;
 import com.delivery.service.DeliveryOrderCommandService;
-import com.delivery.util.Roles;
+import com.delivery.util.RoleName;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,31 +29,31 @@ public class DeliveryOrderController {
         return service.getOrder(id);
     }
 
-    @Secured(Roles.ROLE_USER)
+    @Secured(RoleName.ROLE_CUSTOMER)
     @GetMapping("/owner")
     public List<DeliveryOrderDto> findAllOrdersByOwner() {
         return service.findAllOrdersByOwner();
     }
 
-    @Secured(Roles.ROLE_COURIER)
+    @Secured(RoleName.ROLE_COURIER)
     @GetMapping("/assignee")
     public List<DeliveryOrderDto> findAllOrdersByAssignee() {
         return service.findAllOrdersByAssignee();
     }
 
-    @Secured(Roles.ROLE_USER)
+    @Secured(RoleName.ROLE_CUSTOMER)
     @PostMapping
     public DeliveryOrderDto create(@RequestBody DeliveryOrderCreateDto createDto) {
         return service.createOrder(createDto);
     }
 
-    @Secured(Roles.ROLE_ADMIN)
+    @Secured(RoleName.ROLE_ADMIN)
     @PutMapping("assignee")
     public DeliveryOrderDto assigneeOrderToCourier(@RequestBody DeliveryOrderAssigneeDto assigneeDto) {
         return service.assigneeOrderToCourier(assigneeDto);
     }
 
-    @Secured(Roles.ROLE_USER)
+    @Secured(RoleName.ROLE_CUSTOMER)
     @PutMapping("destination")
     public DeliveryOrderDto changeDestination(@RequestBody DeliveryOrderAssigneeDto assigneeDto) {
         return service.assigneeOrderToCourier(assigneeDto);

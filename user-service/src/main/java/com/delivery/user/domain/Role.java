@@ -18,5 +18,5 @@ public class Role {
     @Basic(optional = false)
     private Long id;
 
-    private String info;
+    private String description;
 }

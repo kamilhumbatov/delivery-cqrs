@@ -2,10 +2,13 @@ package com.delivery.user.service.impl;
 
 import com.delivery.user.domain.User;
 import com.delivery.user.dto.signup.SignUpRequest;
-import com.delivery.user.exception.UserNotFoundException;
+import com.delivery.user.exception.UsernameAlreadyTakenException;
 import com.delivery.user.repository.UserRepository;
+import com.delivery.user.service.RoleService;
 import com.delivery.user.service.UserService;
+import com.delivery.util.RoleName;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,12 +18,29 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
+    private final RoleService roleService;
+    private final PasswordEncoder passwordEncoder;
+    private static final String YOUR_REGISTRATION_WAS_SUCCESSFUL = "Your registration was successful!";
 
-    public User findByUsername(String username) {
-        return repository.findByUsername(username).orElseThrow(UserNotFoundException::new);
+    @Override
+    public Optional<User> findByUsername(String username) {
+        return repository.findByUsername(username);
     }
 
-    public void createUser(SignUpRequest request) {
-        User user = findByUsername(request.getUsername());
+    @Override
+    public String createCustomer(SignUpRequest request) {
+        Optional<User> userOptional = findByUsername(request.getUsername());
+        if (userOptional.isPresent()) {
+            throw new UsernameAlreadyTakenException();
+        } else {
+            User user = User.builder()
+                    .fullName(request.getFullName())
+                    .username(request.getUsername())
+                    .password(passwordEncoder.encode(request.getPassword()))
+                    .role(roleService.findByDescription(RoleName.ROLE_CUSTOMER))
+                    .build();
+            repository.save(user);
+            return YOUR_REGISTRATION_WAS_SUCCESSFUL;
+        }
     }
 }

@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: in_27062020
-      author: microfin
+      id: in_04042022
+      author: delivery
       changes:
         - insert:
-            tableName: mp_office_users_role
+            tableName: role
             columns:
               - column:
                   name: id
@@ -13,20 +13,20 @@ databaseChangeLog:
                   name: description
                   value: ROLE_ADMIN
         - insert:
-            tableName: mp_office_users_role
+            tableName: role
             columns:
               - column:
                   name: id
                   value: 2
               - column:
                   name: description
-                  value: ROLE_OPERATOR
+                  value: ROLE_CUSTOMER
         - insert:
-            tableName: mp_office_users_role
+            tableName: role
             columns:
               - column:
                   name: id
                   value: 3
               - column:
                   name: description
-                  value: ROLE_HEAD
+                  value: ROLE_COURIER

@@ -3,6 +3,7 @@ package com.delivery.user.service.impl;
 import com.delivery.user.domain.User;
 import com.delivery.user.dto.auth.AuthRequest;
 import com.delivery.user.dto.auth.AuthResponse;
+import com.delivery.user.exception.UserNotFoundException;
 import com.delivery.user.service.AuthService;
 import com.delivery.user.service.UserService;
 import com.delivery.user.service.security.JwtTokenProvider;
@@ -23,7 +24,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponse doAuth(AuthRequest authRequest) throws Exception {
-        User user = userService.findByUsername(authRequest.getUsername());
+        User user = userService.findByUsername(authRequest.getUsername()).orElseThrow(UserNotFoundException::new);
         authenticate(authRequest);
         return AuthResponse.builder()
                 .accessToken(tokenProvider.generateTokenForUser(user))
