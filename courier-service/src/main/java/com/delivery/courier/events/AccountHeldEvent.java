@@ -2,13 +2,19 @@ package com.delivery.courier.events;
 
 
 import com.delivery.courier.aggregates.Status;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public class AccountHeldEvent extends BaseEvent<String> {
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class AccountHeldEvent {
 
-    public final Status status;
+    private String id;
 
-    public AccountHeldEvent(String id, Status status) {
-        super(id);
-        this.status = status;
-    }
+    private  Status status;
+
 }

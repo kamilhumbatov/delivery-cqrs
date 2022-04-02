@@ -11,8 +11,8 @@ public class CreditMoneyCommand  {
     @TargetAggregateIdentifier
     private String id;
 
-    public final double creditAmount;
+    private  double creditAmount;
 
-    public final String currency;
+    private  String currency;
 
 }

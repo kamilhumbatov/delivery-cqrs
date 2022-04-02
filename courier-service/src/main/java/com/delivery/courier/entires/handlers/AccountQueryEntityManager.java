@@ -3,7 +3,6 @@ package com.delivery.courier.entires.handlers;
 import com.delivery.courier.aggregates.AccountAggregate;
 import com.delivery.courier.entires.AccountQueryEntity;
 import com.delivery.courier.entires.repositories.AccountRepository;
-import com.delivery.courier.events.BaseEvent;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +19,15 @@ public class AccountQueryEntityManager {
     @Qualifier("accountAggregateEventSourcingRepository")
     private EventSourcingRepository<AccountAggregate> accountAggregateEventSourcingRepository;
 
-    @EventSourcingHandler
-    void on(BaseEvent event){
-        persistAccount(buildQueryAccount(getAccountFromEvent(event)));
-    }
+//    @EventSourcingHandler
+//    void on(BaseEvent event){
+//        persistAccount(buildQueryAccount(getAccountFromEvent(event)));
+//    }
 
 
-    private AccountAggregate getAccountFromEvent(BaseEvent event){
-        return accountAggregateEventSourcingRepository.load(event.id.toString()).getWrappedAggregate().getAggregateRoot();
-    }
+//    private AccountAggregate getAccountFromEvent(BaseEvent event){
+//        return accountAggregateEventSourcingRepository.load(event.id.toString()).getWrappedAggregate().getAggregateRoot();
+//    }
 
     private AccountQueryEntity findExistingOrCreateQueryAccount(String id){
         return accountRepository.findById(id).isPresent() ? accountRepository.findById(id).get() : new AccountQueryEntity();

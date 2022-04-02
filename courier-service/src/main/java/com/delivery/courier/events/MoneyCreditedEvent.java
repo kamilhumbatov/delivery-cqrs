@@ -1,14 +1,19 @@
 package com.delivery.courier.events;
 
-public class MoneyCreditedEvent extends BaseEvent<String> {
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    public final double creditAmount;
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class MoneyCreditedEvent {
 
-    public final String currency;
+    private String id;
 
-    public MoneyCreditedEvent(String id, double creditAmount, String currency) {
-        super(id);
-        this.creditAmount = creditAmount;
-        this.currency = currency;
-    }
+    private  double creditAmount;
+
+    private  String currency;
 }

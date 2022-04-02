@@ -1,14 +1,21 @@
 package com.delivery.courier.events;
 
-public class AccountCreatedEvent extends BaseEvent<String> {
 
-    public final double accountBalance;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    public final String currency;
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class AccountCreatedEvent  {
 
-    public AccountCreatedEvent(String id, double accountBalance, String currency) {
-        super(id);
-        this.accountBalance = accountBalance;
-        this.currency = currency;
-    }
+    private String id;
+
+    private double accountBalance;
+
+    private String currency;
+
 }

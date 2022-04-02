@@ -11,8 +11,8 @@ public class DebitMoneyCommand {
     @TargetAggregateIdentifier
     private String id;
 
-    public final double debitAmount;
+    private double debitAmount;
 
-    public final String currency;
+    private String currency;
 
 }
