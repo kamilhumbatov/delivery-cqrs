@@ -1,6 +1,6 @@
 package com.delivery.user.service.impl;
 
-import com.delivery.domain.User;
+import com.delivery.user.domain.User;
 import com.delivery.user.dto.auth.AuthRequest;
 import com.delivery.user.dto.auth.AuthResponse;
 import com.delivery.user.exception.UserNotFoundException;

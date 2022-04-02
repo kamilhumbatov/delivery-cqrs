@@ -1,6 +1,6 @@
 package com.delivery.user.service;
 
-import com.delivery.domain.Role;
+import com.delivery.user.domain.Role;
 
 public interface RoleService {
 

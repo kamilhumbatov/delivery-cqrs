@@ -2,7 +2,7 @@ package com.delivery.courier.config;
 
 import com.delivery.AuthEntryPointJwt;
 import com.delivery.JwtTokenFilter;
-import com.delivery.config.MainSecurityConfig;
+import com.delivery.deliver.config.MainSecurityConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
