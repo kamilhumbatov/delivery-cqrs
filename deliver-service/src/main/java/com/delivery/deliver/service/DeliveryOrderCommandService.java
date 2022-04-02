@@ -8,11 +8,11 @@ import com.delivery.deliver.dto.DeliveryOrderDto;
 import java.util.List;
 
 public interface DeliveryOrderCommandService {
-    DeliveryOrderDto getOrder(Long id);
+    DeliveryOrderDto getOrder(String id);
 
     DeliveryOrderDto createOrder(DeliveryOrderCreateDto createDto);
 
-    DeliveryOrderDto changeDestination(Long id,DeliveryOrderDestinationDto destinationDto);
+    DeliveryOrderDto changeDestination(String id,DeliveryOrderDestinationDto destinationDto);
 
     DeliveryOrderDto assigneeOrderToCourier(DeliveryOrderAssigneeDto assigneeDto);
 

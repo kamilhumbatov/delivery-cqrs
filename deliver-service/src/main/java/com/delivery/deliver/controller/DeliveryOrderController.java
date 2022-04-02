@@ -25,7 +25,7 @@ public class DeliveryOrderController {
     private final DeliveryOrderCommandService service;
 
     @GetMapping("/{id}")
-    public DeliveryOrderDto getOrder(@PathVariable Long id) {
+    public DeliveryOrderDto getOrder(@PathVariable String id) {
         return service.getOrder(id);
     }
 

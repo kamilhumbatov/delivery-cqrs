@@ -4,11 +4,11 @@ import com.delivery.deliver.dto.DeliveryOrderDto;
 
 public interface DeliveryOrderStatusService {
 
-    DeliveryOrderDto changeOrderStatusToPickUp(long id);
+    DeliveryOrderDto changeOrderStatusToPickUp(String id);
 
-    DeliveryOrderDto changeOrderStatusToDelivery(long id);
+    DeliveryOrderDto changeOrderStatusToDelivery(String id);
 
-    DeliveryOrderDto changeOrderStatusToDelivered(long id);
+    DeliveryOrderDto changeOrderStatusToDelivered(String id);
 
-    DeliveryOrderDto changeOrderStatusToCancel(long id);
+    DeliveryOrderDto changeOrderStatusToCancel(String id);
 }

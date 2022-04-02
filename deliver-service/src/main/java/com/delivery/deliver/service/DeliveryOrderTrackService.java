@@ -6,5 +6,5 @@ import java.util.concurrent.CompletableFuture;
 
 public interface DeliveryOrderTrackService {
 
-    CompletableFuture<String> changeCoordinate(long id, DeliveryOrderDestinationDto destinationDto);
+    CompletableFuture<String> changeCoordinate(String id, DeliveryOrderDestinationDto destinationDto);
 }

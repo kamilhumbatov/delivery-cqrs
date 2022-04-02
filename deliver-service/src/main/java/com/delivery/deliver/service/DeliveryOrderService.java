@@ -5,7 +5,7 @@ import com.delivery.deliver.domain.DeliveryOrder;
 import java.util.List;
 
 public interface DeliveryOrderService {
-    DeliveryOrder findById(long id);
+    DeliveryOrder findById(String id);
 
     DeliveryOrder save(DeliveryOrder deliveryOrder);
 

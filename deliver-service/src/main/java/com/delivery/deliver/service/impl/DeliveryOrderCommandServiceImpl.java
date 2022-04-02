@@ -30,7 +30,7 @@ public class DeliveryOrderCommandServiceImpl implements DeliveryOrderCommandServ
     private final CurrentUserService currentUserService;
 
     @Override
-    public DeliveryOrderDto getOrder(Long id) {
+    public DeliveryOrderDto getOrder(String id) {
         DeliveryOrder deliveryOrder = orderService.findById(id);
         return mapper.toDto(deliveryOrder);
     }
@@ -48,7 +48,7 @@ public class DeliveryOrderCommandServiceImpl implements DeliveryOrderCommandServ
     }
 
     @Override
-    public DeliveryOrderDto changeDestination(Long id, DeliveryOrderDestinationDto destinationDto) {
+    public DeliveryOrderDto changeDestination(String id, DeliveryOrderDestinationDto destinationDto) {
         return null;
     }
 

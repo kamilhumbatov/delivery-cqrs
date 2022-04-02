@@ -23,7 +23,7 @@ public class DeliveryOrderTrackServiceImpl implements DeliveryOrderTrackService 
     private final CommandGateway commandGateway;
 
     @Override
-    public CompletableFuture<String> changeCoordinate(long id, DeliveryOrderDestinationDto destinationDto) {
+    public CompletableFuture<String> changeCoordinate(String id, DeliveryOrderDestinationDto destinationDto) {
         DeliveryOrder deliveryOrder = orderService.findById(id);
         //checkUserAccess(deliveryOrder);
         if (deliveryOrder.getStatus().compareTo(DeliveryOrderStatus.DELIVERY) == 0) {

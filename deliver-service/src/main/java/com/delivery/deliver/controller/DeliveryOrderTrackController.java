@@ -19,7 +19,7 @@ public class DeliveryOrderTrackController {
     @Secured(RoleName.ROLE_COURIER)
     @PostMapping("/{id}")
     public CompletableFuture<String> changeCoordinate(
-            @PathVariable Long id,
+            @PathVariable String id,
             @RequestBody DeliveryOrderDestinationDto coordinateDto) {
         return service.changeCoordinate(id, coordinateDto);
     }

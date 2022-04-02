@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 public class DeliveryOrderAssigneeDto {
 
     @NotNull
-    private Long id;
+    private String id;
 
     @NotBlank
     private String assignee;

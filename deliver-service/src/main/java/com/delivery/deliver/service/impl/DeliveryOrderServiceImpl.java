@@ -16,7 +16,7 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     private final DeliveryOrderRepository repository;
 
     @Override
-    public DeliveryOrder findById(long id) {
+    public DeliveryOrder findById(String id) {
         return repository.findById(id).orElseThrow(() -> new DeliveryOrderNotFoundException(id));
     }
 

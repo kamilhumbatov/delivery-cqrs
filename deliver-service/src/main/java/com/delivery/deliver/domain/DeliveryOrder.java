@@ -11,7 +11,6 @@ import javax.persistence.*;
 public class DeliveryOrder {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private String id;
 
@@ -23,6 +22,6 @@ public class DeliveryOrder {
     private DeliveryOrderStatus status;
 
     @OneToOne
-    @JoinColumn(name="DESTINATION_ID")
+    @JoinColumn(name = "DESTINATION_ID")
     private DeliveryOrderDestination destination;
 }

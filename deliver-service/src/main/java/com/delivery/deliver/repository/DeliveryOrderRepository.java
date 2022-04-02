@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface DeliveryOrderRepository extends JpaRepository<DeliveryOrder, Long> {
+public interface DeliveryOrderRepository extends JpaRepository<DeliveryOrder, String> {
 
     List<DeliveryOrder> findAllByOwner(String owner);
 
