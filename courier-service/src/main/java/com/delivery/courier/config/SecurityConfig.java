@@ -25,6 +25,6 @@ public class SecurityConfig extends MainSecurityConfig {
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
         http.authorizeRequests()
-                .anyRequest().authenticated();
+                .anyRequest().permitAll();
     }
 }
