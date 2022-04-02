@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -17,7 +18,7 @@ import javax.persistence.*;
 public class DeliveryOrder {
 
     @Id
-    @Basic(optional = false)
+    @Column(name = "id", unique = true)
     private String id;
 
     private String owner;
@@ -27,7 +28,7 @@ public class DeliveryOrder {
     @Enumerated(EnumType.STRING)
     private DeliveryOrderStatus status;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "DESTINATION_ID")
     private DeliveryOrderDestination destination;
 }

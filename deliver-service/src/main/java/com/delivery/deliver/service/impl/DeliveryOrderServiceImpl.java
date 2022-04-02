@@ -42,6 +42,7 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     @EventHandler
     public void on(DeliverOrderCreatedEvent event) {
         DeliveryOrder deliveryOrder = DeliveryOrder.builder()
+                .id(event.id)
                 .owner(event.owner)
                 .status(DeliveryOrderStatus.CREATED)
                 .build();
@@ -49,6 +50,7 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
         DeliveryOrderDestination deliveryOrderDestination = DeliveryOrderDestination.builder()
                 .latitude(event.latitude)
                 .longitude(event.longitude)
+                .order(deliveryOrder)
                 .build();
         deliveryOrderDestination.setOrder(deliveryOrder);
         repository.save(deliveryOrder);

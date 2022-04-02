@@ -28,13 +28,6 @@ public class DeliveryOrderCreateServiceImpl implements DeliveryOrderCreateServic
 
     @Override
     public CompletableFuture<String> createOrder(DeliveryOrderCreateDto createDto) {
-//        DeliveryOrder deliveryOrder = createMapper.toDbo(createDto);
-//        deliveryOrder.setStatus(DeliveryOrderStatus.CREATED);
-//        deliveryOrder.setOwner(currentUserService.getCurrentUser());
-//
-//        DeliveryOrderDestination deliveryOrderDestination = destinationCreateMapper.toDbo(createDto);
-//        deliveryOrderDestination.setOrder(deliveryOrder);
-
         CreateOrderCommand command = new CreateOrderCommand(
                 UUID.randomUUID().toString(),
                 "currentUser",
@@ -42,6 +35,5 @@ public class DeliveryOrderCreateServiceImpl implements DeliveryOrderCreateServic
                 createDto.getLongitude()
         );
         return commandGateway.send(command);
-        //return mapper.toDto(orderService.save(deliveryOrder));
     }
 }
