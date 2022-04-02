@@ -1,14 +1,14 @@
 package com.delivery.service;
 
-import java.util.concurrent.CompletableFuture;
+import com.delivery.dto.DeliveryOrderDto;
 
 public interface DeliveryOrderStatusService {
 
-    CompletableFuture<String> changeOrderStatusToPickUp(long id);
+    DeliveryOrderDto changeOrderStatusToPickUp(long id);
 
-    CompletableFuture<String> changeOrderStatusToDelivery(long id);
+    DeliveryOrderDto changeOrderStatusToDelivery(long id);
 
-    CompletableFuture<String> changeOrderStatusToDelivered(long id);
+    DeliveryOrderDto changeOrderStatusToDelivered(long id);
 
-    CompletableFuture<String> changeOrderStatusToCancel(long id);
+    DeliveryOrderDto changeOrderStatusToCancel(long id);
 }

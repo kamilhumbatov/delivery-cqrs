@@ -27,7 +27,12 @@ public class DeliveryOrderTrackServiceImpl implements DeliveryOrderTrackService 
         DeliveryOrder deliveryOrder = orderService.findById(id);
         //checkUserAccess(deliveryOrder);
         if (deliveryOrder.getStatus().compareTo(DeliveryOrderStatus.DELIVERY) == 0) {
-            return commandGateway.send(new ChangeOrderCoordinateCommand(deliveryOrder.getId(), deliveryOrder, destinationDto));
+            ChangeOrderCoordinateCommand command = new ChangeOrderCoordinateCommand(
+                    deliveryOrder.getId(),
+                    destinationDto.getLatitude(),
+                    destinationDto.getLongitude()
+            );
+            return commandGateway.send(command);
         }
         throw new DeliveryOrderStatusException(DeliveryOrderStatus.CANCELED, "Because order was delivered!");
     }
