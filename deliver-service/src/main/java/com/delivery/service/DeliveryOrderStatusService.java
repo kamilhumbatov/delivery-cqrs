@@ -2,7 +2,7 @@ package com.delivery.service;
 
 import java.util.concurrent.CompletableFuture;
 
-public interface DeliveryOrderStatusCommandService {
+public interface DeliveryOrderStatusService {
 
     CompletableFuture<String> changeOrderStatusToPickUp(long id);
 

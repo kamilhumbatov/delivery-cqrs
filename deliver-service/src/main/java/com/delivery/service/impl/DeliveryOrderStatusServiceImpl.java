@@ -1,13 +1,11 @@
 package com.delivery.service.impl;
 
 import com.delivery.CurrentUserService;
-import com.delivery.dto.DeliveryOrderDto;
 import com.delivery.commands.ChangeStatusDeliveryOrderCommand;
 import com.delivery.enums.DeliveryOrderStatus;
 import com.delivery.exception.DeliveryOrderStatusException;
 import com.delivery.service.DeliveryOrderService;
-import com.delivery.service.DeliveryOrderStatusCommandService;
-import com.delivery.service.mapper.DeliveryOrderMapper;
+import com.delivery.service.DeliveryOrderStatusService;
 import com.delivery.user.domain.DeliveryOrder;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -18,7 +16,7 @@ import java.util.concurrent.CompletableFuture;
 
 @Service
 @RequiredArgsConstructor
-public class DeliveryOrderStatusServiceImpl implements DeliveryOrderStatusCommandService {
+public class DeliveryOrderStatusServiceImpl implements DeliveryOrderStatusService {
 
     private final DeliveryOrderService orderService;
     private final CurrentUserService currentUserService;

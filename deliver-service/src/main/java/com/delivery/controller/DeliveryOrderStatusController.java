@@ -1,6 +1,6 @@
 package com.delivery.controller;
 
-import com.delivery.service.DeliveryOrderStatusCommandService;
+import com.delivery.service.DeliveryOrderStatusService;
 import com.delivery.util.RoleName;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class DeliveryOrderStatusController {
 
-    private final DeliveryOrderStatusCommandService service;
+    private final DeliveryOrderStatusService service;
 
     @Secured(RoleName.ROLE_COURIER)
     @GetMapping("/pickup/{id}")
