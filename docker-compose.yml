@@ -18,12 +18,32 @@ services:
     networks:
       - backend
 
-  courier-service:
-    build: ./courier-service
+  gateway:
+    build: ./gateway-service
     networks:
       - backend
     ports:
-      - 8283:8283
+      - 8180:8180
+
+  user-service:
+    build: ./user-service
+    depends_on:
+      - gateway
+      - db
+    networks:
+      - backend
+    ports:
+      - 8181:8181
+
+  deliver-service:
+    build: ./deliver-service
+    depends_on:
+      - gateway
+      - db
+    networks:
+      - backend
+    ports:
+      - 8182:8182
 
 
 volumes:

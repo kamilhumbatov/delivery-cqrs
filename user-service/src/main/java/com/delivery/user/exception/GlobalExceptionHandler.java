@@ -28,6 +28,16 @@ public class GlobalExceptionHandler extends CommonExceptionHandler {
         return buildErrorResponse(exception, HttpStatus.BAD_REQUEST, request);
     }
 
+    @ExceptionHandler(UsernameAlreadyTakenException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handleUsernameAlreadyTakenException(
+            UsernameAlreadyTakenException exception,
+            WebRequest request
+    ) {
+        log.error("Username already taken", exception);
+        return buildErrorResponse(exception, HttpStatus.BAD_REQUEST, request);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex

@@ -4,7 +4,7 @@ server:
     contextPath: /deliver
 
 application:
-  name: delivery_deliver
+  name: deliver-service
 
 spring:
   datasource:

@@ -4,7 +4,7 @@ server:
     contextPath: /security
 
 application:
-  name: delivery_security
+  name: user-service
 
 spring:
   datasource:
