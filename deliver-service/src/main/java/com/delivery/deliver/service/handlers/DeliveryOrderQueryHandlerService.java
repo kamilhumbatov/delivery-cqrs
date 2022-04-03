@@ -1,12 +1,13 @@
-package com.delivery.deliver.service;
+package com.delivery.deliver.service.handlers;
 
-import com.delivery.deliver.dto.DeliveryOrderAssigneeDto;
+import com.delivery.deliver.aggregates.OrderAggregate;
+import com.delivery.deliver.domain.DeliveryOrder;
 import com.delivery.deliver.dto.DeliveryOrderDestinationDto;
 import com.delivery.deliver.dto.DeliveryOrderDto;
 
 import java.util.List;
 
-public interface DeliveryOrderCommandService {
+public interface DeliveryOrderQueryHandlerService {
     DeliveryOrderDto getOrder(String id);
 
     DeliveryOrderDto changeDestination(String id, DeliveryOrderDestinationDto destinationDto);
@@ -14,6 +15,4 @@ public interface DeliveryOrderCommandService {
     List<DeliveryOrderDto> findAllOrdersByOwner();
 
     List<DeliveryOrderDto> findAllOrdersByAssignee();
-
-    List<Object> listEventsForAccount(String orderId);
 }

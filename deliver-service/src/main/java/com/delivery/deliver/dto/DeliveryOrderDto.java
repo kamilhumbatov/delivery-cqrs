@@ -5,7 +5,9 @@ import lombok.Data;
 @Data
 public class DeliveryOrderDto {
 
-    private Long id;
+    private String id;
+
+    private String owner;
 
     private String assignee;
 }

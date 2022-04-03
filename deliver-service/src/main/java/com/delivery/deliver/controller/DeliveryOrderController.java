@@ -3,7 +3,7 @@ package com.delivery.deliver.controller;
 import com.delivery.deliver.aggregates.OrderAggregate;
 import com.delivery.deliver.dto.DeliveryOrderDto;
 import com.delivery.deliver.queries.GetDeliveryOrderQuery;
-import com.delivery.deliver.service.DeliveryOrderCommandService;
+import com.delivery.deliver.service.handlers.DeliveryOrderQueryHandlerService;
 import com.delivery.util.RoleName;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryGateway;
@@ -22,13 +22,14 @@ import java.util.concurrent.ExecutionException;
 @RequiredArgsConstructor
 public class DeliveryOrderController {
 
-    private final DeliveryOrderCommandService service;
+    private final DeliveryOrderQueryHandlerService service;
     private final QueryGateway queryGateway;
 
-//    @GetMapping("/{id}")
-//    public DeliveryOrderDto getOrder(@PathVariable String id) {
-//        return service.getOrder(id);
-//    }
+    @GetMapping("/{id}")
+    public OrderAggregate getDeliveryOrder(@PathVariable String id) throws InterruptedException, ExecutionException {
+        CompletableFuture<OrderAggregate> future = queryGateway.query(new GetDeliveryOrderQuery(id), OrderAggregate.class);
+        return future.get();
+    }
 
     @Secured(RoleName.ROLE_CUSTOMER)
     @GetMapping("/owner")
@@ -40,16 +41,5 @@ public class DeliveryOrderController {
     @GetMapping("/assignee")
     public List<DeliveryOrderDto> findAllOrdersByAssignee() {
         return service.findAllOrdersByAssignee();
-    }
-
-    @GetMapping("/{accountNumber}/events")
-    public List<Object> listEventsForAccount(@PathVariable(value = "accountNumber") String accountNumber) {
-        return service.listEventsForAccount(accountNumber);
-    }
-
-    @GetMapping("/{id}")
-    public OrderAggregate getDeliveryOrder(@PathVariable String id) throws InterruptedException, ExecutionException {
-        CompletableFuture<OrderAggregate> future = queryGateway.query(new GetDeliveryOrderQuery(id), OrderAggregate.class);
-        return future.get();
     }
 }

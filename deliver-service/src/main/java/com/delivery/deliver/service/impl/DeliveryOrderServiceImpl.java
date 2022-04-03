@@ -1,11 +1,14 @@
 package com.delivery.deliver.service.impl;
 
+import com.delivery.deliver.aggregates.OrderAggregate;
 import com.delivery.deliver.domain.DeliveryOrder;
 import com.delivery.deliver.domain.DeliveryOrderDestination;
 import com.delivery.deliver.enums.DeliveryOrderStatus;
 import com.delivery.deliver.events.DeliverOrderActivatedEvent;
 import com.delivery.deliver.events.DeliverOrderCreatedEvent;
 import com.delivery.deliver.exception.DeliveryOrderNotFoundException;
+import com.delivery.deliver.queries.GetDeliveryOrderQuery;
+import com.delivery.deliver.queries.OrderAggregateProjector;
 import com.delivery.deliver.repository.DeliveryOrderRepository;
 import com.delivery.deliver.service.DeliveryOrderService;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +21,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DeliveryOrderServiceImpl implements DeliveryOrderService {
 
+    private final OrderAggregateProjector orderProjector;
     private final DeliveryOrderRepository repository;
 
     @Override
     public DeliveryOrder findById(String id) {
+        //GetDeliveryOrderQuery query=new GetDeliveryOrderQuery();
+        //query.setId(id);
+        //OrderAggregate aggregate=orderProjector.getOrderAggregate(query);
         return repository.findById(id).orElseThrow(() -> new DeliveryOrderNotFoundException(id));
+//        return DeliveryOrder.builder()
+//                .owner()
+//                .build();
     }
 
     @Override

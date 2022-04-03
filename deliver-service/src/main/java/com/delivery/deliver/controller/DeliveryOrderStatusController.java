@@ -1,6 +1,5 @@
 package com.delivery.deliver.controller;
 
-import com.delivery.deliver.dto.DeliveryOrderDto;
 import com.delivery.deliver.service.DeliveryOrderStatusService;
 import com.delivery.util.RoleName;
 import lombok.RequiredArgsConstructor;

@@ -13,13 +13,15 @@ import java.util.concurrent.ExecutionException;
 @RequiredArgsConstructor
 public class OrderAggregateProjector {
 
-    private final Repository<OrderAggregate> libraryRepository;
+    private final Repository<OrderAggregate> aggregateRepository;
 
     @QueryHandler
     public OrderAggregate getOrderAggregate(GetDeliveryOrderQuery query) throws InterruptedException, ExecutionException {
         CompletableFuture<OrderAggregate> future = new CompletableFuture<OrderAggregate>();
-        libraryRepository.load(query.getId()).execute(future::complete);
+        aggregateRepository.load(query.getId()).execute(future::complete);
         return future.get();
     }
+
+
 
 }

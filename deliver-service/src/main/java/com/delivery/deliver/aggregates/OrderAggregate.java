@@ -69,7 +69,7 @@ public class OrderAggregate {
     }
 
     @CommandHandler
-    public void on(ChangeAssigneeCommand command) {
+    public void handle(ChangeAssigneeCommand command) {
         System.out.println("AssigneeOrderCommand");
         var event = OrderAssignedEvent.builder()
                 .orderId(command.getId())
@@ -85,7 +85,7 @@ public class OrderAggregate {
     }
 
     @CommandHandler
-    protected void on(ChangeCoordinateCommand command) {
+    protected void handle(ChangeCoordinateCommand command) {
         System.out.println("ChangeCoordinateCommand");
         var event = CoordinateChangedEvent.builder()
                 .orderId(command.getId())
@@ -107,7 +107,7 @@ public class OrderAggregate {
     }
 
     @CommandHandler
-    protected void on(ChangeDestinationCommand command) {
+    protected void handle(ChangeDestinationCommand command) {
         var event = CoordinateChangedEvent.builder()
                 .orderId(command.getId())
                 .latitude(command.getLatitude())
@@ -126,7 +126,7 @@ public class OrderAggregate {
     }
 
     @CommandHandler
-    protected void on(ChangeStatusCommand command) {
+    protected void handle(ChangeStatusCommand command) {
         System.out.println("ChangeStatusCommand");
         var event = StatusChangedEvent.builder()
                 .orderId(command.getId())
