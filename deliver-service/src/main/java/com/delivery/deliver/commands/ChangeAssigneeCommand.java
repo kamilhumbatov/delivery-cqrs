@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 @Builder
-public class AssigneeOrderCommand {
+public class ChangeAssigneeCommand {
 
     @TargetAggregateIdentifier
     private String id;

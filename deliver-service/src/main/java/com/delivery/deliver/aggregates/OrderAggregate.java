@@ -1,6 +1,6 @@
 package com.delivery.deliver.aggregates;
 
-import com.delivery.deliver.commands.AssigneeOrderCommand;
+import com.delivery.deliver.commands.ChangeAssigneeCommand;
 import com.delivery.deliver.commands.ChangeCoordinateCommand;
 import com.delivery.deliver.commands.ChangeStatusCommand;
 import com.delivery.deliver.commands.CreateOrderCommand;
@@ -73,7 +73,7 @@ public class OrderAggregate {
     }
 
     @CommandHandler
-    public OrderAggregate(AssigneeOrderCommand command) {
+    public void on(ChangeAssigneeCommand command) {
         System.out.println("AssigneeOrderCommand");
         var event = OrderAssignedEvent.builder()
                 .orderId(command.getId())

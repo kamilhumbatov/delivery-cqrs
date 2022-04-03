@@ -1,7 +1,7 @@
 package com.delivery.deliver.service.commands;
 
 import com.delivery.CurrentUserService;
-import com.delivery.deliver.commands.AssigneeOrderCommand;
+import com.delivery.deliver.commands.ChangeAssigneeCommand;
 import com.delivery.deliver.commands.ChangeCoordinateCommand;
 import com.delivery.deliver.commands.ChangeStatusCommand;
 import com.delivery.deliver.commands.CreateOrderCommand;
@@ -35,7 +35,7 @@ public class OrderCommandServiceImpl implements OrderCommandService {
 
     @Override
     public String assigneeOrder(String id, String assignee) {
-        AssigneeOrderCommand command = AssigneeOrderCommand.builder()
+        ChangeAssigneeCommand command = ChangeAssigneeCommand.builder()
                 .id(id)
                 .assignee(assignee)
                 .build();
