@@ -3,19 +3,19 @@ package com.delivery.deliver.service.handlers;
 import com.delivery.deliver.domain.DeliveryOrder;
 import com.delivery.deliver.domain.DeliveryOrderCoordinate;
 import com.delivery.deliver.domain.DeliveryOrderDestination;
-import com.delivery.deliver.events.CoordinateChangedEvent;
-import com.delivery.deliver.events.DestinationChangedEvent;
-import com.delivery.deliver.events.OrderAssignedEvent;
-import com.delivery.deliver.events.StatusChangedEvent;
+import com.delivery.deliver.enums.DeliveryOrderStatus;
+import com.delivery.deliver.events.*;
 import com.delivery.deliver.repository.DeliveryOrderCoordinateRepository;
 import com.delivery.deliver.service.DeliveryOrderDestinationService;
 import com.delivery.deliver.service.DeliveryOrderService;
 import com.delivery.deliver.service.kafka.KafkaProducerService;
 import lombok.RequiredArgsConstructor;
+import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.stereotype.Component;
 
 @Component
+@ProcessingGroup("order-group")
 @RequiredArgsConstructor
 public class DeliveryOrderEventHandlerImpl implements DeliveryOrderEventHandler{
 
@@ -62,5 +62,31 @@ public class DeliveryOrderEventHandlerImpl implements DeliveryOrderEventHandler{
         order.setStatus(event.getStatus());
         deliveryOrderService.save(order);
         kafkaProducerService.sendOrderStatus(order);
+    }
+
+    @Override
+    @EventHandler
+    public void on(DeliverOrderCreatedEvent event) {
+        DeliveryOrder deliveryOrder = DeliveryOrder.builder()
+                .id(event.getOrderId())
+                .owner(event.getOwner())
+                .status(DeliveryOrderStatus.CREATED)
+                .build();
+
+        DeliveryOrderDestination deliveryOrderDestination = DeliveryOrderDestination.builder()
+                .latitude(event.getLatitude())
+                .longitude(event.getLongitude())
+                .order(deliveryOrder)
+                .build();
+        deliveryOrderDestination.setOrder(deliveryOrder);
+        deliveryOrderService.save(deliveryOrder);
+    }
+
+    @Override
+    @EventHandler
+    public void on(DeliverOrderActivatedEvent event) {
+        DeliveryOrder deliveryOrder = deliveryOrderService.findById(event.getId());
+        deliveryOrder.setStatus(DeliveryOrderStatus.PENDING);
+        deliveryOrderService.save(deliveryOrder);
     }
 }

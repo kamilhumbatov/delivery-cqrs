@@ -2,9 +2,9 @@ package com.delivery.deliver.service.handlers;
 
 import com.delivery.CurrentUserService;
 import com.delivery.deliver.domain.DeliveryOrder;
-import com.delivery.deliver.dto.DeliveryOrderDestinationDto;
 import com.delivery.deliver.dto.DeliveryOrderDto;
 import com.delivery.deliver.queries.GetAssignerQuery;
+import com.delivery.deliver.queries.GetOrderQuery;
 import com.delivery.deliver.queries.GetOwnerQuery;
 import com.delivery.deliver.service.DeliveryOrderService;
 import com.delivery.deliver.service.mapper.DeliveryOrderMapper;
@@ -28,13 +28,19 @@ public class DeliveryOrderQueryHandlerImpl implements DeliveryOrderQueryHandlerS
 
     @Override
     public DeliveryOrderDto getOrder(String id) {
-        DeliveryOrder deliveryOrder = orderService.findById(id);
-        return mapper.toDto(deliveryOrder);
+        GetOrderQuery getOrderQuery = new GetOrderQuery();
+        getOrderQuery.setId(id);
+
+        DeliveryOrderDto deliveryOrderDto =
+                queryGateway.query(getOrderQuery,
+                        ResponseTypes.instanceOf(DeliveryOrderDto.class)).join();
+        return deliveryOrderDto;
     }
 
-    @Override
-    public DeliveryOrderDto changeDestination(String id, DeliveryOrderDestinationDto destinationDto) {
-        return null;
+    @QueryHandler
+    private DeliveryOrderDto getOrderQuery(GetOrderQuery getOrderQuery) {
+        DeliveryOrder deliveryOrder = orderService.findById(getOrderQuery.getId());
+        return mapper.toDto(deliveryOrder);
     }
 
     @Override
