@@ -1,7 +1,6 @@
 package com.delivery.deliver.aggregates;
 
 import com.delivery.deliver.commands.ChangeCoordinateCommand;
-import com.delivery.deliver.commands.CreateAccountCommand;
 import com.delivery.deliver.commands.CreateOrderCommand;
 import com.delivery.deliver.commands.CreditMoneyCommand;
 import com.delivery.deliver.enums.DeliveryOrderStatus;
@@ -20,10 +19,6 @@ public class OrderAggregate {
 
     @AggregateIdentifier
     private String id;
-
-    private double accountBalance;
-
-    private String currency;
 
     private String status;
 
@@ -93,24 +88,6 @@ public class OrderAggregate {
         //this.coordinates.add(event.getLatitude());
     }
 
-    @CommandHandler
-    public OrderAggregate(CreateAccountCommand createAccountCommand) {
-        System.out.println("CreateAccountCommand");
-        AggregateLifecycle.apply(new AccountCreatedEvent(createAccountCommand.getId(),
-                createAccountCommand.getAccountBalance(), createAccountCommand.getCurrency()));
-    }
-
-    @EventSourcingHandler
-    protected void on(AccountCreatedEvent accountCreatedEvent) {
-        System.out.println("AccountCreatedEvent");
-        this.id = accountCreatedEvent.getId();
-        this.accountBalance = accountCreatedEvent.getAccountBalance();
-        this.currency = accountCreatedEvent.getCurrency();
-        this.status = String.valueOf(Status.CREATED);
-
-        AggregateLifecycle.apply(new AccountActivatedEvent(this.id, Status.ACTIVATED));
-    }
-
     @EventSourcingHandler
     protected void on(AccountActivatedEvent accountActivatedEvent) {
         System.out.println("AccountActivatedEvent");
@@ -139,27 +116,67 @@ public class OrderAggregate {
         this.id = id;
     }
 
-    public double getAccountBalance() {
-        return accountBalance;
-    }
-
-    public void setAccountBalance(double accountBalance) {
-        this.accountBalance = accountBalance;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getCurrentLatitude() {
+        return currentLatitude;
+    }
+
+    public void setCurrentLatitude(String currentLatitude) {
+        this.currentLatitude = currentLatitude;
+    }
+
+    public String getCurrentLongitude() {
+        return currentLongitude;
+    }
+
+    public void setCurrentLongitude(String currentLongitude) {
+        this.currentLongitude = currentLongitude;
+    }
+
+    public DeliveryOrderStatus getStatusDelivery() {
+        return statusDelivery;
+    }
+
+    public void setStatusDelivery(DeliveryOrderStatus statusDelivery) {
+        this.statusDelivery = statusDelivery;
+    }
+
+    public List<String> getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(List<String> coordinates) {
+        this.coordinates = coordinates;
     }
 }

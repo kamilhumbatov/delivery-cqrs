@@ -13,10 +13,6 @@ public class CreditMoneyCommand  {
     @TargetAggregateIdentifier
     private String id;
 
-//    private  double creditAmount;
-//
-//    private  String currency;
-
     @NotBlank
     private String latitude;
 
