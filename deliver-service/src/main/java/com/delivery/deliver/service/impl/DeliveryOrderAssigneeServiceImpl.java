@@ -6,7 +6,6 @@ import com.delivery.deliver.exception.DeliveryOrderStatusException;
 import com.delivery.deliver.service.DeliveryOrderAssigneeService;
 import com.delivery.deliver.service.DeliveryOrderService;
 import com.delivery.deliver.service.commands.OrderCommandService;
-import com.delivery.deliver.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class DeliveryOrderAssigneeServiceImpl implements DeliveryOrderAssigneeService {
 
-    private final SecurityUtil securityUtil;
     private final DeliveryOrderService orderService;
     private final OrderCommandService orderCommandService;
 

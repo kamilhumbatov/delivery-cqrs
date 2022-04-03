@@ -1,13 +1,11 @@
 package com.delivery.deliver.aggregates;
 
+import com.delivery.deliver.commands.AssigneeOrderCommand;
 import com.delivery.deliver.commands.ChangeCoordinateCommand;
 import com.delivery.deliver.commands.ChangeStatusCommand;
 import com.delivery.deliver.commands.CreateOrderCommand;
 import com.delivery.deliver.enums.DeliveryOrderStatus;
-import com.delivery.deliver.events.CoordinateChangedEvent;
-import com.delivery.deliver.events.DeliverOrderActivatedEvent;
-import com.delivery.deliver.events.DeliverOrderCreatedEvent;
-import com.delivery.deliver.events.StatusChangedEvent;
+import com.delivery.deliver.events.*;
 import lombok.Data;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
@@ -26,6 +24,8 @@ public class OrderAggregate {
     private String id;
 
     private String owner;
+
+    private String assignee;
 
     private String latitude;
 
@@ -70,6 +70,22 @@ public class OrderAggregate {
     protected void on(DeliverOrderActivatedEvent accountActivatedEvent) {
         System.out.println("AccountActivatedEvent");
         this.statusDelivery = accountActivatedEvent.getStatus();
+    }
+
+    @CommandHandler
+    public OrderAggregate(AssigneeOrderCommand command) {
+        System.out.println("AssigneeOrderCommand");
+        var event = OrderAssignedEvent.builder()
+                .orderId(command.getId())
+                .assignee(command.getAssignee())
+                .build();
+        AggregateLifecycle.apply(event);
+    }
+
+    @EventSourcingHandler
+    protected void on(OrderAssignedEvent orderAssignedEvent) {
+        System.out.println("OrderAssignedEvent");
+        this.assignee = orderAssignedEvent.getAssignee();
     }
 
     @CommandHandler

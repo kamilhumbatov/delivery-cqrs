@@ -1,5 +1,5 @@
 server:
-  port: 8180
+  port: 7070
 
 spring:
   cloud:
@@ -17,13 +17,13 @@ spring:
               - OPTIONS
       routes:
         - id: userModule
-          uri: http://localhost:8181/
+          uri: http://localhost:7071/
           filters:
             - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
           predicates:
             - Path=/user/**
         - id: deliverModule
-          uri: http://localhost:8182/
+          uri: http://localhost:7072/
           filters:
             - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
           predicates:

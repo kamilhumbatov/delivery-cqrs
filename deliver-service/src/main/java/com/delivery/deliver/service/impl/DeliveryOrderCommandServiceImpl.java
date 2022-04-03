@@ -2,7 +2,6 @@ package com.delivery.deliver.service.impl;
 
 import com.delivery.CurrentUserService;
 import com.delivery.deliver.domain.DeliveryOrder;
-import com.delivery.deliver.dto.DeliveryOrderAssigneeDto;
 import com.delivery.deliver.dto.DeliveryOrderDestinationDto;
 import com.delivery.deliver.dto.DeliveryOrderDto;
 import com.delivery.deliver.service.DeliveryOrderCommandService;
@@ -20,15 +19,14 @@ import java.util.stream.Collectors;
 public class DeliveryOrderCommandServiceImpl implements DeliveryOrderCommandService {
 
     private final EventStore eventStore;
-    //private final DeliveryOrderMapper mapper;
+    private final DeliveryOrderMapper mapper;
     private final DeliveryOrderService orderService;
     private final CurrentUserService currentUserService;
 
     @Override
     public DeliveryOrderDto getOrder(String id) {
         DeliveryOrder deliveryOrder = orderService.findById(id);
-        //return mapper.toDto(deliveryOrder);
-        return null;
+        return mapper.toDto(deliveryOrder);
     }
 
     @Override
@@ -54,6 +52,6 @@ public class DeliveryOrderCommandServiceImpl implements DeliveryOrderCommandServ
 
     @Override
     public List<Object> listEventsForAccount(String orderId) {
-        return eventStore.readEvents(orderId).asStream().map( s -> s.getPayload()).collect(Collectors.toList());
+        return eventStore.readEvents(orderId).asStream().map(s -> s.getPayload()).collect(Collectors.toList());
     }
 }
