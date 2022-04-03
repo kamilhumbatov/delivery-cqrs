@@ -1,16 +1,21 @@
 package com.delivery.deliver.controller;
 
-import com.delivery.deliver.dto.DeliveryOrderAssigneeDto;
-import com.delivery.deliver.dto.DeliveryOrderCreateDto;
+import com.delivery.deliver.domain.DeliveryOrder;
 import com.delivery.deliver.dto.DeliveryOrderDto;
+import com.delivery.deliver.queries.GetLibraryQuery;
 import com.delivery.deliver.service.DeliveryOrderCommandService;
-import com.delivery.deliver.service.commands.OrderCommandService;
 import com.delivery.util.RoleName;
 import lombok.RequiredArgsConstructor;
+import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("delivery-orders")
@@ -18,7 +23,7 @@ import java.util.List;
 public class DeliveryOrderController {
 
     private final DeliveryOrderCommandService service;
-    private final OrderCommandService orderCommandService;
+    private final QueryGateway queryGateway;
 
     @GetMapping("/{id}")
     public DeliveryOrderDto getOrder(@PathVariable String id) {
@@ -42,9 +47,9 @@ public class DeliveryOrderController {
         return service.listEventsForAccount(accountNumber);
     }
 
-    @Secured(RoleName.ROLE_CUSTOMER)
-    @PostMapping
-    public String create(@RequestBody DeliveryOrderCreateDto createDto) {
-        return orderCommandService.createOrder(createDto);
+    @GetMapping("/api/library/{id}")
+    public DeliveryOrder getLibrary(@PathVariable String id) throws InterruptedException, ExecutionException {
+        CompletableFuture<DeliveryOrder> future = queryGateway.query(new GetLibraryQuery(id), DeliveryOrder.class);
+        return future.get();
     }
 }
