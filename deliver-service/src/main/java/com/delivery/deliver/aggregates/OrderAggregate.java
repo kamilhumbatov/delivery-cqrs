@@ -1,11 +1,13 @@
 package com.delivery.deliver.aggregates;
 
 import com.delivery.deliver.commands.ChangeCoordinateCommand;
+import com.delivery.deliver.commands.ChangeStatusCommand;
 import com.delivery.deliver.commands.CreateOrderCommand;
 import com.delivery.deliver.enums.DeliveryOrderStatus;
 import com.delivery.deliver.events.CoordinateChangedEvent;
 import com.delivery.deliver.events.DeliverOrderActivatedEvent;
 import com.delivery.deliver.events.DeliverOrderCreatedEvent;
+import com.delivery.deliver.events.StatusChangedEvent;
 import lombok.Data;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
@@ -22,8 +24,6 @@ public class OrderAggregate {
 
     @AggregateIdentifier
     private String id;
-
-    private String status;
 
     private String owner;
 
@@ -63,21 +63,13 @@ public class OrderAggregate {
         this.longitude = event.getLongitude();
         this.statusDelivery = DeliveryOrderStatus.CREATED;
         this.coordinates = new ArrayList<>();
-        AggregateLifecycle.apply(new DeliverOrderActivatedEvent(this.id, DeliveryOrderStatus.ACTIVATED));
+        AggregateLifecycle.apply(new DeliverOrderActivatedEvent(this.id, DeliveryOrderStatus.PENDING));
     }
 
     @EventSourcingHandler
     protected void on(DeliverOrderActivatedEvent accountActivatedEvent) {
         System.out.println("AccountActivatedEvent");
         this.statusDelivery = accountActivatedEvent.getStatus();
-    }
-
-    @EventSourcingHandler
-    public void on(CoordinateChangedEvent event) {
-        this.currentLatitude = event.getLatitude();
-        this.currentLongitude = event.getLongitude();
-        this.coordinates.add(event.getLatitude());
-        System.out.println("DeliverOrderCoordinateChangedEvent:" + this.coordinates.size());
     }
 
     @CommandHandler
@@ -89,5 +81,29 @@ public class OrderAggregate {
                 .longitude(command.getLongitude())
                 .build();
         AggregateLifecycle.apply(event);
+    }
+
+    @EventSourcingHandler
+    public void on(CoordinateChangedEvent event) {
+        this.currentLatitude = event.getLatitude();
+        this.currentLongitude = event.getLongitude();
+        this.coordinates.add(event.getLatitude());
+        System.out.println("DeliverOrderCoordinateChangedEvent:" + this.coordinates.size());
+    }
+
+    @CommandHandler
+    protected void on(ChangeStatusCommand command) {
+        System.out.println("ChangeStatusCommand");
+        var event = StatusChangedEvent.builder()
+                .orderId(command.getId())
+                .status(command.getStatus())
+                .build();
+        AggregateLifecycle.apply(event);
+    }
+
+    @EventSourcingHandler
+    public void on(StatusChangedEvent event) {
+        this.statusDelivery = event.getStatus();
+        System.out.println("StatusChangedEvent:" + this.statusDelivery.name());
     }
 }
