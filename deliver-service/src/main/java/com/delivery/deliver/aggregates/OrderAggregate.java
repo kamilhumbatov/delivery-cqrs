@@ -1,11 +1,12 @@
 package com.delivery.deliver.aggregates;
 
+import com.delivery.deliver.commands.ChangeCoordinateCommand;
 import com.delivery.deliver.commands.CreateOrderCommand;
-import com.delivery.deliver.commands.OrderCoordinateCommand;
 import com.delivery.deliver.enums.DeliveryOrderStatus;
+import com.delivery.deliver.events.CoordinateChangedEvent;
 import com.delivery.deliver.events.DeliverOrderActivatedEvent;
-import com.delivery.deliver.events.DeliverOrderCoordinateChangedEvent;
 import com.delivery.deliver.events.DeliverOrderCreatedEvent;
+import lombok.Data;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
@@ -15,6 +16,7 @@ import org.axonframework.spring.stereotype.Aggregate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Aggregate
 public class OrderAggregate {
 
@@ -71,96 +73,21 @@ public class OrderAggregate {
     }
 
     @EventSourcingHandler
-    public void on(DeliverOrderCoordinateChangedEvent event) {
-        System.out.println("DeliverOrderCoordinateChangedEvent");
+    public void on(CoordinateChangedEvent event) {
         this.currentLatitude = event.getLatitude();
         this.currentLongitude = event.getLongitude();
-        //this.coordinates.add(event.getLatitude());
+        this.coordinates.add(event.getLatitude());
+        System.out.println("DeliverOrderCoordinateChangedEvent:" + this.coordinates.size());
     }
 
     @CommandHandler
-    protected void on(OrderCoordinateCommand command) {
-        System.out.println("CreditMoneyCommand");
-//        AggregateLifecycle.apply(new MoneyCreditedEvent(creditMoneyCommand.getId(), creditMoneyCommand.getCreditAmount(),
-//                creditMoneyCommand.getCurrency()));
+    protected void on(ChangeCoordinateCommand command) {
         System.out.println("ChangeCoordinateCommand");
-        var event = DeliverOrderCoordinateChangedEvent.builder()
+        var event = CoordinateChangedEvent.builder()
                 .orderId(command.getId())
                 .latitude(command.getLatitude())
                 .longitude(command.getLongitude())
                 .build();
         AggregateLifecycle.apply(event);
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
-
-    public String getCurrentLatitude() {
-        return currentLatitude;
-    }
-
-    public void setCurrentLatitude(String currentLatitude) {
-        this.currentLatitude = currentLatitude;
-    }
-
-    public String getCurrentLongitude() {
-        return currentLongitude;
-    }
-
-    public void setCurrentLongitude(String currentLongitude) {
-        this.currentLongitude = currentLongitude;
-    }
-
-    public DeliveryOrderStatus getStatusDelivery() {
-        return statusDelivery;
-    }
-
-    public void setStatusDelivery(DeliveryOrderStatus statusDelivery) {
-        this.statusDelivery = statusDelivery;
-    }
-
-    public List<String> getCoordinates() {
-        return coordinates;
-    }
-
-    public void setCoordinates(List<String> coordinates) {
-        this.coordinates = coordinates;
     }
 }

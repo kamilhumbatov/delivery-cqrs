@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 @Builder
-public class OrderCoordinateCommand {
+public class ChangeCoordinateCommand {
 
     @TargetAggregateIdentifier
     private String id;

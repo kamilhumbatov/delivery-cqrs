@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DeliverOrderCoordinateChangedEvent {
+public class CoordinateChangedEvent {
     private String orderId;
     private String latitude;
     private String longitude;

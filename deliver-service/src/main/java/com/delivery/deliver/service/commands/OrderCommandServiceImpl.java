@@ -1,8 +1,9 @@
-package com.delivery.deliver.service.impl;
+package com.delivery.deliver.service.commands;
 
+import com.delivery.deliver.commands.ChangeCoordinateCommand;
 import com.delivery.deliver.commands.CreateOrderCommand;
 import com.delivery.deliver.dto.DeliveryOrderCreateDto;
-import com.delivery.deliver.service.DeliveryOrderCreateService;
+import com.delivery.deliver.dto.DeliveryOrderDestinationDto;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class DeliveryOrderCreateServiceImpl implements DeliveryOrderCreateService {
+public class OrderCommandServiceImpl implements OrderCommandService {
 
     private final CommandGateway commandGateway;
 
@@ -24,7 +25,16 @@ public class DeliveryOrderCreateServiceImpl implements DeliveryOrderCreateServic
                         .latitude(createDto.getLatitude())
                         .longitude(createDto.getLongitude())
                         .build();
-        String result = commandGateway.sendAndWait(command);
-        return result;
+        return commandGateway.sendAndWait(command);
+    }
+
+    @Override
+    public String changeCoordinate(String id, DeliveryOrderDestinationDto destinationDto) {
+        ChangeCoordinateCommand command = ChangeCoordinateCommand.builder()
+                .id(id)
+                .longitude(destinationDto.getLongitude())
+                .latitude(destinationDto.getLatitude())
+                .build();
+        return commandGateway.sendAndWait(command);
     }
 }

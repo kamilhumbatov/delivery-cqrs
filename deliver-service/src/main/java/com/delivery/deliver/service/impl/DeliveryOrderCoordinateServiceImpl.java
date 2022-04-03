@@ -2,7 +2,7 @@ package com.delivery.deliver.service.impl;
 
 import com.delivery.deliver.domain.DeliveryOrder;
 import com.delivery.deliver.domain.DeliveryOrderCoordinate;
-import com.delivery.deliver.events.DeliverOrderCoordinateChangedEvent;
+import com.delivery.deliver.events.CoordinateChangedEvent;
 import com.delivery.deliver.repository.DeliveryOrderCoordinateRepository;
 import com.delivery.deliver.service.DeliveryOrderCoordinateService;
 import com.delivery.deliver.service.DeliveryOrderDestinationService;
@@ -20,7 +20,7 @@ public class DeliveryOrderCoordinateServiceImpl implements DeliveryOrderCoordina
     private final DeliveryOrderCoordinateRepository repository;
 
     @EventHandler
-    public void on(DeliverOrderCoordinateChangedEvent event) {
+    public void on(CoordinateChangedEvent event) {
         DeliveryOrder order = deliveryOrderService.findById(event.getOrderId());
         DeliveryOrderCoordinate orderCoordinate = DeliveryOrderCoordinate.builder()
                 .latitude(event.getLatitude())

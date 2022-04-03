@@ -4,14 +4,13 @@ import com.delivery.deliver.dto.DeliveryOrderAssigneeDto;
 import com.delivery.deliver.dto.DeliveryOrderCreateDto;
 import com.delivery.deliver.dto.DeliveryOrderDto;
 import com.delivery.deliver.service.DeliveryOrderCommandService;
-import com.delivery.deliver.service.DeliveryOrderCreateService;
+import com.delivery.deliver.service.commands.OrderCommandService;
 import com.delivery.util.RoleName;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("delivery-orders")
@@ -19,7 +18,7 @@ import java.util.concurrent.CompletableFuture;
 public class DeliveryOrderController {
 
     private final DeliveryOrderCommandService service;
-    private final DeliveryOrderCreateService createService;
+    private final OrderCommandService orderCommandService;
 
     @GetMapping("/{id}")
     public DeliveryOrderDto getOrder(@PathVariable String id) {
@@ -39,14 +38,14 @@ public class DeliveryOrderController {
     }
 
     @GetMapping("/{accountNumber}/events")
-    public List<Object> listEventsForAccount(@PathVariable(value = "accountNumber") String accountNumber){
+    public List<Object> listEventsForAccount(@PathVariable(value = "accountNumber") String accountNumber) {
         return service.listEventsForAccount(accountNumber);
     }
 
     @Secured(RoleName.ROLE_CUSTOMER)
     @PostMapping
     public String create(@RequestBody DeliveryOrderCreateDto createDto) {
-        return createService.createOrder(createDto);
+        return orderCommandService.createOrder(createDto);
     }
 
     @Secured(RoleName.ROLE_ADMIN)
