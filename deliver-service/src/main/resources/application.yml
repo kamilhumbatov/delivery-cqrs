@@ -21,5 +21,15 @@ spring:
       hibernate:
         jdbc:
           time_zone: Asia/Baku
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+  kafka:
+    topic:
+      name: deliveryTopic
+    producer:
+      bootstrap-servers: ${KAFKA_HOST_NAME:localhost}:9092
+      properties:
+        retry.backoff.ms: 1000
 app:
   jwtExpirationInMs: 720000

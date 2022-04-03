@@ -10,6 +10,7 @@
 		<module>deliver-service</module>
         <module>user-service</module>
         <module>courier-service</module>
+        <module>notification-service</module>
     </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
