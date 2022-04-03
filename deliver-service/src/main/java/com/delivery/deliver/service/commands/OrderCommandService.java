@@ -13,4 +13,6 @@ public interface OrderCommandService {
     String changeStatus(String id, DeliveryOrderStatus status);
 
     String assigneeOrder(String id, String assignee);
+
+    String changeDestination(String id, DeliveryOrderDestinationDto destinationDto);
 }

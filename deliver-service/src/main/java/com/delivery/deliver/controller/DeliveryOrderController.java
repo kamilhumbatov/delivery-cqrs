@@ -52,6 +52,5 @@ public class DeliveryOrderController {
     @PutMapping("destination")
     public DeliveryOrderDto changeDestination(@RequestBody DeliveryOrderAssigneeDto assigneeDto) {
         //return service.changeDestination(assigneeDto);
-        return null;
     }
 }

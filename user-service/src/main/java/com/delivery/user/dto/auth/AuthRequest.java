@@ -13,6 +13,6 @@ public class AuthRequest {
     private String username;
 
     @NotBlank
-    @ApiModelProperty(value = "Password", example = "123")
+    @ApiModelProperty(value = "Password", example = "123456")
     private String password;
 }

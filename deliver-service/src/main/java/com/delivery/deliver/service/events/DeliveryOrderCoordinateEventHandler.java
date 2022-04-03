@@ -1,10 +1,9 @@
-package com.delivery.deliver.service.impl;
+package com.delivery.deliver.service.events;
 
 import com.delivery.deliver.domain.DeliveryOrder;
 import com.delivery.deliver.domain.DeliveryOrderCoordinate;
 import com.delivery.deliver.events.CoordinateChangedEvent;
 import com.delivery.deliver.repository.DeliveryOrderCoordinateRepository;
-import com.delivery.deliver.service.DeliveryOrderCoordinateService;
 import com.delivery.deliver.service.DeliveryOrderDestinationService;
 import com.delivery.deliver.service.DeliveryOrderService;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class DeliveryOrderCoordinateServiceImpl implements DeliveryOrderCoordinateService {
+public class DeliveryOrderCoordinateEventHandler {
 
     private final DeliveryOrderService deliveryOrderService;
     private final DeliveryOrderDestinationService destinationService;

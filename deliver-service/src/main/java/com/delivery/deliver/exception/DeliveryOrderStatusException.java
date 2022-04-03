@@ -13,4 +13,8 @@ public class DeliveryOrderStatusException extends IllegalArgumentException {
     public DeliveryOrderStatusException(DeliveryOrderStatus status, String reason) {
         super(String.format("Can not change status to %s. %s", status.name(), reason));
     }
+
+    public DeliveryOrderStatusException(String reason) {
+        super(reason);
+    }
 }

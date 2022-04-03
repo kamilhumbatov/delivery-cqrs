@@ -1,10 +1,7 @@
 package com.delivery.deliver.service.commands;
 
 import com.delivery.CurrentUserService;
-import com.delivery.deliver.commands.ChangeAssigneeCommand;
-import com.delivery.deliver.commands.ChangeCoordinateCommand;
-import com.delivery.deliver.commands.ChangeStatusCommand;
-import com.delivery.deliver.commands.CreateOrderCommand;
+import com.delivery.deliver.commands.*;
 import com.delivery.deliver.dto.DeliveryOrderCreateDto;
 import com.delivery.deliver.dto.DeliveryOrderDestinationDto;
 import com.delivery.deliver.enums.DeliveryOrderStatus;
@@ -45,6 +42,16 @@ public class OrderCommandServiceImpl implements OrderCommandService {
     @Override
     public String changeCoordinate(String id, DeliveryOrderDestinationDto destinationDto) {
         ChangeCoordinateCommand command = ChangeCoordinateCommand.builder()
+                .id(id)
+                .longitude(destinationDto.getLongitude())
+                .latitude(destinationDto.getLatitude())
+                .build();
+        return commandGateway.sendAndWait(command);
+    }
+
+    @Override
+    public String changeDestination(String id, DeliveryOrderDestinationDto destinationDto) {
+        ChangeDestinationCommand command = ChangeDestinationCommand.builder()
                 .id(id)
                 .longitude(destinationDto.getLongitude())
                 .latitude(destinationDto.getLatitude())
