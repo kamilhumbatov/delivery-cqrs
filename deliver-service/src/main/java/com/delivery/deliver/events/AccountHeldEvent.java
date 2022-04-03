@@ -11,9 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountActivatedEvent {
+public class AccountHeldEvent {
 
     private String id;
+
     private Status status;
 
 }

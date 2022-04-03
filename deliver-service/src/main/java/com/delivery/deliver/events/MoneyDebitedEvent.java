@@ -1,7 +1,5 @@
 package com.delivery.deliver.events;
 
-
-import com.delivery.deliver.aggregates.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,9 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountActivatedEvent {
-
+public class MoneyDebitedEvent {
     private String id;
-    private Status status;
 
+    private  double debitAmount;
+
+    private  String currency;
 }

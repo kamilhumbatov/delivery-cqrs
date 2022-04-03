@@ -1,9 +1,9 @@
-package com.delivery.courier.aggregates;
+package com.delivery.deliver.aggregates;
 
-import com.delivery.courier.commands.CreateAccountCommand;
-import com.delivery.courier.commands.CreditMoneyCommand;
-import com.delivery.courier.commands.DebitMoneyCommand;
-import com.delivery.courier.events.*;
+import com.delivery.deliver.commands.CreateAccountCommand;
+import com.delivery.deliver.commands.CreditMoneyCommand;
+import com.delivery.deliver.commands.DebitMoneyCommand;
+import com.delivery.deliver.events.*;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
@@ -11,7 +11,7 @@ import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
 
 @Aggregate
-public class AccountAggregate {
+public class OrderAggregate {
 
     @AggregateIdentifier
     private String id;
@@ -22,11 +22,11 @@ public class AccountAggregate {
 
     private String status;
 
-    public AccountAggregate() {
+    public OrderAggregate() {
     }
 
     @CommandHandler
-    public AccountAggregate(CreateAccountCommand createAccountCommand){
+    public OrderAggregate(CreateAccountCommand createAccountCommand){
         System.out.println("CreateAccountCommand");
         AggregateLifecycle.apply(new AccountCreatedEvent(createAccountCommand.getId(),
                 createAccountCommand.getAccountBalance(), createAccountCommand.getCurrency()));
