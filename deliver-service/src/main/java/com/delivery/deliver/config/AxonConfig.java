@@ -1,6 +1,5 @@
 package com.delivery.deliver.config;
 
-import com.delivery.deliver.aggregates.DeliveryOrderAggregate;
 import com.delivery.deliver.aggregates.OrderAggregate;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.axonframework.eventsourcing.eventstore.EventStore;

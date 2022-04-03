@@ -1,9 +1,7 @@
 package com.delivery.deliver.service.impl;
 
 import com.delivery.CurrentUserService;
-import com.delivery.deliver.commands.ChangeCoordinateCommand;
-import com.delivery.deliver.commands.CreditMoneyCommand;
-import com.delivery.deliver.domain.DeliveryOrder;
+import com.delivery.deliver.commands.OrderCoordinateCommand;
 import com.delivery.deliver.dto.DeliveryOrderDestinationDto;
 import com.delivery.deliver.service.DeliveryOrderService;
 import com.delivery.deliver.service.DeliveryOrderTrackService;
@@ -25,7 +23,7 @@ public class DeliveryOrderTrackServiceImpl implements DeliveryOrderTrackService 
         //checkUserAccess(deliveryOrder);
         //if (deliveryOrder.getStatus().compareTo(DeliveryOrderStatus.DELIVERY) == 0)
         {
-            CreditMoneyCommand command2 = CreditMoneyCommand.builder()
+            OrderCoordinateCommand command2 = OrderCoordinateCommand.builder()
                     .id(id)
                     .longitude(destinationDto.getLongitude())
                     .latitude(destinationDto.getLatitude())

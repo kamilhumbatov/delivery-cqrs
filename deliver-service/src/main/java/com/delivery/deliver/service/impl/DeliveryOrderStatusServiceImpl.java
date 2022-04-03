@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class DeliveryOrderStatusServiceImpl implements DeliveryOrderStatusService {
 
-    private final DeliveryOrderMapper mapper;
+    //private final DeliveryOrderMapper mapper;
     private final DeliveryOrderService orderService;
     private final CurrentUserService currentUserService;
 
@@ -66,7 +66,8 @@ public class DeliveryOrderStatusServiceImpl implements DeliveryOrderStatusServic
             throw new DeliveryOrderStatusException(status);
         }
         deliveryOrder.setStatus(status);
-        return mapper.toDto(orderService.save(deliveryOrder));
+        //return mapper.toDto(orderService.save(deliveryOrder));
+        return null;
     }
 
 }

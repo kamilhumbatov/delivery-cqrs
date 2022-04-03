@@ -8,10 +8,10 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 @Builder
-public class ChangeCoordinateCommand {
+public class OrderCoordinateCommand {
 
     @TargetAggregateIdentifier
-    private String orderId;
+    private String id;
 
     @NotBlank
     private String latitude;

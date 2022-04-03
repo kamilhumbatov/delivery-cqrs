@@ -1,6 +1,5 @@
 package com.delivery.deliver.events;
 
-import com.delivery.deliver.aggregates.Status;
 import com.delivery.deliver.enums.DeliveryOrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

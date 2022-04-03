@@ -20,14 +20,15 @@ import java.util.stream.Collectors;
 public class DeliveryOrderCommandServiceImpl implements DeliveryOrderCommandService {
 
     private final EventStore eventStore;
-    private final DeliveryOrderMapper mapper;
+    //private final DeliveryOrderMapper mapper;
     private final DeliveryOrderService orderService;
     private final CurrentUserService currentUserService;
 
     @Override
     public DeliveryOrderDto getOrder(String id) {
         DeliveryOrder deliveryOrder = orderService.findById(id);
-        return mapper.toDto(deliveryOrder);
+        //return mapper.toDto(deliveryOrder);
+        return null;
     }
 
     @Override
@@ -39,7 +40,8 @@ public class DeliveryOrderCommandServiceImpl implements DeliveryOrderCommandServ
     public DeliveryOrderDto assigneeOrderToCourier(DeliveryOrderAssigneeDto assigneeDto) {
         DeliveryOrder deliveryOrder = orderService.findById(assigneeDto.getId());
         deliveryOrder.setAssignee(assigneeDto.getAssignee());
-        return mapper.toDto(orderService.save(deliveryOrder));
+        //return mapper.toDto(orderService.save(deliveryOrder));
+        return null;
     }
 
     @Override

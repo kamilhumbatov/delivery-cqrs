@@ -1,10 +1,11 @@
 package com.delivery.deliver.aggregates;
 
-import com.delivery.deliver.commands.ChangeCoordinateCommand;
 import com.delivery.deliver.commands.CreateOrderCommand;
-import com.delivery.deliver.commands.CreditMoneyCommand;
+import com.delivery.deliver.commands.OrderCoordinateCommand;
 import com.delivery.deliver.enums.DeliveryOrderStatus;
-import com.delivery.deliver.events.*;
+import com.delivery.deliver.events.DeliverOrderActivatedEvent;
+import com.delivery.deliver.events.DeliverOrderCoordinateChangedEvent;
+import com.delivery.deliver.events.DeliverOrderCreatedEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
@@ -69,17 +70,6 @@ public class OrderAggregate {
         this.statusDelivery = accountActivatedEvent.getStatus();
     }
 
-    @CommandHandler
-    public OrderAggregate(ChangeCoordinateCommand command) {
-        System.out.println("ChangeCoordinateCommand");
-        var event = DeliverOrderCoordinateChangedEvent.builder()
-                .orderId(command.getOrderId())
-                .latitude(command.getLatitude())
-                .longitude(command.getLongitude())
-                .build();
-        AggregateLifecycle.apply(event);
-    }
-
     @EventSourcingHandler
     public void on(DeliverOrderCoordinateChangedEvent event) {
         System.out.println("DeliverOrderCoordinateChangedEvent");
@@ -88,14 +78,8 @@ public class OrderAggregate {
         //this.coordinates.add(event.getLatitude());
     }
 
-    @EventSourcingHandler
-    protected void on(AccountActivatedEvent accountActivatedEvent) {
-        System.out.println("AccountActivatedEvent");
-        this.status = String.valueOf(accountActivatedEvent.getStatus());
-    }
-
     @CommandHandler
-    protected void on(CreditMoneyCommand command) {
+    protected void on(OrderCoordinateCommand command) {
         System.out.println("CreditMoneyCommand");
 //        AggregateLifecycle.apply(new MoneyCreditedEvent(creditMoneyCommand.getId(), creditMoneyCommand.getCreditAmount(),
 //                creditMoneyCommand.getCurrency()));
