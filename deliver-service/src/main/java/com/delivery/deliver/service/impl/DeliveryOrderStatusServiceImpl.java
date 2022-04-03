@@ -1,29 +1,27 @@
 package com.delivery.deliver.service.impl;
 
-import com.delivery.CurrentUserService;
 import com.delivery.deliver.domain.DeliveryOrder;
-import com.delivery.deliver.dto.DeliveryOrderDto;
 import com.delivery.deliver.enums.DeliveryOrderStatus;
 import com.delivery.deliver.exception.DeliveryOrderStatusException;
 import com.delivery.deliver.service.DeliveryOrderService;
 import com.delivery.deliver.service.DeliveryOrderStatusService;
-import com.delivery.deliver.service.mapper.DeliveryOrderMapper;
+import com.delivery.deliver.service.commands.OrderCommandService;
+import com.delivery.deliver.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class DeliveryOrderStatusServiceImpl implements DeliveryOrderStatusService {
 
-    private final DeliveryOrderMapper mapper;
+    private final SecurityUtil securityUtil;
     private final DeliveryOrderService orderService;
-    private final CurrentUserService currentUserService;
+    private final OrderCommandService orderCommand;
 
     @Override
-    public DeliveryOrderDto changeOrderStatusToCancel(String id) {
+    public String changeOrderStatusToCancel(String id) {
         DeliveryOrder deliveryOrder = orderService.findById(id);
-        checkUserAccess(deliveryOrder);
+        securityUtil.checkUserOwner(deliveryOrder);
         if (deliveryOrder.getStatus().compareTo(DeliveryOrderStatus.DELIVERED) == 0) {
             throw new DeliveryOrderStatusException(DeliveryOrderStatus.CANCELED, "Because order was delivered!");
         }
@@ -31,33 +29,27 @@ public class DeliveryOrderStatusServiceImpl implements DeliveryOrderStatusServic
     }
 
     @Override
-    public DeliveryOrderDto changeOrderStatusToPickUp(String id) {
+    public String changeOrderStatusToPickUp(String id) {
         return changeOrderStatus(id, DeliveryOrderStatus.PICKUP);
     }
 
     @Override
-    public DeliveryOrderDto changeOrderStatusToDelivery(String id) {
+    public String changeOrderStatusToDelivery(String id) {
         return changeOrderStatus(id, DeliveryOrderStatus.DELIVERY);
     }
 
     @Override
-    public DeliveryOrderDto changeOrderStatusToDelivered(String id) {
+    public String changeOrderStatusToDelivered(String id) {
         return changeOrderStatus(id, DeliveryOrderStatus.DELIVERED);
     }
 
-    private void checkUserAccess(DeliveryOrder deliveryOrder) {
-        if (!deliveryOrder.getAssignee().equals(currentUserService.getCurrentUser())) {
-            throw new BadCredentialsException("Bad Credentials");
-        }
-    }
-
-    private DeliveryOrderDto changeOrderStatus(String id, DeliveryOrderStatus status) {
+    private String changeOrderStatus(String id, DeliveryOrderStatus status) {
         DeliveryOrder deliveryOrder = orderService.findById(id);
-        checkUserAccess(deliveryOrder);
+        securityUtil.checkUserAssigned(deliveryOrder);
         return changeOrderStatus(deliveryOrder, status);
     }
 
-    private DeliveryOrderDto changeOrderStatus(DeliveryOrder deliveryOrder, DeliveryOrderStatus status) {
+    private String changeOrderStatus(DeliveryOrder deliveryOrder, DeliveryOrderStatus status) {
         if (deliveryOrder.getStatus().compareTo(status) == 1) {
             throw new DeliveryOrderStatusException(status,
                     String.format("Because order status is %s", deliveryOrder.getStatus().name()));
@@ -65,8 +57,7 @@ public class DeliveryOrderStatusServiceImpl implements DeliveryOrderStatusServic
         if (deliveryOrder.getStatus().compareTo(status) == 0) {
             throw new DeliveryOrderStatusException(status);
         }
-        deliveryOrder.setStatus(status);
-        return mapper.toDto(orderService.save(deliveryOrder));
+        return orderCommand.changeStatus(deliveryOrder.getId(), status);
     }
 
 }

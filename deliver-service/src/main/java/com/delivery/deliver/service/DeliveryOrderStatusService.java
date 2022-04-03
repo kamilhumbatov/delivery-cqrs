@@ -1,14 +1,12 @@
 package com.delivery.deliver.service;
 
-import com.delivery.deliver.dto.DeliveryOrderDto;
-
 public interface DeliveryOrderStatusService {
 
-    DeliveryOrderDto changeOrderStatusToPickUp(String id);
+    String changeOrderStatusToPickUp(String id);
 
-    DeliveryOrderDto changeOrderStatusToDelivery(String id);
+    String changeOrderStatusToDelivery(String id);
 
-    DeliveryOrderDto changeOrderStatusToDelivered(String id);
+    String changeOrderStatusToDelivered(String id);
 
-    DeliveryOrderDto changeOrderStatusToCancel(String id);
+    String changeOrderStatusToCancel(String id);
 }

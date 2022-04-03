@@ -16,25 +16,25 @@ public class DeliveryOrderStatusController {
 
     @Secured(RoleName.ROLE_COURIER)
     @GetMapping("/pickup/{id}")
-    public DeliveryOrderDto pickupOrder(@PathVariable String id) {
+    public String pickupOrder(@PathVariable String id) {
         return service.changeOrderStatusToPickUp(id);
     }
 
     @Secured(RoleName.ROLE_COURIER)
     @GetMapping("/deliver/{id}")
-    public DeliveryOrderDto deliveryOrder(@PathVariable String id) {
+    public String deliveryOrder(@PathVariable String id) {
         return service.changeOrderStatusToDelivery(id);
     }
 
     @Secured(RoleName.ROLE_COURIER)
     @GetMapping("/delivered/{id}")
-    public DeliveryOrderDto deliveredOrder(@PathVariable String id) {
+    public String deliveredOrder(@PathVariable String id) {
         return service.changeOrderStatusToDelivered(id);
     }
 
     @Secured({RoleName.ROLE_CUSTOMER, RoleName.ROLE_COURIER, RoleName.ROLE_ADMIN})
     @PutMapping("/cancel/{id}")
-    public DeliveryOrderDto cancelOrder(@PathVariable String id) {
+    public String cancelOrder(@PathVariable String id) {
         return service.changeOrderStatusToCancel(id);
     }
 }
