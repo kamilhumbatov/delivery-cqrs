@@ -9,8 +9,8 @@ application:
 spring:
   datasource:
     url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/delivery_deliver?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&characterSetResults=UTF-8&serverTimezone=UTC&createDatabaseIfNotExist=true
-    username: root
-    password: ${DATABASE_ROOT_PASSWORD:3141593}
+    username: ${DATABASE_USER:root}
+    password: ${DATABASE_PASSWORD:3141593}
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     generate-ddl: true

@@ -34,6 +34,10 @@ services:
       - backend
     ports:
       - 7071:7071
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:${DATABASE_PORT}/delivery_security?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: ${DATABASE_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DATABASE_PASSWORD}
 
   deliver-service:
     build: ./deliver-service
@@ -44,6 +48,11 @@ services:
       - backend
     ports:
       - 7072:7072
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:${DATABASE_PORT}/delivery_deliver?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: ${DATABASE_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DATABASE_PASSWORD}
+      KAFKA_HOST_NAME: ${KAFKA_HOST_NAME}
 
   notification-service:
     build: ./notification-service
