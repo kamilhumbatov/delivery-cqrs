@@ -12,8 +12,14 @@ public class SecurityUtil {
 
     private final CurrentUserService currentUserService;
 
-    public void checkUserAccess(DeliveryOrder deliveryOrder) {
+    public void checkUserAssigned(DeliveryOrder deliveryOrder) {
         if (!deliveryOrder.getAssignee().equals(currentUserService.getCurrentUser())) {
+            throw new BadCredentialsException("Bad Credentials");
+        }
+    }
+
+    public void checkUserOwner(DeliveryOrder deliveryOrder) {
+        if (!deliveryOrder.getOwner().equals(currentUserService.getCurrentUser())) {
             throw new BadCredentialsException("Bad Credentials");
         }
     }

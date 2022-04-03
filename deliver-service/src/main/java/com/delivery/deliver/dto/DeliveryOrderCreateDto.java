@@ -9,12 +9,10 @@ import javax.validation.constraints.NotBlank;
 public class DeliveryOrderCreateDto {
 
     @NotBlank
-
     @ApiModelProperty(value = "Latitude coordinate", example = "41.123")
     private String latitude;
 
     @NotBlank
-
     @ApiModelProperty(value = "Longitude coordinate", example = "42.345")
     private String longitude;
 }

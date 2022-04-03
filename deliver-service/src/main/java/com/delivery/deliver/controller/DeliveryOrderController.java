@@ -47,10 +47,4 @@ public class DeliveryOrderController {
     public String create(@RequestBody DeliveryOrderCreateDto createDto) {
         return orderCommandService.createOrder(createDto);
     }
-
-    @Secured(RoleName.ROLE_CUSTOMER)
-    @PutMapping("destination")
-    public DeliveryOrderDto changeDestination(@RequestBody DeliveryOrderAssigneeDto assigneeDto) {
-        //return service.changeDestination(assigneeDto);
-    }
 }

@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -26,6 +25,7 @@ public class DeliveryOrder {
     private String assignee;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private DeliveryOrderStatus status;
 
     @OneToOne(cascade = CascadeType.PERSIST)

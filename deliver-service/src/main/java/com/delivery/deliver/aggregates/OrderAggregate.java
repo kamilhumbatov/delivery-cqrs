@@ -1,9 +1,6 @@
 package com.delivery.deliver.aggregates;
 
-import com.delivery.deliver.commands.ChangeAssigneeCommand;
-import com.delivery.deliver.commands.ChangeCoordinateCommand;
-import com.delivery.deliver.commands.ChangeStatusCommand;
-import com.delivery.deliver.commands.CreateOrderCommand;
+import com.delivery.deliver.commands.*;
 import com.delivery.deliver.enums.DeliveryOrderStatus;
 import com.delivery.deliver.events.*;
 import lombok.Data;
@@ -105,6 +102,23 @@ public class OrderAggregate {
         this.currentLongitude = event.getLongitude();
         this.coordinates.add(event.getLatitude());
         System.out.println("DeliverOrderCoordinateChangedEvent:" + this.coordinates.size());
+    }
+
+    @CommandHandler
+    protected void on(ChangeDestinationCommand command) {
+        var event = CoordinateChangedEvent.builder()
+                .orderId(command.getId())
+                .latitude(command.getLatitude())
+                .longitude(command.getLongitude())
+                .build();
+        AggregateLifecycle.apply(event);
+    }
+
+    @EventSourcingHandler
+    public void on(DestinationChangedEvent event) {
+        this.latitude = event.getLatitude();
+        this.longitude = event.getLongitude();
+        System.out.println("DestinationChangedEvent");
     }
 
     @CommandHandler

@@ -22,7 +22,7 @@ public class DeliveryOrderTrackServiceImpl implements DeliveryOrderTrackService 
     @Override
     public String changeCoordinate(String id, DeliveryOrderDestinationDto destinationDto) {
         DeliveryOrder deliveryOrder = orderService.findById(id);
-        securityUtil.checkUserAccess(deliveryOrder);
+        securityUtil.checkUserAssigned(deliveryOrder);
         if (deliveryOrder.getStatus().compareTo(DeliveryOrderStatus.DELIVERY) == 0) {
             return orderCommandService.changeCoordinate(id, destinationDto);
         }
