@@ -24,4 +24,6 @@ public class Constant {
             "/webjars/**",
             "/swagger-ui.html"
     };
+
+    public static final String SECRET_KEY="6cvdeT8HJsvYHjhvDHsmFRMVf8e2yQyC";
 }

@@ -2,6 +2,7 @@ package com.delivery;
 
 import com.delivery.model.CustomUser;
 import com.delivery.model.CustomUserDetails;
+import com.delivery.util.Constant;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -19,11 +20,10 @@ public class JwtService {
     private static final String ID = "id";
     private static final String ROLE_CEO = "ROLE_CEO";
     private static final String TIN = "TIN";
-    private static final String secret = "X1X2X3";
 
     private Claims getAllClaimsFromToken(String token) {
         return Jwts.parser()
-                .setSigningKey(secret)
+                .setSigningKey(Constant.SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody();
     }
@@ -46,7 +46,7 @@ public class JwtService {
     public boolean validate(String token) {
         try {
             Jwts.parser()
-                    .setSigningKey(secret)
+                    .setSigningKey(Constant.SECRET_KEY)
                     .parseClaimsJws(token);
             return true;
         } catch (MalformedJwtException e) {

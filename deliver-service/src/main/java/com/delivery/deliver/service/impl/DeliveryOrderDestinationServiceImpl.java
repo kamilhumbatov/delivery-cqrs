@@ -14,8 +14,8 @@ public class DeliveryOrderDestinationServiceImpl implements DeliveryOrderDestina
     private final DeliveryOrderDestinationRepository deliveryOrderDestinationRepository;
 
     public void updateLastCoordinate(DeliveryOrderCoordinate orderCoordinate) {
-        //DeliveryOrderDestination deliveryOrderDestination = orderCoordinate.getOrder().getDestination();
-        //deliveryOrderDestination.setLastLocation(orderCoordinate);
-        //deliveryOrderDestinationRepository.save(deliveryOrderDestination);
+        DeliveryOrderDestination deliveryOrderDestination = orderCoordinate.getOrder().getDestination();
+        deliveryOrderDestination.setLastLocation(orderCoordinate);
+        deliveryOrderDestinationRepository.save(deliveryOrderDestination);
     }
 }

@@ -1,5 +1,6 @@
 package com.delivery.deliver.service.commands;
 
+import com.delivery.CurrentUserService;
 import com.delivery.deliver.commands.ChangeCoordinateCommand;
 import com.delivery.deliver.commands.ChangeStatusCommand;
 import com.delivery.deliver.commands.CreateOrderCommand;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class OrderCommandServiceImpl implements OrderCommandService {
 
+    private final CurrentUserService currentUserService;
     private final CommandGateway commandGateway;
 
     @Override
@@ -23,7 +25,7 @@ public class OrderCommandServiceImpl implements OrderCommandService {
         CreateOrderCommand command =
                 CreateOrderCommand.builder()
                         .orderId(UUID.randomUUID().toString())
-                        .owner("currentUser")
+                        .owner(currentUserService.getCurrentUser())
                         .latitude(createDto.getLatitude())
                         .longitude(createDto.getLongitude())
                         .build();
