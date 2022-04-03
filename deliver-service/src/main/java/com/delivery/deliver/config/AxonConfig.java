@@ -10,8 +10,10 @@ import org.springframework.context.annotation.Configuration;
 public class AxonConfig {
 
     @Bean
-    EventSourcingRepository<OrderAggregate> accountAggregateEventSourcingRepository(EventStore eventStore) {
-        EventSourcingRepository<OrderAggregate> repository = EventSourcingRepository.builder(OrderAggregate.class).eventStore(eventStore).build();
+    EventSourcingRepository<OrderAggregate> orderAggregateEventSourcingRepository(EventStore eventStore) {
+        EventSourcingRepository<OrderAggregate> repository = EventSourcingRepository
+                .builder(OrderAggregate.class)
+                .eventStore(eventStore).build();
         return repository;
     }
 }

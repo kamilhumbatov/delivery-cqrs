@@ -1,8 +1,8 @@
 package com.delivery.deliver.controller;
 
-import com.delivery.deliver.domain.DeliveryOrder;
+import com.delivery.deliver.aggregates.OrderAggregate;
 import com.delivery.deliver.dto.DeliveryOrderDto;
-import com.delivery.deliver.queries.GetLibraryQuery;
+import com.delivery.deliver.queries.GetDeliveryOrderQuery;
 import com.delivery.deliver.service.DeliveryOrderCommandService;
 import com.delivery.util.RoleName;
 import lombok.RequiredArgsConstructor;
@@ -25,10 +25,10 @@ public class DeliveryOrderController {
     private final DeliveryOrderCommandService service;
     private final QueryGateway queryGateway;
 
-    @GetMapping("/{id}")
-    public DeliveryOrderDto getOrder(@PathVariable String id) {
-        return service.getOrder(id);
-    }
+//    @GetMapping("/{id}")
+//    public DeliveryOrderDto getOrder(@PathVariable String id) {
+//        return service.getOrder(id);
+//    }
 
     @Secured(RoleName.ROLE_CUSTOMER)
     @GetMapping("/owner")
@@ -47,9 +47,9 @@ public class DeliveryOrderController {
         return service.listEventsForAccount(accountNumber);
     }
 
-    @GetMapping("/api/library/{id}")
-    public DeliveryOrder getLibrary(@PathVariable String id) throws InterruptedException, ExecutionException {
-        CompletableFuture<DeliveryOrder> future = queryGateway.query(new GetLibraryQuery(id), DeliveryOrder.class);
+    @GetMapping("/{id}")
+    public OrderAggregate getDeliveryOrder(@PathVariable String id) throws InterruptedException, ExecutionException {
+        CompletableFuture<OrderAggregate> future = queryGateway.query(new GetDeliveryOrderQuery(id), OrderAggregate.class);
         return future.get();
     }
 }

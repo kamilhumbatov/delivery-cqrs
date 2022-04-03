@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class GetLibraryQuery {
+public class GetDeliveryOrderQuery {
     private String id;
 }

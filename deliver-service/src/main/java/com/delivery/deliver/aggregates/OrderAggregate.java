@@ -1,6 +1,7 @@
 package com.delivery.deliver.aggregates;
 
 import com.delivery.deliver.commands.*;
+import com.delivery.deliver.dto.DeliveryOrderDestinationDto;
 import com.delivery.deliver.enums.DeliveryOrderStatus;
 import com.delivery.deliver.events.*;
 import lombok.Data;
@@ -24,17 +25,13 @@ public class OrderAggregate {
 
     private String assignee;
 
-    private String latitude;
+    private DeliveryOrderDestinationDto destination;
 
-    private String longitude;
-
-    private String currentLatitude;
-
-    private String currentLongitude;
+    private DeliveryOrderDestinationDto currentLocation;
 
     private DeliveryOrderStatus statusDelivery;
 
-    private List<String> coordinates;
+    private List<DeliveryOrderDestinationDto> coordinates;
 
     public OrderAggregate() {
     }
@@ -56,8 +53,10 @@ public class OrderAggregate {
         System.out.println("DeliverOrderCreatedEvent");
         this.id = event.getOrderId();
         this.owner = event.getOwner();
-        this.latitude = event.getLatitude();
-        this.longitude = event.getLongitude();
+        this.destination = DeliveryOrderDestinationDto.builder()
+                .latitude(event.getLatitude())
+                .longitude(event.getLongitude())
+                .build();
         this.statusDelivery = DeliveryOrderStatus.CREATED;
         this.coordinates = new ArrayList<>();
         AggregateLifecycle.apply(new DeliverOrderActivatedEvent(this.id, DeliveryOrderStatus.PENDING));
@@ -98,9 +97,12 @@ public class OrderAggregate {
 
     @EventSourcingHandler
     public void on(CoordinateChangedEvent event) {
-        this.currentLatitude = event.getLatitude();
-        this.currentLongitude = event.getLongitude();
-        this.coordinates.add(event.getLatitude());
+        DeliveryOrderDestinationDto currentLocation = DeliveryOrderDestinationDto.builder()
+                .latitude(event.getLatitude())
+                .longitude(event.getLongitude())
+                .build();
+        this.currentLocation = currentLocation;
+        this.coordinates.add(currentLocation);
         System.out.println("DeliverOrderCoordinateChangedEvent:" + this.coordinates.size());
     }
 
@@ -116,8 +118,10 @@ public class OrderAggregate {
 
     @EventSourcingHandler
     public void on(DestinationChangedEvent event) {
-        this.latitude = event.getLatitude();
-        this.longitude = event.getLongitude();
+        this.destination = DeliveryOrderDestinationDto.builder()
+                .latitude(event.getLatitude())
+                .longitude(event.getLongitude())
+                .build();
         System.out.println("DestinationChangedEvent");
     }
 
