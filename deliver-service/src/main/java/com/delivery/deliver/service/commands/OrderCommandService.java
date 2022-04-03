@@ -11,4 +11,6 @@ public interface OrderCommandService {
     String changeCoordinate(String id, DeliveryOrderDestinationDto destinationDto);
 
     String changeStatus(String id, DeliveryOrderStatus status);
+
+    String assigneeOrder(String id, String assignee);
 }

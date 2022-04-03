@@ -11,8 +11,6 @@ public interface DeliveryOrderCommandService {
 
     DeliveryOrderDto changeDestination(String id, DeliveryOrderDestinationDto destinationDto);
 
-    DeliveryOrderDto assigneeOrderToCourier(DeliveryOrderAssigneeDto assigneeDto);
-
     List<DeliveryOrderDto> findAllOrdersByOwner();
 
     List<DeliveryOrderDto> findAllOrdersByAssignee();

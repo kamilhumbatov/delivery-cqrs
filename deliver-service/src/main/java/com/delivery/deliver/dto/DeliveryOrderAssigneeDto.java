@@ -1,16 +1,14 @@
 package com.delivery.deliver.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Data
 public class DeliveryOrderAssigneeDto {
 
-    @NotNull
-    private String id;
-
     @NotBlank
+    @ApiModelProperty(value = "Courier username", example = "araz")
     private String assignee;
 }

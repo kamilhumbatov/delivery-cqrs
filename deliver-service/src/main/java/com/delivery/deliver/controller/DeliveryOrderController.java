@@ -48,15 +48,10 @@ public class DeliveryOrderController {
         return orderCommandService.createOrder(createDto);
     }
 
-    @Secured(RoleName.ROLE_ADMIN)
-    @PutMapping("assignee")
-    public DeliveryOrderDto assigneeOrderToCourier(@RequestBody DeliveryOrderAssigneeDto assigneeDto) {
-        return service.assigneeOrderToCourier(assigneeDto);
-    }
-
     @Secured(RoleName.ROLE_CUSTOMER)
     @PutMapping("destination")
     public DeliveryOrderDto changeDestination(@RequestBody DeliveryOrderAssigneeDto assigneeDto) {
-        return service.assigneeOrderToCourier(assigneeDto);
+        //return service.changeDestination(assigneeDto);
+        return null;
     }
 }

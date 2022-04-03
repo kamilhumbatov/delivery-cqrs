@@ -37,14 +37,6 @@ public class DeliveryOrderCommandServiceImpl implements DeliveryOrderCommandServ
     }
 
     @Override
-    public DeliveryOrderDto assigneeOrderToCourier(DeliveryOrderAssigneeDto assigneeDto) {
-        DeliveryOrder deliveryOrder = orderService.findById(assigneeDto.getId());
-        deliveryOrder.setAssignee(assigneeDto.getAssignee());
-        //return mapper.toDto(orderService.save(deliveryOrder));
-        return null;
-    }
-
-    @Override
     public List<DeliveryOrderDto> findAllOrdersByOwner() {
         return orderService.findAllOrdersByOwner(currentUserService.getCurrentUser())
                 .stream()
