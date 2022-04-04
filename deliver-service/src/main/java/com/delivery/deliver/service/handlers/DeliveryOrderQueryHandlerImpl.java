@@ -30,11 +30,8 @@ public class DeliveryOrderQueryHandlerImpl implements DeliveryOrderQueryHandlerS
     public DeliveryOrderDto getOrder(String id) {
         GetOrderQuery getOrderQuery = new GetOrderQuery();
         getOrderQuery.setId(id);
-
-        DeliveryOrderDto deliveryOrderDto =
-                queryGateway.query(getOrderQuery,
-                        ResponseTypes.instanceOf(DeliveryOrderDto.class)).join();
-        return deliveryOrderDto;
+        return queryGateway.query(getOrderQuery,
+                ResponseTypes.instanceOf(DeliveryOrderDto.class)).join();
     }
 
     @QueryHandler
@@ -46,11 +43,9 @@ public class DeliveryOrderQueryHandlerImpl implements DeliveryOrderQueryHandlerS
     @Override
     public List<DeliveryOrderDto> findAllOrdersByOwner() {
         GetOwnerQuery getOwnerQuery = new GetOwnerQuery();
-        List<DeliveryOrderDto> deliveryOrderDtoList =
-                queryGateway.query(getOwnerQuery,
-                        ResponseTypes.multipleInstancesOf(DeliveryOrderDto.class))
-                        .join();
-        return deliveryOrderDtoList;
+        return queryGateway.query(getOwnerQuery,
+                ResponseTypes.multipleInstancesOf(DeliveryOrderDto.class))
+                .join();
     }
 
     @QueryHandler
@@ -64,11 +59,9 @@ public class DeliveryOrderQueryHandlerImpl implements DeliveryOrderQueryHandlerS
     @Override
     public List<DeliveryOrderDto> findAllOrdersByAssignee() {
         GetAssignerQuery getAssignerQuery = new GetAssignerQuery();
-        List<DeliveryOrderDto> deliveryOrderDtoList =
-                queryGateway.query(getAssignerQuery,
-                        ResponseTypes.multipleInstancesOf(DeliveryOrderDto.class))
-                        .join();
-        return deliveryOrderDtoList;
+        return queryGateway.query(getAssignerQuery,
+                ResponseTypes.multipleInstancesOf(DeliveryOrderDto.class))
+                .join();
     }
 
     @QueryHandler

@@ -1,7 +1,6 @@
 package com.delivery.deliver.service.impl;
 
 import com.delivery.deliver.domain.DeliveryOrder;
-import com.delivery.deliver.domain.DeliveryOrderCoordinate;
 import com.delivery.deliver.domain.DeliveryOrderDestination;
 import com.delivery.deliver.dto.DeliveryOrderDestinationDto;
 import com.delivery.deliver.enums.DeliveryOrderStatus;

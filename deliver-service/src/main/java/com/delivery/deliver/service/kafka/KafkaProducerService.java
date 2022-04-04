@@ -23,7 +23,7 @@ public class KafkaProducerService {
     public void sendOrderStatus(DeliveryOrder deliveryOrder) {
         Map<String, Object> headers = new HashMap<>();
         headers.put(KafkaHeaders.TOPIC, topicName);
-        kafkaTemplate.send(new GenericMessage<DeliveryOrder>(deliveryOrder, headers));
+        kafkaTemplate.send(new GenericMessage<>(deliveryOrder, headers));
     }
 }
 

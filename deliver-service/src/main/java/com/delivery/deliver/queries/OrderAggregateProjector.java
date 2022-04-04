@@ -17,7 +17,7 @@ public class OrderAggregateProjector {
 
     @QueryHandler
     public OrderAggregate getOrderAggregate(GetDeliveryOrderQuery query) throws InterruptedException, ExecutionException {
-        CompletableFuture<OrderAggregate> future = new CompletableFuture<OrderAggregate>();
+        CompletableFuture<OrderAggregate> future = new CompletableFuture<>();
         aggregateRepository.load(query.getId()).execute(future::complete);
         return future.get();
     }

@@ -38,7 +38,6 @@ public class OrderAggregate {
 
     @CommandHandler
     public OrderAggregate(CreateOrderCommand command) {
-        System.out.println("CreateOrderCommand");
         var event = DeliverOrderCreatedEvent.builder()
                 .orderId(command.getOrderId())
                 .latitude(command.getLatitude())
@@ -50,7 +49,6 @@ public class OrderAggregate {
 
     @EventSourcingHandler
     public void on(DeliverOrderCreatedEvent event) {
-        System.out.println("DeliverOrderCreatedEvent");
         this.id = event.getOrderId();
         this.owner = event.getOwner();
         this.destination = DeliveryOrderDestinationDto.builder()
@@ -64,13 +62,11 @@ public class OrderAggregate {
 
     @EventSourcingHandler
     protected void on(DeliverOrderActivatedEvent accountActivatedEvent) {
-        System.out.println("AccountActivatedEvent");
         this.statusDelivery = accountActivatedEvent.getStatus();
     }
 
     @CommandHandler
     public void handle(ChangeAssigneeCommand command) {
-        System.out.println("AssigneeOrderCommand");
         var event = OrderAssignedEvent.builder()
                 .orderId(command.getId())
                 .assignee(command.getAssignee())
@@ -80,13 +76,11 @@ public class OrderAggregate {
 
     @EventSourcingHandler
     protected void on(OrderAssignedEvent orderAssignedEvent) {
-        System.out.println("OrderAssignedEvent");
         this.assignee = orderAssignedEvent.getAssignee();
     }
 
     @CommandHandler
     protected void handle(ChangeCoordinateCommand command) {
-        System.out.println("ChangeCoordinateCommand");
         var event = CoordinateChangedEvent.builder()
                 .orderId(command.getId())
                 .latitude(command.getLatitude())
@@ -103,7 +97,6 @@ public class OrderAggregate {
                 .build();
         this.currentLocation = currentLocation;
         this.coordinates.add(currentLocation);
-        System.out.println("DeliverOrderCoordinateChangedEvent:" + this.coordinates.size());
     }
 
     @CommandHandler
@@ -122,12 +115,10 @@ public class OrderAggregate {
                 .latitude(event.getLatitude())
                 .longitude(event.getLongitude())
                 .build();
-        System.out.println("DestinationChangedEvent");
     }
 
     @CommandHandler
     protected void handle(ChangeStatusCommand command) {
-        System.out.println("ChangeStatusCommand");
         var event = StatusChangedEvent.builder()
                 .orderId(command.getId())
                 .status(command.getStatus())
@@ -138,6 +129,5 @@ public class OrderAggregate {
     @EventSourcingHandler
     public void on(StatusChangedEvent event) {
         this.statusDelivery = event.getStatus();
-        System.out.println("StatusChangedEvent:" + this.statusDelivery.name());
     }
 }

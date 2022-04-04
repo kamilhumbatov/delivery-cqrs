@@ -19,11 +19,11 @@ public class SendMailServiceImpl implements SendMailService {
 
     @Override
     public void sendStatusChangeMail(DeliveryOrder deliveryOrder) {
-        SimpleMailMessage message = new SimpleMailMessage();
+        var message = new SimpleMailMessage();
         message.setFrom(hostMail);
         message.setTo(deliveryOrder.getOwner());
-        message.setSubject("You have successfully registered");
-        message.setText("Thank for registration");
+        message.setSubject("Delivery status");
+        message.setText(String.format("You parcel delivery status is %s", deliveryOrder.getStatus()));
         mailConfig.getJavaMailSender().send(message);
     }
 }

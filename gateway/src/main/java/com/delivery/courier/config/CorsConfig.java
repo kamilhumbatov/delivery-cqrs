@@ -14,13 +14,13 @@ public class CorsConfig {
     @Bean
     public CorsWebFilter corsWebFilter() {
 
-        final CorsConfiguration corsConfig = new CorsConfiguration();
+        final var corsConfig = new CorsConfiguration();
         corsConfig.setAllowedOrigins(Collections.singletonList("*"));
         corsConfig.setMaxAge(3600L);
         corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE"));
         corsConfig.addAllowedHeader("*");
 
-        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        final var source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfig);
 
         return new CorsWebFilter(source);

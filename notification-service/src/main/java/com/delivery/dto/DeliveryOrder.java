@@ -6,4 +6,6 @@ import lombok.Data;
 public class DeliveryOrder {
 
     private String owner;
+
+    private String status;
 }
