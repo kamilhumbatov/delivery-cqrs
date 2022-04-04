@@ -18,10 +18,9 @@ maven-build:
   artifacts:
     paths:
       - gateway/target/*.jar
-      - security/target/*.jar
-      - deliver/target/*.jar
-      - admin/target/*.jar
-      - user/target/*.jar
+      - user-service/target/*.jar
+      - deliver-service/target/*.jar
+      - notification-service/target/*.jar
   only:
     - main
 
@@ -32,12 +31,11 @@ maven-test:
   artifacts:
     paths:
       - gateway/target/*.jar
-      - security/target/*.jar
-      - deliver/target/*.jar
-      - admin/target/*.jar
-      - user/target/*.jar
+      - user-service/target/*.jar
+      - deliver-service/target/*.jar
+      - notification-service/target/*.jar
   only:
-    - test
+    - main
 
 docker-build:
   stage: docker
