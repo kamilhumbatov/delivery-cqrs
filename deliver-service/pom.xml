@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>deliver</artifactId>
+    <artifactId>deliver-service</artifactId>
 
     <properties>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>

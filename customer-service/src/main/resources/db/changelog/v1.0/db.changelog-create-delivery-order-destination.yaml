@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id:  20220404-create-delivery-order-destination-table
+      author:  delivery
+      changes:
+        - createTable:
+            tableName: delivery_order_destination
+            columns:
+              - column:
+                  name:  id
+                  type:  int
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: dod_pk
+                    nullable: false
+              - column:
+                  name:  latitude
+                  type:  varchar(100)
+              - column:
+                  name:  longitude
+                  type:  varchar(100)
