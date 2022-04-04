@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id:  20220404-create-role-table
+      author:  delivery
+      changes:
+        - createTable:
+            tableName: role
+            columns:
+              - column:
+                  name:  id
+                  type:  int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: role_pk
+                    nullable: false
+              - column:
+                  name:  description
+                  type:  varchar(100)

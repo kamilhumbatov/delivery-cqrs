@@ -15,8 +15,8 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     generate-ddl: true
     hibernate:
-      ddl-auto: update
-      use_sql_comments: true
+      ddl-auto: none
+      use_sql_comments: false
     properties:
       hibernate:
         jdbc:

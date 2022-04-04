@@ -25,7 +25,4 @@ public class DeliveryOrderDestination {
 
     @OneToOne(mappedBy = "destination")
     private DeliveryOrder order;
-
-    @ManyToOne
-    private DeliveryOrderCoordinate lastLocation;
 }

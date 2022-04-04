@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id:  20220404-create-user-table
+      author:  delivery
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name:  id
+                  type:  int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: user_pk
+                    nullable: false
+              - column:
+                  name:  username
+                  type:  varchar(100)
+              - column:
+                  name:  password
+                  type:  varchar(100)
+              - column:
+                  name:  fullName
+                  type:  varchar(100)
+              - column:
+                  name:  role_id
+                  type:  int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: role_fk
+                    references: ROLE(id)
+                    deleteCascade: true

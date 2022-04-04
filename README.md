@@ -16,8 +16,8 @@ The Todo application makes use of the following design patterns:
 > docker-compose up
 
 ## Api call
-http://localhost:7071/security/swagger-ui.html <br>
-http://localhost:7072/deliver/swagger-ui.html
+http://localhost:7007/user/swagger-ui.html <br>
+http://localhost:7007/deliver/swagger-ui.html
 
 ## Implementation
 
