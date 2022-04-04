@@ -10,6 +10,7 @@
 		<module>deliver-service</module>
         <module>user-service</module>
         <module>notification-service</module>
+        <module>customer-service</module>
     </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -29,7 +30,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+<!--			<scope>test</scope>-->
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
