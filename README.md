@@ -33,6 +33,21 @@ Implementation notes:
 * Spring Framework - http://projects.spring.io/spring-framework/
 * Spring Data JPA - https://projects.spring.io/spring-data-jpa/
 
+## Architectthure of Project
+There has 3 domains 
+* User Service
+* Delivery Service
+* Notification Service
+
+User Service is simple CRUD application
+Delivery service are Event Sourcing and CQRS implementation  
+Notification Service is send sms to customers
+![alt text](img/delivery_architecture.png)
+
 ## Architectthure of Delivery Service
 
-![alt text](architecture.png)
+![alt text](img/architecture.png)
+
+## PS
+* In a future it is possible to add Customer payment and implement Saga design pattern
+* In a future it is possible to add kubernate deployment in a google cloud
