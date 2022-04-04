@@ -23,12 +23,6 @@ public class DeliveryOrderDestinationServiceImpl implements DeliveryOrderDestina
     private final OrderCommandService orderCommand;
     private final DeliveryOrderDestinationRepository repository;
 
-    public void updateLastCoordinate(DeliveryOrderCoordinate orderCoordinate) {
-//        DeliveryOrderDestination deliveryOrderDestination = orderCoordinate.getOrder().getDestination();
-//        deliveryOrderDestination.setLastLocation(orderCoordinate);
-//        deliveryOrderDestinationRepository.save(deliveryOrderDestination);
-    }
-
     @Override
     public String changeDestination(String id, DeliveryOrderDestinationDto destinationDto) {
         DeliveryOrder deliveryOrder = orderService.findById(id);

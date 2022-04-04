@@ -42,7 +42,6 @@ public class DeliveryOrderEventHandlerImpl implements DeliveryOrderEventHandler{
                 .order(order)
                 .build();
         repository.save(orderCoordinate);
-        destinationService.updateLastCoordinate(orderCoordinate);
     }
 
     @Override
