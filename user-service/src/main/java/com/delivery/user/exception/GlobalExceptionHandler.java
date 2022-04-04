@@ -38,6 +38,16 @@ public class GlobalExceptionHandler extends CommonExceptionHandler {
         return buildErrorResponse(exception, HttpStatus.BAD_REQUEST, request);
     }
 
+    @ExceptionHandler(UnUhtorizedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ResponseEntity<ErrorResponse> handleUnUhtorizedException(
+            UnUhtorizedException exception,
+            WebRequest request
+    ) {
+        log.error("Username already taken", exception);
+        return buildErrorResponse(exception, HttpStatus.UNAUTHORIZED, request);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex

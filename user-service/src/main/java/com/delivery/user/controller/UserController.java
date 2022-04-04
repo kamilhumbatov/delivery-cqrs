@@ -7,9 +7,11 @@ import com.delivery.user.dto.signup.SignUpRequest;
 import com.delivery.user.dto.signup.SignUpResponse;
 import com.delivery.user.service.AuthService;
 import com.delivery.user.service.UserService;
+import com.delivery.util.RoleName;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,6 +38,15 @@ public class UserController {
 
     @PostMapping("/signup/customer")
     public SignUpResponse registerUser(@Validated @RequestBody SignUpRequest signUpRequest) {
+        log.info("Customer trying signup", signUpRequest.getUsername());
+        return SignUpResponse.builder()
+                .result(userService.createCustomer(signUpRequest))
+                .build();
+    }
+
+    @Secured(RoleName.ROLE_ADMIN)
+    @PostMapping("/signup/courier")
+    public SignUpResponse registerCourier(@Validated @RequestBody SignUpRequest signUpRequest) {
         log.info("Customer trying signup", signUpRequest.getUsername());
         return SignUpResponse.builder()
                 .result(userService.createCustomer(signUpRequest))

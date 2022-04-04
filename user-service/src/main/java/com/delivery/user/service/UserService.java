@@ -10,4 +10,6 @@ public interface UserService {
     Optional<User> findByUsername(String username);
 
     String createCustomer(SignUpRequest request);
+
+    String createCourier(SignUpRequest request);
 }

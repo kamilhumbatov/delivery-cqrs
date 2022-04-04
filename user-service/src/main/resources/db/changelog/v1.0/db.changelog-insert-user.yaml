@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20220404-insert-user
+      author: delivery
+      changes:
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: username
+                  value: admin
+              - column:
+                  name: password
+                  value: $2a$10$gJDXC4IVE0k8W2WrKMXozu1V/cqP4pUc20dKRBrv93uJxuGuFZ8uu
+              - column:
+                  name: full_name
+                  value: Administrator
+              - column:
+                  name: role_id
+                  value: 1

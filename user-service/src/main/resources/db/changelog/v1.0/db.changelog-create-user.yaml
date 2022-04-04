@@ -21,7 +21,7 @@ databaseChangeLog:
                   name:  password
                   type:  varchar(100)
               - column:
-                  name:  fullName
+                  name:  full_name
                   type:  varchar(100)
               - column:
                   name:  role_id

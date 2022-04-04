@@ -11,7 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
-        prePostEnabled = true
+        prePostEnabled = true,
+        securedEnabled = true
 )
 @Import({JwtTokenFilter.class, AuthEntryPointJwt.class})
 public class SecurityConfig extends MainSecurityConfig {
