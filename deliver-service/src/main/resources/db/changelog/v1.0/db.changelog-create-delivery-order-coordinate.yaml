@@ -9,6 +9,7 @@ databaseChangeLog:
               - column:
                   name:  id
                   type:  int
+                  autoIncrement: true
                   constraints:
                     primaryKey: true
                     primaryKeyName: dod_pk
@@ -21,9 +22,9 @@ databaseChangeLog:
                   type:  varchar(100)
               - column:
                   name:  order_id
-                  type:  int
+                  type:  varchar(100)
                   constraints:
                     nullable: false
-                    foreignKeyName: order_id_fk
-                    references: DELIVERY_ORDER(id)
+                    foreignKeyName: delivery_order_fk
+                    references: delivery_order(id)
                     deleteCascade: true

@@ -9,6 +9,7 @@ databaseChangeLog:
               - column:
                   name:  id
                   type:  int
+                  autoIncrement: true
                   constraints:
                     primaryKey: true
                     primaryKeyName: dod_pk

@@ -28,5 +28,5 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     foreignKeyName: destination_fk
-                    references: DELIVERY_ORDER_DESTINATION(id)
+                    references: delivery_order_destination(id)
                     deleteCascade: true
