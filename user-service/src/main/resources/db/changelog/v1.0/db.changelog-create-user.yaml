@@ -29,5 +29,5 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     foreignKeyName: role_fk
-                    references: ROLE(id)
+                    references: role(id)
                     deleteCascade: true

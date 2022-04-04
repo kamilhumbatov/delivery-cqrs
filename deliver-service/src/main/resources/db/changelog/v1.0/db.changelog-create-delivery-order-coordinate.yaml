@@ -4,7 +4,7 @@ databaseChangeLog:
       author:  delivery
       changes:
         - createTable:
-            tableName: delivery_order_destination
+            tableName: delivery_order_coordinate
             columns:
               - column:
                   name:  id

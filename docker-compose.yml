@@ -58,7 +58,6 @@ services:
     build: ./notification-service
     depends_on:
       - gateway
-      - db
     networks:
       - backend
     ports:

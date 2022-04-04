@@ -26,10 +26,10 @@ class DeliveryOrderServiceImplTest {
     public static final String ID="121212";
 
     @InjectMocks
-    private DeliveryOrderServiceImpl deliveryOrderService;
+    DeliveryOrderServiceImpl deliveryOrderService;
 
     @Mock
-    private DeliveryOrderRepository deliveryOrderRepository;
+    DeliveryOrderRepository deliveryOrderRepository;
 
     @BeforeEach
     void setup() {
