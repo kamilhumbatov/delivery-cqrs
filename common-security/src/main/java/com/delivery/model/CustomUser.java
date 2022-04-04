@@ -13,6 +13,5 @@ public class CustomUser {
 
     private String username;
     private String password;
-    private String tin;
     private String role;
 }

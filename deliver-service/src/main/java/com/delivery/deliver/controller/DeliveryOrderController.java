@@ -19,9 +19,22 @@ public class DeliveryOrderController {
 
     private final DeliveryOrderQueryHandlerService service;
 
-    @GetMapping("/{id}")
-    public DeliveryOrderDto findById(@PathVariable String id) {
-        return service.getOrder(id);
+    @Secured(RoleName.ROLE_ADMIN)
+    @GetMapping("/admin/{id}")
+    public DeliveryOrderDto findByIdAdmin(@PathVariable String id) {
+        return service.getOrder(id, RoleName.ROLE_ADMIN);
+    }
+
+    @Secured(RoleName.ROLE_CUSTOMER)
+    @GetMapping("/customer/{id}")
+    public DeliveryOrderDto findByIdCustomer(@PathVariable String id) {
+        return service.getOrder(id, RoleName.ROLE_CUSTOMER);
+    }
+
+    @Secured(RoleName.ROLE_COURIER)
+    @GetMapping("/courier/{id}")
+    public DeliveryOrderDto findByIdCourier(@PathVariable String id) {
+        return service.getOrder(id, RoleName.ROLE_COURIER);
     }
 
     @Secured(RoleName.ROLE_CUSTOMER)

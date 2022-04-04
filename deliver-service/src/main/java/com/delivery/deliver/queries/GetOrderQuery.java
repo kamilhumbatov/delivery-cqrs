@@ -6,4 +6,6 @@ import lombok.Data;
 public class GetOrderQuery {
 
     private String id;
+
+    private String role;
 }

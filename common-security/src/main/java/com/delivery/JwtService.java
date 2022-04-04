@@ -18,8 +18,7 @@ import org.springframework.stereotype.Component;
 public class JwtService {
 
     private static final String ID = "id";
-    private static final String ROLE_CEO = "ROLE_CEO";
-    private static final String TIN = "TIN";
+    private static final String ROLE = "role";
 
     private Claims getAllClaimsFromToken(String token) {
         return Jwts.parser()
@@ -38,8 +37,7 @@ public class JwtService {
                 CustomUser.builder()
                         .username(claims.getSubject())
                         .password((String) claims.get(ID))
-                        .tin((String) claims.get(TIN))
-                        .role(ROLE_CEO)
+                        .role((String) claims.get(ROLE))
                         .build());
     }
 

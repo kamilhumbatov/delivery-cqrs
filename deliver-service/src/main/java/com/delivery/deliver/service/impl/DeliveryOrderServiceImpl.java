@@ -21,6 +21,16 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     }
 
     @Override
+    public DeliveryOrder findByIdAndOwner(String id, String owner) {
+        return repository.findByIdAndOwner(id, owner).orElseThrow(() -> new DeliveryOrderNotFoundException(id));
+    }
+
+    @Override
+    public DeliveryOrder findByIdAndAssignee(String id, String assignee) {
+        return repository.findByIdAndOwner(id, assignee).orElseThrow(() -> new DeliveryOrderNotFoundException(id));
+    }
+
+    @Override
     public List<DeliveryOrder> findAllOrdersByOwner(String username) {
         return repository.findAllByOwner(username);
     }

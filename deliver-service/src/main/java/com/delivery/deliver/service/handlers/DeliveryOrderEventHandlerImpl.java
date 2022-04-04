@@ -4,7 +4,12 @@ import com.delivery.deliver.domain.DeliveryOrder;
 import com.delivery.deliver.domain.DeliveryOrderCoordinate;
 import com.delivery.deliver.domain.DeliveryOrderDestination;
 import com.delivery.deliver.enums.DeliveryOrderStatus;
-import com.delivery.deliver.events.*;
+import com.delivery.deliver.events.CoordinateChangedEvent;
+import com.delivery.deliver.events.DeliverOrderActivatedEvent;
+import com.delivery.deliver.events.DeliverOrderCreatedEvent;
+import com.delivery.deliver.events.DestinationChangedEvent;
+import com.delivery.deliver.events.OrderAssignedEvent;
+import com.delivery.deliver.events.StatusChangedEvent;
 import com.delivery.deliver.repository.DeliveryOrderCoordinateRepository;
 import com.delivery.deliver.service.DeliveryOrderDestinationService;
 import com.delivery.deliver.service.DeliveryOrderService;
@@ -17,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ProcessingGroup("order-group")
 @RequiredArgsConstructor
-public class DeliveryOrderEventHandlerImpl implements DeliveryOrderEventHandler{
+public class DeliveryOrderEventHandlerImpl implements DeliveryOrderEventHandler {
 
     private final DeliveryOrderService deliveryOrderService;
     private final DeliveryOrderDestinationService destinationService;
@@ -77,7 +82,7 @@ public class DeliveryOrderEventHandlerImpl implements DeliveryOrderEventHandler{
                 .longitude(event.getLongitude())
                 .order(deliveryOrder)
                 .build();
-        deliveryOrderDestination.setOrder(deliveryOrder);
+        deliveryOrder.setDestination(deliveryOrderDestination);
         deliveryOrderService.save(deliveryOrder);
     }
 
