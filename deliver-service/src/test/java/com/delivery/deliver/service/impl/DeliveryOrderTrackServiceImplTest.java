@@ -1,11 +1,9 @@
 package com.delivery.deliver.service.impl;
 
 import com.delivery.deliver.domain.DeliveryOrder;
-import com.delivery.deliver.domain.DeliveryOrderDestination;
 import com.delivery.deliver.dto.DeliveryOrderDestinationDto;
 import com.delivery.deliver.enums.DeliveryOrderStatus;
 import com.delivery.deliver.exception.DeliveryOrderStatusException;
-import com.delivery.deliver.repository.DeliveryOrderDestinationRepository;
 import com.delivery.deliver.service.DeliveryOrderService;
 import com.delivery.deliver.service.commands.OrderCommandService;
 import com.delivery.deliver.util.SecurityUtil;
@@ -43,9 +41,6 @@ class DeliveryOrderTrackServiceImplTest {
     @Mock
     OrderCommandService orderCommand;
 
-    @Mock
-    DeliveryOrderDestinationRepository repository;
-
     @BeforeEach
     void setup() {
         deliveryOrderStatusPending = DeliveryOrder.builder()
@@ -78,7 +73,7 @@ class DeliveryOrderTrackServiceImplTest {
     }
 
     @Test
-    void givenOrderWithDeliveryStatusAndDestinationWhenChangeDestinationThenDeliveryOrderStatusException() {
+    void givenOrderWithPendingStatusAndDestinationWhenChangeDestinationThenDeliveryOrderStatusException() {
         //arrange
         when(orderService.findById(ID)).thenReturn(deliveryOrderStatusPending);
 

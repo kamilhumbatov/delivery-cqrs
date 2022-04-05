@@ -19,45 +19,40 @@ public class DeliveryOrderStatusServiceImpl implements DeliveryOrderStatusServic
     private final OrderCommandService orderCommand;
 
     @Override
-    public String changeOrderStatusToCancel(String id) {
-        DeliveryOrder deliveryOrder = orderService.findById(id);
-        securityUtil.checkUserOwner(deliveryOrder);
-        if (deliveryOrder.getStatus().compareTo(DeliveryOrderStatus.DELIVERED) == 0) {
-            throw new DeliveryOrderStatusException(DeliveryOrderStatus.CANCELED, "Because order was delivered!");
-        }
-        return changeOrderStatus(deliveryOrder, DeliveryOrderStatus.CANCELED);
-    }
-
-    @Override
     public String changeOrderStatusToPickUp(String id) {
-        return changeOrderStatus(id, DeliveryOrderStatus.PICKUP);
+        return changeOrderStatus(id, DeliveryOrderStatus.PENDING, DeliveryOrderStatus.PICKUP,
+                "Because order status is not Pending!");
     }
 
     @Override
     public String changeOrderStatusToDelivery(String id) {
-        return changeOrderStatus(id, DeliveryOrderStatus.DELIVERY);
+        return changeOrderStatus(id, DeliveryOrderStatus.PICKUP, DeliveryOrderStatus.DELIVERY,
+                "Because order status is not Pickup!");
     }
 
     @Override
     public String changeOrderStatusToDelivered(String id) {
-        return changeOrderStatus(id, DeliveryOrderStatus.DELIVERED);
+        return changeOrderStatus(id, DeliveryOrderStatus.DELIVERY, DeliveryOrderStatus.DELIVERED,
+                "Because order status is not Delivery!");
     }
 
-    private String changeOrderStatus(String id, DeliveryOrderStatus status) {
+    private String changeOrderStatus(String id, DeliveryOrderStatus fromStatus, DeliveryOrderStatus toStatus, String message) {
         DeliveryOrder deliveryOrder = orderService.findById(id);
         securityUtil.checkUserAssigned(deliveryOrder);
-        return changeOrderStatus(deliveryOrder, status);
+        if (deliveryOrder.getStatus().compareTo(fromStatus) == 0) {
+            return orderCommand.changeStatus(deliveryOrder.getId(), toStatus);
+        }
+        throw new DeliveryOrderStatusException(message);
     }
 
-    private String changeOrderStatus(DeliveryOrder deliveryOrder, DeliveryOrderStatus status) {
-        if (deliveryOrder.getStatus().compareTo(status) == 1) {
-            throw new DeliveryOrderStatusException(status,
-                    String.format("Because order status is %s", deliveryOrder.getStatus().name()));
+    @Override
+    public String changeOrderStatusToCancel(String id) {
+        DeliveryOrder deliveryOrder = orderService.findById(id);
+        securityUtil.checkUserOwner(deliveryOrder);
+        if (deliveryOrder.getStatus().compareTo(DeliveryOrderStatus.DELIVERED) == 0) {
+            throw new DeliveryOrderStatusException("Because order status is  Delivered!");
         }
-        if (deliveryOrder.getStatus().compareTo(status) == 0) {
-            throw new DeliveryOrderStatusException(status);
-        }
-        return orderCommand.changeStatus(deliveryOrder.getId(), status);
+        return orderCommand.changeStatus(deliveryOrder.getId(), DeliveryOrderStatus.CANCELED);
     }
 
 }

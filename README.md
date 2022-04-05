@@ -33,10 +33,43 @@ Implementation notes:
 * Spring Framework - http://projects.spring.io/spring-framework/
 * Spring Data JPA - https://projects.spring.io/spring-data-jpa/
 
+## Acceptance Criteria
+* GIVEN order and customer<br>
+  WHEN order is created <br>
+  THAN status is CREATED
+* GIVEN order<br>
+  WHEN status is CREATED <br>
+  THAN automatically change status to PENDING
+* GIVEN order and admin<br>
+  WHEN status is PENDING <br>
+  THAN can assignee delivery to courier<br>
+* GIVEN order and courier<br>
+  WHEN status is PENDING <br>
+  THAN admin can change status to PICKUP<br>
+* GIVEN order and courier<br>
+  WHEN status is PICKUP <br>
+  THAN admin can change status to DELIVERY<br>
+* GIVEN order and courier<br>
+  WHEN status is DELIVERY <br>
+  THAN admin can change status to DELIVERED<br>
+* GIVEN order<br>
+  WHEN stautus is DELIVERED <br>
+  THAN can not change of status 
+* GIVEN order and customer<br>
+  WHEN stautus is  DELIVERED <br>
+  THAN can not change of status to CANCEL   
+
 ## Architectthure of Project
 There has 3 domains 
 * User Service
-* Delivery Service
+* Delivery Service<br>
+  There are 5 statuses for deliver 
+    * CREATED 
+    * PENDING
+    * PICKUP
+    * DELIVERY
+    * DELIVERED
+    * CANCELED
 * Notification Service
 
 User Service is simple CRUD application
@@ -52,3 +85,4 @@ Notification Service is send sms to customers
 * Add Customer payment and implement Saga design pattern
 * Add kubernate deployment in a google cloud
 * Connect Event Source to Cassandra or MongoDb
+* For manage delivery status it is easily implement Cammmunda or another BPMN
