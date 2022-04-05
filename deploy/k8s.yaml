@@ -1,0 +1,210 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: delivery-gatewy-k8s
+spec:
+  selector:
+    matchLabels:
+      app: delivery-gatewy-k8s
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: delivery-gatewy-k8s
+    spec:
+      containers:
+        - name: delivery-gatewy-k8s
+          image: delivery_gateway
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 7007
+              protocol: TCP
+            - name: management-port
+              containerPort: 7107
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: management-port
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            failureThreshold: 25
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: management-port
+            initialDelaySeconds: 180
+            periodSeconds: 30
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: delivery-gatewy-service
+spec:
+  selector:
+    app: delivery-gatewy-k8s
+  ports:
+    - port: 7007
+      targetPort: 7007
+      protocol: TCP
+  type: ClusterIP
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: delivery-deliver-k8s
+spec:
+  selector:
+    matchLabels:
+      app: delivery-deliver-k8s
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: delivery-deliver-k8s
+    spec:
+      containers:
+        - name: delivery-deliver-k8s
+          image: delivery_deliver-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 7071
+              protocol: TCP
+            - name: management-port
+              containerPort: 7171
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: management-port
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            failureThreshold: 25
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: management-port
+            initialDelaySeconds: 180
+            periodSeconds: 30
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: delivery-deliver-service
+spec:
+  selector:
+    app: delivery-deliver-k8s
+  ports:
+    - port: 7171
+      targetPort: 7171
+      protocol: TCP
+  type: ClusterIP
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: delivery-user-k8s
+spec:
+  selector:
+    matchLabels:
+      app: delivery-user-k8s
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: delivery-user-k8s
+    spec:
+      containers:
+        - name: delivery-deliver-k8s
+          image: delivery_user-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 7072
+              protocol: TCP
+            - name: management-port
+              containerPort: 7172
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: management-port
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            failureThreshold: 25
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: management-port
+            initialDelaySeconds: 180
+            periodSeconds: 30
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: delivery-user-service
+spec:
+  selector:
+    app: delivery-user-k8s
+  ports:
+    - port: 7172
+      targetPort: 7172
+      protocol: TCP
+  type: ClusterIP
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: delivery-notification-k8s
+spec:
+  selector:
+    matchLabels:
+      app: delivery-notification-k8s
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: delivery-notification-k8s
+    spec:
+      containers:
+        - name: delivery-notification-k8s
+          image: delivery_notification-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 7073
+              protocol: TCP
+            - name: management-port
+              containerPort: 7173
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: management-port
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            failureThreshold: 25
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: management-port
+            initialDelaySeconds: 180
+            periodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: delivery-notification-service
+spec:
+  selector:
+    app: delivery-notification-k8s
+  ports:
+    - port: 7173
+      targetPort: 7173
+      protocol: TCP
+  type: ClusterIP

@@ -45,3 +45,10 @@ docker-build:
     - docker push registry.gitlab.com/kamilhumbatov/delivery
   only:
     - main
+
+deploy:
+  stage: deploy
+  image: bitnami/kubectl:latest
+  script:
+    - mkdir -p ~/.kube; echo "$CI_KUBE_CONFIG" > ~/.kube/config
+    - kubectl apply -f deploy/k8s.yaml
