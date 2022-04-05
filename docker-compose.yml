@@ -84,7 +84,7 @@ services:
   notification-service:
     build: ./notification-service
     depends_on:
-      - gateway
+      - kafka
     networks:
       - backend
     ports:
