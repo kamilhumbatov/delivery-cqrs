@@ -29,7 +29,7 @@ public class DeliveryOrderDestinationServiceImpl implements DeliveryOrderDestina
         if (deliveryOrder.getStatus().compareTo(DeliveryOrderStatus.PENDING) == 0) {
             return orderCommand.changeDestination(id, destinationDto);
         }
-        throw new DeliveryOrderStatusException("Order status is not Pending");
+        throw new DeliveryOrderStatusException("Order status is not Pending!");
     }
 
     @Override

@@ -26,6 +26,6 @@ public class DeliveryOrderTrackServiceImpl implements DeliveryOrderTrackService 
         if (deliveryOrder.getStatus().compareTo(DeliveryOrderStatus.DELIVERY) == 0) {
             return orderCommandService.changeCoordinate(id, destinationDto);
         }
-        throw new DeliveryOrderStatusException(deliveryOrder.getStatus(), "Because order was not delivery!");
+        throw new DeliveryOrderStatusException("Order status is not Delivery!");
     }
 }

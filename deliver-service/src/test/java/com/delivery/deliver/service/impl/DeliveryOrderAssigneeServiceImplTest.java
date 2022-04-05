@@ -72,7 +72,7 @@ class DeliveryOrderAssigneeServiceImplTest {
         //act && assert
         assertThatThrownBy(() -> deliveryOrderAssigneeService.assigneeOrderToCourier(ID, ASSIGNEE))
                 .isInstanceOf(DeliveryOrderStatusException.class)
-                .hasMessage("Order status is not Pending");
+                .hasMessage("Order status is not Pending!");
         verify(orderService, times(1)).findById(ID);
     }
 

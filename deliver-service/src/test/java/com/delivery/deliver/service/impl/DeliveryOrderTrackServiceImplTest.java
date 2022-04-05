@@ -4,7 +4,6 @@ import com.delivery.deliver.domain.DeliveryOrder;
 import com.delivery.deliver.domain.DeliveryOrderDestination;
 import com.delivery.deliver.dto.DeliveryOrderDestinationDto;
 import com.delivery.deliver.enums.DeliveryOrderStatus;
-import com.delivery.deliver.exception.DeliveryOrderNotFoundException;
 import com.delivery.deliver.exception.DeliveryOrderStatusException;
 import com.delivery.deliver.repository.DeliveryOrderDestinationRepository;
 import com.delivery.deliver.service.DeliveryOrderService;
@@ -24,19 +23,16 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class DeliveryOrderDestinationServiceImplTest {
+class DeliveryOrderTrackServiceImplTest {
 
     private static final String ID = "121212";
-    private static final Long ID_DESTINATION = 1L;
     private static final String RESULT = "12-12";
     private DeliveryOrder deliveryOrderStatusPending;
     private DeliveryOrder deliveryOrderStatusDelivery;
-    private DeliveryOrderDestination deliveryOrderDestination;
-    private DeliveryOrderDestination deliveryOrderDestinationForSave;
     private DeliveryOrderDestinationDto deliveryOrderDestinationDto;
 
     @InjectMocks
-    DeliveryOrderDestinationServiceImpl deliveryOrderDestinationService;
+    DeliveryOrderTrackServiceImpl deliveryOrderTrackService;
 
     @Mock
     SecurityUtil securityUtil;
@@ -52,16 +48,6 @@ class DeliveryOrderDestinationServiceImplTest {
 
     @BeforeEach
     void setup() {
-        deliveryOrderDestination = DeliveryOrderDestination.builder()
-                .id(ID_DESTINATION)
-                .latitude("")
-                .longitude("")
-                .build();
-        deliveryOrderDestinationForSave = DeliveryOrderDestination.builder()
-                .id(ID_DESTINATION)
-                .latitude("")
-                .longitude("")
-                .build();
         deliveryOrderStatusPending = DeliveryOrder.builder()
                 .id(ID)
                 .status(DeliveryOrderStatus.PENDING)
@@ -77,43 +63,29 @@ class DeliveryOrderDestinationServiceImplTest {
     }
 
     @Test
-    void givenOrderWithPendingStatusAndDestinationWhenChangeDestinationThenOk() {
+    void givenOrderWithDeliveryStatusAndDestinationWhenChangeCoordinateThenOk() {
         //arrange
-        when(orderService.findById(ID)).thenReturn(deliveryOrderStatusPending);
-        when(orderCommand.changeDestination(ID, deliveryOrderDestinationDto)).thenReturn(RESULT);
+        when(orderService.findById(ID)).thenReturn(deliveryOrderStatusDelivery);
+        when(orderCommand.changeCoordinate(ID, deliveryOrderDestinationDto)).thenReturn(RESULT);
 
         //act
-        String response = deliveryOrderDestinationService.changeDestination(ID, deliveryOrderDestinationDto);
+        String response = deliveryOrderTrackService.changeCoordinate(ID, deliveryOrderDestinationDto);
 
         //assert
         assertThat(response).isEqualTo(RESULT);
-        verify(orderCommand, times(1)).changeDestination(ID, deliveryOrderDestinationDto);
+        verify(orderCommand, times(1)).changeCoordinate(ID, deliveryOrderDestinationDto);
         verify(orderService, times(1)).findById(ID);
     }
 
     @Test
     void givenOrderWithDeliveryStatusAndDestinationWhenChangeDestinationThenDeliveryOrderStatusException() {
         //arrange
-        when(orderService.findById(ID)).thenReturn(deliveryOrderStatusDelivery);
+        when(orderService.findById(ID)).thenReturn(deliveryOrderStatusPending);
 
         //act && assert
-        assertThatThrownBy(() -> deliveryOrderDestinationService.changeDestination(ID, deliveryOrderDestinationDto))
+        assertThatThrownBy(() -> deliveryOrderTrackService.changeCoordinate(ID, deliveryOrderDestinationDto))
                 .isInstanceOf(DeliveryOrderStatusException.class)
-                .hasMessage("Order status is not Pending!");
+                .hasMessage("Order status is not Delivery!");
         verify(orderService, times(1)).findById(ID);
-    }
-
-    @Test
-    void givenDestinationWhenUpdateDestinationThenOk() {
-        //arrange
-        when(repository.save(deliveryOrderDestinationForSave)).thenReturn(deliveryOrderDestination);
-
-        //act
-        DeliveryOrderDestination orderDestination = deliveryOrderDestinationService
-                .updateDestination(deliveryOrderDestinationForSave);
-
-        //assert
-        assertThat(orderDestination.getId()).isEqualTo(deliveryOrderDestination.getId());
-        verify(repository, times(1)).save(deliveryOrderDestinationForSave);
     }
 }
