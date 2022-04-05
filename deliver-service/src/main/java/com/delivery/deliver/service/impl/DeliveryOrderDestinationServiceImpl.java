@@ -33,7 +33,7 @@ public class DeliveryOrderDestinationServiceImpl implements DeliveryOrderDestina
     }
 
     @Override
-    public void updateDestination(DeliveryOrderDestination deliveryOrderDestination) {
-        repository.save(deliveryOrderDestination);
+    public DeliveryOrderDestination updateDestination(DeliveryOrderDestination deliveryOrderDestination) {
+        return repository.save(deliveryOrderDestination);
     }
 }

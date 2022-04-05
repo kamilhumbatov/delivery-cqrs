@@ -166,7 +166,7 @@ class DeliveryOrderServiceImplTest {
         when(deliveryOrderRepository.save(deliveryOrderForSave)).thenReturn(deliveryOrder);
 
         //act
-        DeliveryOrder order = deliveryOrderService.save(deliveryOrder);
+        DeliveryOrder order = deliveryOrderService.save(deliveryOrderForSave);
 
         //assert
         assertThat(order.getId()).isEqualTo(deliveryOrder.getId());

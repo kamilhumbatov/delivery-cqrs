@@ -7,5 +7,5 @@ public interface DeliveryOrderDestinationService {
 
     String changeDestination(String id, DeliveryOrderDestinationDto destinationDto);
 
-    void updateDestination(DeliveryOrderDestination deliveryOrderDestination);
+    DeliveryOrderDestination updateDestination(DeliveryOrderDestination deliveryOrderDestination);
 }

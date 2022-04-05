@@ -48,6 +48,7 @@ Notification Service is send sms to customers
 
 ![alt text](img/architecture.png)
 
-## PS
-* In a future it is possible to add Customer payment and implement Saga design pattern
-* In a future it is possible to add kubernate deployment in a google cloud
+## It is possible in my side
+* Add Customer payment and implement Saga design pattern
+* Add kubernate deployment in a google cloud
+* Connect Event Source to Cassandra or MongoDb
