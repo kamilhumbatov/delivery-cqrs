@@ -89,6 +89,8 @@ services:
       - backend
     ports:
       - 7073:7073
+    environment:
+      KAFKA_HOST_NAME: ${KAFKA_HOST_NAME}
 
 volumes:
   db-data:
