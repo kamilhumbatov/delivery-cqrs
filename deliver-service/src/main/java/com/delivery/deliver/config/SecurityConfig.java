@@ -1,7 +1,8 @@
 package com.delivery.deliver.config;
 
-import com.delivery.AuthEntryPointJwt;
-import com.delivery.JwtTokenFilter;
+import com.delivery.security.AuthEntryPointJwt;
+import com.delivery.security.JwtTokenFilter;
+import com.delivery.security.config.MainSecurityConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;

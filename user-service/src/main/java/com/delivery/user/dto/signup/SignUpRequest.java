@@ -1,5 +1,6 @@
 package com.delivery.user.dto.signup;
 
+import com.delivery.user.util.StrongPassword;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,8 @@ public class SignUpRequest {
     @ApiModelProperty(value = "Password", example = "Kamil Humbatov")
     private String fullName;
 
+
+    @StrongPassword
     @NotBlank(message = "Username must not be empty!")
     @Size(min = 3, max = 15, message = "Username size must be between 3 and 15")
     @ApiModelProperty(value = "Password", example = "kamil")

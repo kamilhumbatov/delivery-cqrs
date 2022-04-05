@@ -1,13 +1,13 @@
 package com.delivery.deliver.controller;
 
 import com.delivery.deliver.service.DeliveryOrderStatusService;
-import com.delivery.util.RoleName;
+import com.delivery.security.util.RoleName;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("delivery-orders/status")
+@RequestMapping("/api/v1/delivery-orders/status")
 @RequiredArgsConstructor
 public class DeliveryOrderStatusController {
 

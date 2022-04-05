@@ -1,8 +1,8 @@
-package com.delivery.deliver.config;
+package com.delivery.security.config;
 
-import com.delivery.handler.RestAccessDeniedHandler;
-import com.delivery.handler.RestAuthenticationEntryPoint;
-import com.delivery.util.Constant;
+import com.delivery.security.handler.RestAccessDeniedHandler;
+import com.delivery.security.handler.RestAuthenticationEntryPoint;
+import com.delivery.security.util.Constant;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;

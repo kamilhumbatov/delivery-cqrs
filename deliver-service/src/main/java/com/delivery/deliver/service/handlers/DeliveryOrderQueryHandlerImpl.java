@@ -1,6 +1,6 @@
 package com.delivery.deliver.service.handlers;
 
-import com.delivery.CurrentUserService;
+import com.delivery.security.CurrentUserService;
 import com.delivery.deliver.dto.DeliveryOrderDto;
 import com.delivery.deliver.exception.DeliveryOrderNotFoundException;
 import com.delivery.deliver.queries.GetAssignerQuery;
@@ -8,7 +8,7 @@ import com.delivery.deliver.queries.GetOrderQuery;
 import com.delivery.deliver.queries.GetOwnerQuery;
 import com.delivery.deliver.service.DeliveryOrderService;
 import com.delivery.deliver.service.mapper.DeliveryOrderMapper;
-import com.delivery.util.RoleName;
+import com.delivery.security.util.RoleName;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;

@@ -1,4 +1,4 @@
-package com.delivery.util;
+package com.delivery.security.util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

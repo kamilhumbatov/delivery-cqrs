@@ -1,4 +1,4 @@
-package com.delivery.model;
+package com.delivery.security.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

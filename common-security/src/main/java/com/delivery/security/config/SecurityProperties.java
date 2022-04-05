@@ -1,4 +1,4 @@
-package com.delivery.deliver.config;
+package com.delivery.security.config;
 
 import lombok.Getter;
 import lombok.Setter;

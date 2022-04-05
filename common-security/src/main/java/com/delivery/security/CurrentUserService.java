@@ -1,6 +1,6 @@
-package com.delivery;
+package com.delivery.security;
 
-import com.delivery.model.CustomUserDetails;
+import com.delivery.security.model.CustomUserDetails;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 

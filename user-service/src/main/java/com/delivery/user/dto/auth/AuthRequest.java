@@ -1,5 +1,6 @@
 package com.delivery.user.dto.auth;
 
+import com.delivery.user.util.StrongPassword;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 public class AuthRequest {
 
     @NotBlank
+    @StrongPassword
     @ApiModelProperty(value = "Username", example = "kamil")
     private String username;
 

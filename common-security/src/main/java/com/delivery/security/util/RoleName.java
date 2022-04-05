@@ -1,4 +1,4 @@
-package com.delivery.util;
+package com.delivery.security.util;
 
 public class RoleName {
     public static final String ROLE_ADMIN = "ROLE_ADMIN";

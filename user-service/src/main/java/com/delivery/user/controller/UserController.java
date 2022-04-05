@@ -1,5 +1,6 @@
 package com.delivery.user.controller;
 
+import com.delivery.security.util.RoleName;
 import com.delivery.user.dto.auth.AuthRequest;
 import com.delivery.user.dto.auth.AuthResponse;
 import com.delivery.user.dto.auth.RefreshTokenRequest;
@@ -7,7 +8,6 @@ import com.delivery.user.dto.signup.SignUpRequest;
 import com.delivery.user.dto.signup.SignUpResponse;
 import com.delivery.user.service.AuthService;
 import com.delivery.user.service.UserService;
-import com.delivery.util.RoleName;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,14 +37,14 @@ public class UserController {
     }
 
     @PostMapping("/signup/customer")
-    public SignUpResponse registerUser(@Validated @RequestBody SignUpRequest signUpRequest) {
+    public SignUpResponse registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
         log.info("Customer trying signup", signUpRequest.getUsername());
         return SignUpResponse.builder()
                 .result(userService.createCustomer(signUpRequest))
                 .build();
     }
 
-    @Secured(RoleName.ROLE_ADMIN)
+    //@Secured(RoleName.ROLE_ADMIN)
     @PostMapping("/signup/courier")
     public SignUpResponse registerCourier(@Validated @RequestBody SignUpRequest signUpRequest) {
         log.info("Customer trying signup", signUpRequest.getUsername());

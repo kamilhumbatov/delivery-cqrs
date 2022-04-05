@@ -1,6 +1,6 @@
 package com.delivery.deliver.util;
 
-import com.delivery.CurrentUserService;
+import com.delivery.security.CurrentUserService;
 import com.delivery.deliver.domain.DeliveryOrder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;

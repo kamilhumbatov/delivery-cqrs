@@ -6,7 +6,7 @@ import com.delivery.user.exception.UsernameAlreadyTakenException;
 import com.delivery.user.repository.UserRepository;
 import com.delivery.user.service.RoleService;
 import com.delivery.user.service.UserService;
-import com.delivery.util.RoleName;
+import com.delivery.security.util.RoleName;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

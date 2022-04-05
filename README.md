@@ -83,6 +83,6 @@ Notification Service is send sms to customers
 
 ## It is possible in my side
 * Add Customer payment and implement Saga design pattern
-* Add kubernate deployment in a google cloud
+* Add kubernate deployment in a google cloud (see deploy folder)
 * Connect Event Source to Cassandra or MongoDb
 * For manage delivery status it is easily implement Cammmunda or another BPMN

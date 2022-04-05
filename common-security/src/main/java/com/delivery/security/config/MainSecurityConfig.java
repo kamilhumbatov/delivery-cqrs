@@ -1,8 +1,8 @@
-package com.delivery.deliver.config;
+package com.delivery.security.config;
 
-import com.delivery.AuthEntryPointJwt;
-import com.delivery.JwtTokenFilter;
-import com.delivery.util.Constant;
+import com.delivery.security.AuthEntryPointJwt;
+import com.delivery.security.JwtTokenFilter;
+import com.delivery.security.util.Constant;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;

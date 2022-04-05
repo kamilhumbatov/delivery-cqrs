@@ -1,8 +1,8 @@
-package com.delivery;
+package com.delivery.security;
 
-import com.delivery.model.CustomUser;
-import com.delivery.model.CustomUserDetails;
-import com.delivery.util.Constant;
+import com.delivery.security.model.CustomUser;
+import com.delivery.security.model.CustomUserDetails;
+import com.delivery.security.util.Constant;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

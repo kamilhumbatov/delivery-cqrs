@@ -1,8 +1,8 @@
 package com.delivery.user.config;
 
-import com.delivery.AuthEntryPointJwt;
-import com.delivery.JwtTokenFilter;
-import com.delivery.deliver.config.MainSecurityConfig;
+import com.delivery.security.AuthEntryPointJwt;
+import com.delivery.security.JwtTokenFilter;
+import com.delivery.security.config.MainSecurityConfig;
 import com.delivery.user.service.impl.CustomUserDetailsService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
-package com.delivery.handler;
+package com.delivery.security.handler;
 
-import com.delivery.dto.ErrorResponse;
+import com.delivery.security.dto.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;

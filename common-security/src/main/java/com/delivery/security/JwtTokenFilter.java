@@ -1,7 +1,7 @@
-package com.delivery;
+package com.delivery.security;
 
-import com.delivery.model.CustomUserDetails;
-import com.delivery.util.Constant;
+import com.delivery.security.model.CustomUserDetails;
+import com.delivery.security.util.Constant;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

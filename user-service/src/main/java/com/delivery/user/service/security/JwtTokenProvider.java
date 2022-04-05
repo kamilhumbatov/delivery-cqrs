@@ -1,8 +1,8 @@
 package com.delivery.user.service.security;
 
-import com.delivery.deliver.config.SecurityProperties;
+import com.delivery.security.config.SecurityProperties;
 import com.delivery.user.domain.User;
-import com.delivery.util.Constant;
+import com.delivery.security.util.Constant;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

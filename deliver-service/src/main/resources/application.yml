@@ -31,5 +31,6 @@ spring:
       bootstrap-servers: ${KAFKA_HOST_NAME:localhost}:9092
       properties:
         retry.backoff.ms: 1000
-app:
-  jwtExpirationInMs: 720000
+security:
+  token:
+    expire-length: 3600000

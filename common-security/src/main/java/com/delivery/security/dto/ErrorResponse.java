@@ -1,4 +1,4 @@
-package com.delivery.dto;
+package com.delivery.security.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
