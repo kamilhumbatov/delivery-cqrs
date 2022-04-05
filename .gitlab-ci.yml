@@ -10,6 +10,7 @@ stages:
   - build
   - test
   - docker
+  - deploy
 
 maven-build:
   image: maven:3-jdk-11
