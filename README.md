@@ -16,8 +16,8 @@ The Todo application makes use of the following design patterns:
 > docker-compose up
 
 ## Api call
-http://localhost:7007/user/swagger-ui.html <br>
-http://localhost:7007/deliver/swagger-ui.html
+http://localhost:7071/user/swagger-ui.html <br>
+http://localhost:7072/deliver/swagger-ui.html <br>
 
 ## Implementation
 
@@ -43,9 +43,9 @@ Implementation notes:
 * GIVEN order and admin<br>
   WHEN status is PENDING <br>
   THAN can assignee delivery to courier<br>
-* GIVEN order and courier<br>
+* GIVEN order assignee to courier<br>
   WHEN status is PENDING <br>
-  THAN admin can change status to PICKUP<br>
+  THAN courier can change status to PICKUP<br>
 * GIVEN order and courier<br>
   WHEN status is PICKUP <br>
   THAN admin can change status to DELIVERY<br>
