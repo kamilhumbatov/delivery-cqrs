@@ -22,6 +22,6 @@ public class DeliveryOrderAssigneeServiceImpl implements DeliveryOrderAssigneeSe
         if (deliveryOrder.getStatus().compareTo(DeliveryOrderStatus.PENDING) == 0) {
             return orderCommandService.assigneeOrder(id, assignee);
         }
-        throw new DeliveryOrderStatusException("Order status is not pending!");
+        throw new DeliveryOrderStatusException("Order status is not Pending");
     }
 }
