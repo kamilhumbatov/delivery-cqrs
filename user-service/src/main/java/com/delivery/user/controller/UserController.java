@@ -3,7 +3,6 @@ package com.delivery.user.controller;
 import com.delivery.security.util.RoleName;
 import com.delivery.user.dto.auth.AuthRequest;
 import com.delivery.user.dto.auth.AuthResponse;
-import com.delivery.user.dto.auth.RefreshTokenRequest;
 import com.delivery.user.dto.signup.SignUpRequest;
 import com.delivery.user.dto.signup.SignUpResponse;
 import com.delivery.user.service.AuthService;
@@ -44,18 +43,12 @@ public class UserController {
                 .build();
     }
 
-    //@Secured(RoleName.ROLE_ADMIN)
+    @Secured(RoleName.ROLE_ADMIN)
     @PostMapping("/signup/courier")
     public SignUpResponse registerCourier(@Validated @RequestBody SignUpRequest signUpRequest) {
         log.info("Customer trying signup", signUpRequest.getUsername());
         return SignUpResponse.builder()
                 .result(userService.createCustomer(signUpRequest))
                 .build();
-    }
-
-    @PostMapping(value = "/refresh-token")
-    public AuthResponse refreshToken(@Valid @RequestBody RefreshTokenRequest request) {
-        //return refreshTokenService.refreshToken(request);
-        return null;
     }
 }
