@@ -45,7 +45,7 @@ public class UserController {
 
     @Secured(RoleName.ROLE_ADMIN)
     @PostMapping("/signup/courier")
-    public SignUpResponse registerCourier(@Validated @RequestBody SignUpRequest signUpRequest) {
+    public SignUpResponse registerCourier(@Valid @RequestBody SignUpRequest signUpRequest) {
         log.info("Customer trying signup", signUpRequest.getUsername());
         return SignUpResponse.builder()
                 .result(userService.createCustomer(signUpRequest))

@@ -22,14 +22,13 @@ public class SignUpRequest {
     private String fullName;
 
 
-    @StrongPassword
     @NotBlank(message = "Username must not be empty!")
     @Size(min = 3, max = 15, message = "Username size must be between 3 and 15")
     @ApiModelProperty(value = "Password", example = "kamil")
     private String username;
 
+    @StrongPassword
     @NotBlank(message = "Password must not be empty!")
-    @Size(min = 6, max = 20, message = "Password size must be between 6 and 20")
     @ApiModelProperty(value = "Password", example = "123456")
     private String password;
 }

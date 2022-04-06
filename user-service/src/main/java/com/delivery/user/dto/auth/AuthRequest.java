@@ -10,11 +10,11 @@ import javax.validation.constraints.NotBlank;
 public class AuthRequest {
 
     @NotBlank
-    @StrongPassword
     @ApiModelProperty(value = "Username", example = "kamil")
     private String username;
 
     @NotBlank
+    @StrongPassword
     @ApiModelProperty(value = "Password", example = "123456")
     private String password;
 }
