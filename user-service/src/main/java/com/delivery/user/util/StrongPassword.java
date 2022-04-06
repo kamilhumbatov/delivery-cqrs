@@ -13,7 +13,7 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.PARAMETER;
 
 @NotBlank
-@Size(min = 6, max = 15, message = "Password size must be between 6 and 20")
+@Size(min = 6, max = 20, message = "Password size must be between 6 and 20")
 @Pattern.List({
         @Pattern(regexp = "(?=.*[0-9]).+", message = "Password must be have more than one number"),
         @Pattern(regexp = "(?=.*[a-z]).+", message = "Password must be have more than one lowercase")
