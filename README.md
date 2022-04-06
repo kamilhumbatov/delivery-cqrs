@@ -13,7 +13,23 @@ The Todo application makes use of the following design patterns:
 > mvn package
 
 ## Running
+#### Docker
 > docker-compose up
+
+![alt text](img/docker-compose.png)
+
+#### Kubernate
+> kubectl apply -f deploy/k8s.yaml
+
+I can not finished yet
+
+![alt text](img/k8s.png)
+
+#### Gitlab pipline to GKE
+I can not finished yet
+
+![alt text](img/gitlab_pipline.png)
+
 
 ## Api call
 http://localhost:7071/user/swagger-ui.html <br>
