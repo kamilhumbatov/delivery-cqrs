@@ -18,6 +18,6 @@ public class AuthRequest {
 
     @NotBlank
     @StrongPassword
-    @ApiModelProperty(value = "Password", example = "123456")
+    @ApiModelProperty(value = "Password", example = "a123456A")
     private String password;
 }
