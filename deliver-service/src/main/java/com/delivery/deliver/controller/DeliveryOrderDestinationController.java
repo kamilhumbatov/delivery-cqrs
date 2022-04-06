@@ -1,6 +1,7 @@
 package com.delivery.deliver.controller;
 
 import com.delivery.deliver.dto.DeliveryOrderDestinationDto;
+import com.delivery.deliver.dto.ResponseDto;
 import com.delivery.deliver.service.DeliveryOrderDestinationService;
 import com.delivery.security.util.RoleName;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +17,9 @@ public class DeliveryOrderDestinationController {
 
     @Secured(RoleName.ROLE_CUSTOMER)
     @PutMapping("/{id}")
-    public String changeDestination(
+    public ResponseDto changeDestination(
             @PathVariable String id,
             @RequestBody DeliveryOrderDestinationDto destinationDto) {
-        return service.changeDestination(id, destinationDto);
+        return new ResponseDto(service.changeDestination(id, destinationDto));
     }
 }

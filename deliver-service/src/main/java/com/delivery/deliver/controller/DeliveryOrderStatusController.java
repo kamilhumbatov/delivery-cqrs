@@ -1,5 +1,6 @@
 package com.delivery.deliver.controller;
 
+import com.delivery.deliver.dto.ResponseDto;
 import com.delivery.deliver.service.DeliveryOrderStatusService;
 import com.delivery.security.util.RoleName;
 import lombok.RequiredArgsConstructor;
@@ -15,25 +16,25 @@ public class DeliveryOrderStatusController {
 
     @Secured(RoleName.ROLE_COURIER)
     @GetMapping("/pickup/{id}")
-    public String pickupOrder(@PathVariable String id) {
-        return service.changeOrderStatusToPickUp(id);
+    public ResponseDto pickupOrder(@PathVariable String id) {
+        return new ResponseDto(service.changeOrderStatusToPickUp(id));
     }
 
     @Secured(RoleName.ROLE_COURIER)
     @GetMapping("/deliver/{id}")
-    public String deliveryOrder(@PathVariable String id) {
-        return service.changeOrderStatusToDelivery(id);
+    public ResponseDto deliveryOrder(@PathVariable String id) {
+        return new ResponseDto(service.changeOrderStatusToDelivery(id));
     }
 
     @Secured(RoleName.ROLE_COURIER)
     @GetMapping("/delivered/{id}")
-    public String deliveredOrder(@PathVariable String id) {
-        return service.changeOrderStatusToDelivered(id);
+    public ResponseDto deliveredOrder(@PathVariable String id) {
+        return new ResponseDto(service.changeOrderStatusToDelivered(id));
     }
 
     @Secured({RoleName.ROLE_CUSTOMER, RoleName.ROLE_COURIER, RoleName.ROLE_ADMIN})
     @PutMapping("/cancel/{id}")
-    public String cancelOrder(@PathVariable String id) {
-        return service.changeOrderStatusToCancel(id);
+    public ResponseDto cancelOrder(@PathVariable String id) {
+        return new ResponseDto(service.changeOrderStatusToCancel(id));
     }
 }

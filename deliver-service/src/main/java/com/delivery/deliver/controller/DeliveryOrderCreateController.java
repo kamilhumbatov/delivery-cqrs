@@ -1,6 +1,7 @@
 package com.delivery.deliver.controller;
 
 import com.delivery.deliver.dto.DeliveryOrderCreateDto;
+import com.delivery.deliver.dto.ResponseDto;
 import com.delivery.deliver.service.commands.OrderCommandService;
 import com.delivery.security.util.RoleName;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class DeliveryOrderCreateController {
 
     @Secured(RoleName.ROLE_CUSTOMER)
     @PostMapping
-    public String create(@RequestBody DeliveryOrderCreateDto createDto) {
-        return orderCommandService.createOrder(createDto);
+    public ResponseDto create(@RequestBody DeliveryOrderCreateDto createDto) {
+        return new ResponseDto(orderCommandService.createOrder(createDto));
     }
 }

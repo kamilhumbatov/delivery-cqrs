@@ -1,6 +1,7 @@
 package com.delivery.deliver.controller;
 
 import com.delivery.deliver.dto.DeliveryOrderAssigneeDto;
+import com.delivery.deliver.dto.ResponseDto;
 import com.delivery.deliver.service.DeliveryOrderAssigneeService;
 import com.delivery.security.util.RoleName;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +17,9 @@ public class DeliveryOrderAssigneeController {
 
     @Secured(RoleName.ROLE_ADMIN)
     @PutMapping("assignee/{id}")
-    public String assigneeOrderToCourier(
+    public ResponseDto assigneeOrderToCourier(
             @PathVariable String id,
             @RequestBody DeliveryOrderAssigneeDto assigneeDto) {
-        return service.assigneeOrderToCourier(id, assigneeDto.getAssignee());
+        return new ResponseDto(service.assigneeOrderToCourier(id, assigneeDto.getAssignee()));
     }
 }

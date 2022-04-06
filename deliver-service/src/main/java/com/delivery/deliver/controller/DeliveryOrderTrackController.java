@@ -1,6 +1,7 @@
 package com.delivery.deliver.controller;
 
 import com.delivery.deliver.dto.DeliveryOrderDestinationDto;
+import com.delivery.deliver.dto.ResponseDto;
 import com.delivery.deliver.service.DeliveryOrderTrackService;
 import com.delivery.security.util.RoleName;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +17,9 @@ public class DeliveryOrderTrackController {
 
     @Secured(RoleName.ROLE_COURIER)
     @PostMapping("/{id}")
-    public String changeCoordinate(
+    public ResponseDto changeCoordinate(
             @PathVariable String id,
             @RequestBody DeliveryOrderDestinationDto coordinateDto) {
-        return service.changeCoordinate(id, coordinateDto);
+        return new ResponseDto(service.changeCoordinate(id, coordinateDto));
     }
 }
